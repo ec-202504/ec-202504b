@@ -1,0 +1,312 @@
+【プロンプト１】
+以下は「ECカレー屋さん」の例ですが、今回は「ECオフィスカジュアル洋服屋さん」をお題として、以下のDMLを書き換えてください。
+画像は1.jpgのように1から始まる数字にしてください。
+また、どれかの商品の一つに「Gorgeous」と「Special」の文言を必ず入れてください。
+
+-- 商品
+insert into items values(1, 'カツカレー', '食べると勝負に勝てると言われる勝つカレー。ラクラクカレー定番の１品です', 1490, 2570, '1.jpg');
+insert into items values(2, 'ポークポークカレー・ミート', 'グリーンアスパラと相性の良いベーコンにいろどりのフレッシュトマトをトッピングし特製マヨソースでまとめた商品です', 1490, 2570, '2.jpg');
+insert into items values(3, '牛すじカレー', 'トロトロの牛すじとネギの風味が格別な味わいシンプルなカレーです！', 1490, 2570, '3.jpg');
+insert into items values(4, '味噌カツカレー', 'マイルドな味付けのカレーに大きくカットした味噌カツをのせた、バターとチーズの風味が食欲をそそるお子様でも楽しめる商品です', 1900, 2980, '4.jpg');
+insert into items values(5, 'とんかつカレーラーメン', 'カレーはライスだけではありません。ラクラクピザが開発したカレーラーメンは絶品の美味しさ！', 1900, 2980, '5.jpg');
+insert into items values(6, 'ヒレカツカレー', 'やわらかくあっさりとしたヒレ肉を上質な衣で包み込みました。4種類の濃厚な味わいが一つで楽しめるカレーです', 2700, 4050, '6.jpg');
+insert into items values(7, '濃厚Gorgeous', 'こだわりのソースで、旨みとコクを堪能！濃厚Gorgeous4とは、動物由来の原材料を使用していないカレーです。ベジタリアンの方にオススメです', 2570, 3780, '7.jpg');
+insert into items values(8, 'カレーうどん', 'ラクラクカレー自慢のカレーに魚介のダシ、ローストオニオンのコクが加わった絶妙なスープをお楽しみください', 2160, 3380, '8.jpg');
+insert into items values(9, 'Charity4', 'にんにくとトマトの旨みが効いたスパイスカレー。食べると思わず元気が出るラクラクカレーの自信作', 2700, 4050, '9.jpg');
+insert into items values(10, 'ほうれん草のカレードリア', 'カレードリアの王道！ホワイトソースとカレーのダブルソースとなす、ほうれん草、チーズのおいしい組み合わせ', 2160, 3380, '10.jpg');
+insert into items values(11, 'Specialドリア4', 'ホワイトソースとカレーのダブルソースにハンバーグを合わせました', 2700, 4050, '11.jpg');
+insert into items values(12, '季節の野菜カレー', '季節の野菜が一つになった4種の栄養満点カレー。ラクラクカレーオリジナル商品でベジタリアンの方にオススメです', 2160, 3380, '12.jpg');
+insert into items values(13, 'バラエティー４', 'あらびきスライス牛肉とイタリアンチーズを、トマトソースと特製マヨソースの2種類のソースで召し上がって頂く商品です', 2160, 3380, '13.jpg');
+insert into items values(14, 'えびナスカレー', 'デミグラスソースでじっくり煮込んだ旨味たっぷりのえびとナスのカレー', 2980, 4460, '14.jpg');
+insert into items values(15, 'Family４', 'ラクラクピザ自慢「特うまプルコギ」定番「デラックス」お子様に人気「ツナマイルド」女性に好評「チーズ＆チーズ」の４種のおいしさを贅沢に組み合わせました', 2440, 3650, '15.jpg');
+insert into items values(16, 'シンプルイズベスト', '人気ナンバー１！魚介の旨みたっぷり！人気の海の幸と、野菜のリッチなおいしさ', 2700, 4050, '16.jpg');
+insert into items values(17, '学芸会カレー', 'みんな大好き！学芸会で作るような味を再現！定番のおいしさを味わえます', 2440, 3650, '17.jpg');
+insert into items values(18, '黄金に輝くチキンカレー', 'カレーが黄金に輝く、超高級鶏肉を使用したカレーです', 2700, 4050, '18.jpg');
+
+
+-- トッピング
+insert into toppings values(1, 'オニオン', 200, 300);
+insert into toppings values(2, 'ツナマヨ', 200, 300);
+insert into toppings values(3, 'イタリアントマト', 200, 300);
+insert into toppings values(4, 'イカ', 200, 300);
+insert into toppings values(5, 'プルコギ', 200, 300);
+insert into toppings values(6, 'アンチョビ', 200, 300);
+insert into toppings values(7, 'エビ', 200, 300);
+insert into toppings values(8, 'コーン', 200, 300);
+insert into toppings values(9, 'ピーマン', 200, 300);
+insert into toppings values(10, 'フレッシュスライストマト', 200, 300);
+insert into toppings values(11, 'ベーコン', 200, 300);
+insert into toppings values(12, 'ペパロニ･サラミ', 200, 300);
+insert into toppings values(13, '熟成ベーコン', 200, 300);
+insert into toppings values(14, '特製マヨソース', 200, 300);
+insert into toppings values(15, 'カマンベールチーズ', 200, 300);
+insert into toppings values(16, 'フレッシュモッツァレラチーズ', 200, 300);
+insert into toppings values(17, 'イタリアンソーセージ', 200, 300);
+insert into toppings values(18, 'ガーリックスライス', 200, 300);
+
+
+【プロンプト２】
+以下のDMLから商品名を抜き出してください。
+
+insert into items values(1, 'シックなブレザー', 'ビジネスにもカジュアルにも合う、オールラウンドなブレザー。', 14900, 25700, '1.jpg');
+insert into items values(2, 'トレンディなスキニージーンズ', 'スタイリッシュな見た目と快適な履き心地のスキニージーンズ。', 14900, 25700, '2.jpg');
+insert into items values(3, 'クラシックレザージャケット', 'エイジレスな魅力を持つ、上質なレザージャケット。', 14900, 25700, '3.jpg');
+insert into items values(4, 'カジュアルチェックシャツ', 'どんなパンツにも合う、柔らかなチェックシャツ。', 19000, 29800, '4.jpg');
+insert into items values(5, 'エレガントなイブニングドレス', '特別な夜のための華やかなイブニングドレス。', 19000, 29800, '5.jpg');
+insert into items values(6, 'コンフォートフィットTシャツ', '日常を快適にする、シンプルなデザインのTシャツ。', 2700, 4050, '6.jpg');
+insert into items values(7, 'モダンなジャンプスーツGorgeous', 'オフィスでもアウトドアでも活躍する、モダンなジャンプスーツ。', 2570, 3780, '7.jpg');
+insert into items values(8, 'バンドカラーシャツ', 'ミニマルなデザインのバンドカラーシャツ。', 2160, 3380, '8.jpg');
+insert into items values(9, 'ヴィンテージデニムジャケット', 'クールな印象のヴィンテージスタイルデニムジャケット。', 2700, 4050, '9.jpg');
+insert into items values(10, 'ボヘミアンマキシスカート', '自由なスピリットを感じさせるボヘミアンマキシスカート。', 2160, 3380, '10.jpg');
+insert into items values(11, 'フローラルサマードレスSpecial', '暖かい日差しに映える、軽やかなフローラルサマードレス。', 2700, 4050, '11.jpg');
+insert into items values(12, 'スリムフィットスラックス', 'オフィススタイルを格上げするスリムフィットスラックス。', 2160, 3380, '12.jpg');
+insert into items values(13, 'リラックスフィットカーゴパンツ', '快適さと機能性を兼ね備えたカーゴパンツ。', 2160, 3380, '13.jpg');
+insert into items values(14, 'ソフトニットセーター', '寒い日も暖かく包み込むソフトニットセーター。', 2980, 4460, '14.jpg');
+insert into items values(15, 'デザイナーハンドバッグ', 'どんな装いにも映えるスタイリッシュなハンドバッグ。', 2440, 3650, '15.jpg');
+insert into items values(16, 'ファッションサンブーツ', 'どんな天候でも快適に過ごせる、ファッション性の高いブーツ。', 2700, 4050, '16.jpg');
+insert into items values(17, 'ビーズ刺繍のイブニングバッグ', '特別な夜に相応しい、繊細なビーズ刺繍のイブニングバッグ。', 2440, 3650, '17.jpg');
+insert into items values(18, 'アバンギャルドサングラス', 'ファッションステートメントを強調する、ユニークなデザインのサングラス。', 2700, 4050, '18.jpg');
+
+
+【プロンプト３】
+挙げていただいた商品の画像を全て生成してください。
+
+シックなブレザー
+トレンディなスキニージーンズ
+クラシックレザージャケット
+カジュアルチェックシャツ
+エレガントなイブニングドレス
+コンフォートフィットTシャツ
+モダンなジャンプスーツGorgeous
+バンドカラーシャツ
+ヴィンテージデニムジャケット
+ボヘミアンマキシスカート
+フローラルサマードレスSpecial
+スリムフィットスラックス
+リラックスフィットカーゴパンツ
+ソフトニットセーター
+デザイナーハンドバッグ
+ファッションサンブーツ
+ビーズ刺繍のイブニングバッグ
+アバンギャルドサングラス
+
+
+【プロンプト４】
+以下のようにHTMLでモックを作りたいです。
+今回作ってくれた18個の商品が全部表示されるように以下を書き換えてください。
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <!--Import Google Icon Font-->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- Import Materialize CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <!-- Import Font Wesome -->
+    <link
+      href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../static/css/common.css" />
+    <link rel="stylesheet" href="../static/css/header.css" />
+    <link rel="stylesheet" href="../static/css/footer.css" />
+    <link rel="stylesheet" href="../static/css/register_user.css" />
+    <link rel="stylesheet" href="../static/css/login.css" />
+    <link rel="stylesheet" href="../static/css/item_list.css" />
+    <link rel="stylesheet" href="../static/css/item_detail.css" />
+    <link rel="stylesheet" href="../static/css/cart_list.css" />
+    <link rel="stylesheet" href="../static/css/order_confirm.css" />
+    <link rel="stylesheet" href="../static/css/order_finished.css" />
+    <link rel="stylesheet" href="../static/css/responsive.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChatGPTへ→良いタイトルを考えて置き換えてください</title>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="header">
+          <div class="header-left">
+            <a href="top.html">
+              <img class="logo" src="../static/img/header_logo.png" />
+            </a>
+          </div>
+
+          <div class="header-right">
+            <a href="item_list_aloha.html">商品一覧</a>
+            <a href="register_user.html">会員登録</a>
+            <a href="cart_list.html">
+              <i class="fas fa-shopping-cart"> </i>カート
+            </a>
+            <a href="login.html" class="login">
+              <i class="fas fa-sign-in-alt"></i>ログイン
+            </a>
+
+            <a href="order_history.html">注文履歴</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- search form -->
+    <div class="search-wrapper">
+      <div class="container">
+        <form method="post" class="search-form">
+          <input type="text" name="name" class="search-name-input" />
+
+          <button class="btn search-btn" type="button">
+            <span>検　索</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- item list -->
+    <div class="item-wrapper">
+      <div class="container">
+        <div class="items">
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img/1.jpg" />
+            </div>
+            <a href="item_detail.html">ハワイアンパラダイス</a><br />
+            <span class="price">Ｍ</span>1,380円(税抜)<br />
+            <span class="price">Ｌ</span>2,380円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img/2.jpg" />
+            </div>
+            <a href="item_detail.html">ハワイアンパラダイス</a><br />
+            <span class="price">Ｍ</span>1,380円(税抜)<br />
+            <span class="price">Ｌ</span>2,380円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img/3.jpg" />
+            </div>
+            <a href="item_detail.html">ハワイアンパラダイス</a><br />
+            <span class="price">Ｍ</span>1,380円(税抜)<br />
+            <span class="price">Ｌ</span>2,380円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img/4.jpg" />
+            </div>
+            <a href="item_detail.html">ハワイアンパラダイス</a><br />
+            <span class="price">Ｍ</span>1,380円(税抜)<br />
+            <span class="price">Ｌ</span>2,380円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img/5.jpg" />
+            </div>
+            <a href="item_detail.html">ハワイアンパラダイス</a><br />
+            <span class="price">Ｍ</span>1,380円(税抜)<br />
+            <span class="price">Ｌ</span>2,380円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img/6.jpg" />
+            </div>
+            <a href="item_detail.html">ハワイアンパラダイス</a><br />
+            <span class="price">Ｍ</span>1,380円(税抜)<br />
+            <span class="price">Ｌ</span>2,380円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img/7.jpg" />
+            </div>
+            <a href="item_detail.html">ハワイアンパラダイス</a><br />
+            <span class="price">Ｍ</span>1,380円(税抜)<br />
+            <span class="price">Ｌ</span>2,380円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img/8.jpg" />
+            </div>
+            <a href="item_detail.html">ハワイアンパラダイス</a><br />
+            <span class="price">Ｍ</span>1,380円(税抜)<br />
+            <span class="price">Ｌ</span>2,380円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img/9.jpg" />
+            </div>
+            <a href="item_detail.html">ハワイアンパラダイス</a><br />
+            <span class="price">Ｍ</span>1,380円(税抜)<br />
+            <span class="price">Ｌ</span>2,380円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img/10.jpg" />
+            </div>
+            <a href="item_detail.html">ハワイアンパラダイス</a><br />
+            <span class="price">Ｍ</span>1,380円(税抜)<br />
+            <span class="price">Ｌ</span>2,380円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img/11.jpg" />
+            </div>
+            <a href="item_detail.html">ハワイアンパラダイス</a><br />
+            <span class="price">Ｍ</span>1,380円(税抜)<br />
+            <span class="price">Ｌ</span>2,380円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img/12.jpg" />
+            </div>
+            <a href="item_detail.html">ハワイアンパラダイス</a><br />
+            <span class="price">Ｍ</span>1,380円(税抜)<br />
+            <span class="price">Ｌ</span>2,380円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img/13.jpg" />
+            </div>
+            <a href="item_detail.html">ハワイアンパラダイス</a><br />
+            <span class="price">Ｍ</span>1,380円(税抜)<br />
+            <span class="price">Ｌ</span>2,380円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img/14.jpg" />
+            </div>
+            <a href="item_detail.html">ハワイアンパラダイス</a><br />
+            <span class="price">Ｍ</span>1,380円(税抜)<br />
+            <span class="price">Ｌ</span>2,380円(税抜)<br />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <img src="../static/img/header_logo.png" />
+        <p>ChatGPTへ→良いキャッチコピーを考えて置き換えてください</p>
+      </div>
+    </footer>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </body>
+</html>
