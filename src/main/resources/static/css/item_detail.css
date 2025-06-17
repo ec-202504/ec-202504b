@@ -1,0 +1,76 @@
+@charset "UTF-8";
+
+/* ========================================
+    商品詳細ページのスタイル
+   ======================================== */
+
+.item-detail {
+  display: flex;
+  /* 中央揃え */
+  justify-content: center;
+}
+.item-icon img {
+  margin: auto;
+  display: block;
+  border-radius: 30px;
+  width: 250px;
+  height: 250px;
+  padding: 0 0 15px 0;
+}
+
+.item-intro {
+  width: 400px;
+  padding-top: 50px;
+  padding-left: 50px;
+  font-size: 20px;
+}
+
+.item-hedding {
+  font-weight: bold;
+  font-size: 17px;
+  text-align: left;
+}
+.item-size {
+  /* text-align: center; */
+  font-size: 15px;
+  margin-bottom: 20px;
+  padding: 0 200px 0 200px;
+}
+
+/* サイズをオレンジ〇で囲む */
+.price {
+  background-color: #ff4500;
+  border-radius: 50%; /* 角丸にする設定 */
+  color: black;
+}
+
+.item-toppings {
+  font-size: 15px;
+  padding: 0 200px 0 200px;
+}
+
+.item-topping {
+  margin-right: 10px;
+}
+
+.item-hedding-quantity {
+  margin-left: 200px;
+}
+
+.item-quantity {
+  text-align: center;
+  font-size: 15px;
+}
+
+.item-quantity-selectbox {
+  padding: 0 300px 0 300px;
+}
+
+.item-total-price {
+  font-size: 35px;
+  text-align: center;
+}
+
+.item-cart-btn {
+  text-align: center;
+}

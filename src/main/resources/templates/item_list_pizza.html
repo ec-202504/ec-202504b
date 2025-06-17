@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <!--Import Google Icon Font-->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- Import Materialize CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <!-- Import Font Wesome -->
+    <link
+      href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../static/css/common.css" />
+    <link rel="stylesheet" href="../static/css/header.css" />
+    <link rel="stylesheet" href="../static/css/footer.css" />
+    <link rel="stylesheet" href="../static/css/register_user.css" />
+    <link rel="stylesheet" href="../static/css/login.css" />
+    <link rel="stylesheet" href="../static/css/item_list.css" />
+    <link rel="stylesheet" href="../static/css/item_detail.css" />
+    <link rel="stylesheet" href="../static/css/cart_list.css" />
+    <link rel="stylesheet" href="../static/css/order_confirm.css" />
+    <link rel="stylesheet" href="../static/css/order_finished.css" />
+    <link rel="stylesheet" href="../static/css/responsive.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ECピザ屋さん - 商品一覧</title>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="header">
+          <div class="header-left">
+            <a href="top.html">
+              <img class="logo" src="../static/img_pizza/header_logo.png" />
+            </a>
+          </div>
+
+          <div class="header-right">
+            <a href="item_list_aloha.html">商品一覧</a>
+            <a href="register_user.html">会員登録</a>
+            <a href="cart_list.html">
+              <i class="fas fa-shopping-cart"> </i>カート
+            </a>
+            <a href="login.html" class="login">
+              <i class="fas fa-sign-in-alt"></i>ログイン
+            </a>
+
+            <a href="order_history.html">注文履歴</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- search form -->
+    <div class="search-wrapper">
+      <div class="container">
+        <form method="post" class="search-form">
+          <input type="text" name="name" class="search-name-input" />
+
+          <button class="btn search-btn" type="button">
+            <span>検　索</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- item list -->
+    <div class="item-wrapper">
+      <div class="container">
+        <div class="items">
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img_pizza/1.jpg" />
+            </div>
+            <a href="item_detail.html">マルゲリータ</a><br />
+            <span class="price">Ｍ</span>1,200円(税抜)<br />
+            <span class="price">Ｌ</span>1,800円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img_pizza/2.jpg" />
+            </div>
+            <a href="item_detail.html">ペパロニ</a><br />
+            <span class="price">Ｍ</span>1,300円(税抜)<br />
+            <span class="price">Ｌ</span>1,900円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img_pizza/3.jpg" />
+            </div>
+            <a href="item_detail.html">ハワイアン</a><br />
+            <span class="price">Ｍ</span>1,400円(税抜)<br />
+            <span class="price">Ｌ</span>2,000円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img_pizza/4.jpg" />
+            </div>
+            <a href="item_detail.html">クワトロフォルマッジ</a><br />
+            <span class="price">Ｍ</span>1,500円(税抜)<br />
+            <span class="price">Ｌ</span>2,100円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img_pizza/5.jpg" />
+            </div>
+            <a href="item_detail.html">バーベキューチキン</a><br />
+            <span class="price">Ｍ</span>1,600円(税抜)<br />
+            <span class="price">Ｌ</span>2,200円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img_pizza/6.jpg" />
+            </div>
+            <a href="item_detail.html">ベジタリアン</a><br />
+            <span class="price">Ｍ</span>1,400円(税抜)<br />
+            <span class="price">Ｌ</span>2,000円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img_pizza/7.jpg" />
+            </div>
+            <a href="item_detail.html">ミートラバーズ</a><br />
+            <span class="price">Ｍ</span>1,700円(税抜)<br />
+            <span class="price">Ｌ</span>2,300円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img_pizza/8.jpg" />
+            </div>
+            <a href="item_detail.html">マッシュルーム</a><br />
+            <span class="price">Ｍ</span>1,300円(税抜)<br />
+            <span class="price">Ｌ</span>1,900円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img_pizza/9.jpg" />
+            </div>
+            <a href="item_detail.html">マーガリタ</a><br />
+            <span class="price">Ｍ</span>1,200円(税抜)<br />
+            <span class="price">Ｌ</span>1,800円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img_pizza/10.jpg" />
+            </div>
+            <a href="item_detail.html">ほうれん草とフェタ</a><br />
+            <span class="price">Ｍ</span>1,500円(税抜)<br />
+            <span class="price">Ｌ</span>2,100円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img_pizza/11.jpg" />
+            </div>
+            <a href="item_detail.html">シーフード</a><br />
+            <span class="price">Ｍ</span>1,600円(税抜)<br />
+            <span class="price">Ｌ</span>2,200円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img_pizza/12.jpg" />
+            </div>
+            <a href="item_detail.html">ハラペーニョ</a><br />
+            <span class="price">Ｍ</span>1,300円(税抜)<br />
+            <span class="price">Ｌ</span>1,900円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img_pizza/13.jpg" />
+            </div>
+            <a href="item_detail.html">チーズバーストピザ</a><br />
+            <span class="price">Ｍ</span>1,500円(税抜)<br />
+            <span class="price">Ｌ</span>2,100円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img_pizza/14.jpg" />
+            </div>
+            <a href="item_detail.html">ガーリックシュリンプピザ</a><br />
+            <span class="price">Ｍ</span>1,600円(税抜)<br />
+            <span class="price">Ｌ</span>2,200円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img_pizza/15.jpg" />
+            </div>
+            <a href="item_detail.html">ミックスピザ</a><br />
+            <span class="price">Ｍ</span>1,400円(税抜)<br />
+            <span class="price">Ｌ</span>2,000円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img_pizza/16.jpg" />
+            </div>
+            <a href="item_detail.html">マッシュルームピザ</a><br />
+            <span class="price">Ｍ</span>1,300円(税抜)<br />
+            <span class="price">Ｌ</span>1,900円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img_pizza/17.jpg" />
+            </div>
+            <a href="item_detail.html">アンチョビピザ</a><br />
+            <span class="price">Ｍ</span>1,400円(税抜)<br />
+            <span class="price">Ｌ</span>2,000円(税抜)<br />
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <img src="../static/img_pizza/18.jpg" />
+            </div>
+            <a href="item_detail.html">チョコレートデザートピザ</a><br />
+            <span class="price">Ｍ</span>1,200円(税抜)<br />
+            <span class="price">Ｌ</span>1,800円(税抜)<br />
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <img src="../static/img_pizza/header_logo.png" />
+        <p>ECピザ屋さん - 美味しいピザをお届けします</p>
+      </div>
+    </footer>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </body>
+</html>

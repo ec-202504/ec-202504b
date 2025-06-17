@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <!--Import Google Icon Font-->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- Import Materialize CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <!-- Import Font Wesome -->
+    <link
+      href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../static/css/common.css" />
+    <link rel="stylesheet" href="../static/css/header.css" />
+    <link rel="stylesheet" href="../static/css/footer.css" />
+    <link rel="stylesheet" href="../static/css/register_user.css" />
+    <link rel="stylesheet" href="../static/css/login.css" />
+    <link rel="stylesheet" href="../static/css/item_list.css" />
+    <link rel="stylesheet" href="../static/css/item_detail.css" />
+    <link rel="stylesheet" href="../static/css/cart_list.css" />
+    <link rel="stylesheet" href="../static/css/order_confirm.css" />
+    <link rel="stylesheet" href="../static/css/order_finished.css" />
+    <link rel="stylesheet" href="../static/css/responsive.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ラクラクアロハ</title>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="header">
+          <div class="header-left">
+            <a href="top.html">
+              <img class="logo" src="../static/img_aloha/header_logo.png" />
+            </a>
+          </div>
+
+          <div class="header-right">
+            <a href="item_list_aloha.html">商品一覧</a>
+            <a href="register_user.html">会員登録</a>
+            <a href="cart_list.html">
+              <i class="fas fa-shopping-cart"> </i>カート
+            </a>
+            <a href="login.html" class="login">
+              <i class="fas fa-sign-in-alt"></i>ログイン
+            </a>
+
+            <a href="order_history.html">注文履歴</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="top-wrapper">
+      <div class="container">
+        <h1 class="page-title">Hawaiianパラダイス</h1>
+        <div class="row">
+          <div class="row item-detail">
+            <div class="item-icon">
+              <img src="../static/img_aloha/1.jpg" />
+            </div>
+            <div class="item-intro">
+              ハワイで取れる名産物でかつオーガニックな食料がふんだんに使われたローカルフーズです。健康志向の方に大人気の商品です。
+            </div>
+          </div>
+          <div class="row item-size">
+            <div class="item-hedding">サイズ</div>
+            <div>
+              <label>
+                <input id="size-m" name="size" type="radio" checked="checked" />
+                <span>
+                  &nbsp;<span class="price">Ｍ</span
+                  >&nbsp;&nbsp;1,380円(税抜)</span
+                >
+              </label>
+              <label>
+                <input id="size-l" name="size" type="radio" />
+                <span>
+                  &nbsp;<span class="price">Ｌ</span
+                  >&nbsp;&nbsp;2,380円(税抜)</span
+                >
+              </label>
+            </div>
+          </div>
+          <div class="row item-toppings">
+            <div class="item-hedding">
+              トッピング：&nbsp;1つにつき
+              <span>&nbsp;Ｍ&nbsp;</span>&nbsp;&nbsp;200円(税抜)
+              <span>&nbsp;Ｌ</span>&nbsp;&nbsp;300円(税抜)
+            </div>
+            <div>
+              <label class="item-topping">
+                <input type="checkbox" />
+                <span>ハワイアンソルト</span>
+              </label>
+              <label class="item-topping">
+                <input type="checkbox" />
+                <span>ハワイアンマヨネーズ</span>
+              </label>
+              <label class="item-topping">
+                <input type="checkbox" />
+                <span>ハワイアントマト</span>
+              </label>
+              <label class="item-topping">
+                <input type="checkbox" />
+                <span>ブルーチーズ</span>
+              </label>
+              <label class="item-topping">
+                <input type="checkbox" />
+                <span>ハワイアンチョコレート</span>
+              </label>
+              <label class="item-topping">
+                <input type="checkbox" />
+                <span>アンチョビ</span>
+              </label>
+              <label class="item-topping">
+                <input type="checkbox" />
+                <span>エビ</span>
+              </label>
+              <label class="item-topping">
+                <input type="checkbox" />
+                <span>ガーリックスライス</span>
+              </label>
+              <label class="item-topping">
+                <input type="checkbox" />
+                <span>トロピカルフルーツ</span>
+              </label>
+              <label class="item-topping">
+                <input type="checkbox" />
+                <span>ココナッツ</span>
+              </label>
+            </div>
+          </div>
+          <div class="row item-quantity">
+            <div class="item-hedding item-hedding-quantity">数量</div>
+            <div class="item-quantity-selectbox">
+              <div class="input-field col s12">
+                <select class="browser-default">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row item-total-price">
+            <span>この商品金額：38,000 円(税抜)</span>
+          </div>
+          <div class="row item-cart-btn">
+            <button
+              class="btn"
+              type="button"
+              onclick="location.href='cart_list.html'"
+            >
+              <i class="material-icons left">add_shopping_cart</i>
+              <span>カートに入れる</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- end container -->
+    </div>
+    <!-- end top-wrapper -->
+    <footer>
+      <div class="container">
+        <img src="../static/img_aloha/header_logo.png" />
+        <p>アロハな気分をあなたにお届け！</p>
+      </div>
+    </footer>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </body>
+</html>
