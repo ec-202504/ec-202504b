@@ -1,0 +1,418 @@
+-- ユーザー
+drop table if exists users cascade;
+
+create table users (
+ id serial primary key
+ , name varchar(100) not null
+ , email varchar(100) not null unique
+ , password text not null
+ , zipcode varchar(8) not null
+ , address varchar(200) not null
+ , telephone varchar(15) not null
+) ;
+
+-- 商品
+drop table if exists items cascade;
+
+create table items (
+  id integer primary key
+  , type text not null
+  , name text not null
+  , description text not null
+  , price_m integer not null
+  , price_l integer not null
+  , image_path text not null
+  , deleted boolean default false not null
+) ;
+
+-- aloha
+insert into items values(1,  'aloha', 'Hawaiianパラダイス', 'ハワイで取れる名産物でかつオーガニックな食料がふんだんに使われたローカルフーズです。健康志向の方に大人気の商品です。', 2160, 3380, '/img_aloha/1.jpg');
+insert into items values(2,  'aloha', 'アサイーボウル', 'ブラジル発祥のデザートで、アメリカ合衆国のハワイ州で人気が出てよく知られるようになった商品です。アサイーのスムージーをボウルに盛りつけ、グラノーラなどのシリアル食品やバナナやリンゴやイチゴなど好みの果物をのせて蜂蜜をかけて供する。朝食とされることもある。', 1490, 2570, '/img_aloha/2.jpg');
+insert into items values(3,  'aloha', 'ハワイアンマルゲリータピザ', 'ハワイで取れたフレッシュトマトと野菜、チーズをふんだんに使って作られたマルゲリータピザです。隠し味として中にパイナップルやマンゴーも入っています。', 1490, 2570, '/img_aloha/3.jpg');
+insert into items values(4,  'aloha', 'カメハメハベーカリーの焼きたてマラサダ', 'ハワイの定番おやつといえば、やっぱりマラサダ。なかでも、カメハメハベーカリーのマラサダは、行列必至 の人気ぶりです。', 1900, 2980, '/img_aloha/4.jpg');
+insert into items values(5,  'aloha', 'Ray''sのフリフリチキン', 'ノースショア名物の鶏肉を丸焼きにしたフリフリチキンです。現地では土日しか食べられないものを暖かい状態でお届けします。', 1900, 2980, '/img_aloha/5.jpg');
+insert into items values(6,  'aloha', 'マツモトシェーブアイス', '連日行列ができるノースショアの人気かき氷店のシェーブアイスです。日系人が作ったこの店はノース/ハレイワの観光スポットになっています。', 2700, 4050, '/img_aloha/6.jpg');
+insert into items values(7,  'aloha', 'レナーズのマラサダGorgeous4', 'ポルトガル発祥のスイーツで有名なドーナツ「マラサダ」。マラサダの代名詞は「レナーズ」と言われるほど有名なお店のマラサダをお届けします。', 2570, 3780, '/img_aloha/7.jpg');
+insert into items values(8,  'aloha', 'ザ・テラスのエッグベネディクト', 'イングリッシュ・マフィンの半分に、ハム、ベーコンまたはサーモン等や、ポーチドエッグ、オランデーズソースを乗せて作る料理です。', 2160, 3380, '/img_aloha/8.jpg');
+insert into items values(9,  'aloha', 'アヒポキ丼', 'アヒポキとは、ハワイ語で「アヒ」はまぐろ、「ポキ」は魚を小さく切るという意味のハワイ郷土料理の一つです。 甘辛いタレで絡めてお好みの香味野菜を添えてお召し上がりください。 ', 2700, 4050, '/img_aloha/9.jpg');
+insert into items values(10, 'aloha',  'ガーリックシュリンプ', 'オアフ島北部のカフク地方で養殖されるエビをにんにく風味の油で炒めた料理。主に移動販売車で売られており、同地方の名物とされる。', 1490, 2570, '/img_aloha/10.jpg');
+insert into items values(11, 'aloha',  'Bananのソフトクリーム', 'フルーツたっぷりなアイスクリームは、もうリピート間違いなしの絶品もの。冷凍状態のまま鮮度そのままでお届けします。', 2700, 4050, '/img_aloha/11.jpg');
+insert into items values(12, 'aloha',  'ホノルルコーヒー', '本場のコナ100%のコーヒーです。観光客にはもちろんローカルにも人気で毎日大行列ができます。', 2160, 3380, '/img_aloha/12.jpg');
+insert into items values(13, 'aloha',  'マカヒキのイルカバナナ', 'ハワイ・アウラニリゾートに入っているマカヒキのブッフェで提供されているイルカの形をしたバナナです。お子様に大人気です。', 2160, 3380, '/img_aloha/13.jpg');
+insert into items values(14, 'aloha',  'ラムファイヤーのマイタイ', 'シェラトンワイキキ１階に入っているラムファイヤーのマイタイです。お酒ですので20歳以上限定の商品です。', 2980, 4460, '/img_aloha/14.jpg');
+insert into items values(15, 'aloha',  'ロコモコSpecial', '誰もが大好きロコモコです。こだわりのビーフ100％のハンバーグは、肉感がしっかり残ったステーキのような食べごたえ。', 2440, 3650, '/img_aloha/15.jpg');
+insert into items values(16, 'aloha',  'ラウラウ', 'タロイモの葉の中央に肉や魚の小片を乗せ、葉の端を葉の中に折り込んで、その上からティの葉で包む。伝統的にはさらにバナナの葉で包まれ、イムと呼ばれる地中のオーブンで、熱い石と一緒に地中に埋めて調理される、ハワイの郷土料理です。', 2700, 4050, '/img_aloha/16.jpg');
+insert into items values(17, 'aloha',  'ポイ', 'タロイモの球茎から作るポリネシアの主食です。焼くか蒸すかした球茎を、粘りが出るまですりつぶすことによって作られ、絶品の美味しさです。', 2440, 3650, '/img_aloha/17.jpg');
+insert into items values(18, 'aloha',  'ニコスピア38のアヒステーキ', 'ニコスピアで夜しか提供していないアヒ(マグロ)のステーキです。リピータが多く絶品です。', 2700, 4050, '/img_aloha/18.jpg');
+
+--coffee
+insert into items values(21, 'coffee', 'Gorgeous4サンド', '人気の定番具材「ハム」と「チキン」をセットにした食べごたえ抜群のサンドイッチです。', 480, 700, '/img_coffee/1.jpg');
+insert into items values(22, 'coffee', 'エスプレッソフラペチーノ', 'ひと口目に感じるエスプレッソは「リストレット」という方法で抽出した力強い香りと優しい苦味を、ふた口目は全体を混ぜて、こだわりのクリームから来るアフォガートのような味わいをお楽しみください。リフレッシュしたい時や、ほっとひと息つきたい時にも、何度でも飲みたくなるフラペチーノ®です。', 530, 650, '/img_coffee/2.jpg');
+insert into items values(23, 'coffee', 'Specialキャラメルドーナッツ', 'ドーナツ生地の中に、なめらかで風味豊かなキャラメルフィリングを入れ、仕上げにキャラメルのビター感と香ばしさが楽しめるキャラメルコーティングをかけました。', 250, 500, '/img_coffee/3.jpg');
+insert into items values(24, 'coffee', 'チョコクッキー', 'ソフトな食感のクッキー生地には、小麦の香ばしさが感じられるよう全粒粉を入れ、砂糖の一部にはブラウンシュガーを使い、コクのある甘さをプラスしています。風味豊かなスターバックスオリジナルのチョコレートチャンクがごろごろ入っていて、どこを食べてもチョコレートの味わいを存分に楽しめます。ショートサイズのマグカップの上に乗せられるくらいのサイズは、コーヒーと一緒に楽しむのにもぴったりです。', 190, 300, '/img_coffee/4.jpg');
+insert into items values(25, 'coffee', 'カフェモカ', 'エスプレッソにほろ苦いチョコレートシロップとミルクを加え、ホットビバレッジにはホイップクリームをトッピング。ちょっとした贅沢を楽しみたい方におすすめです。', 400, 520, '/img_coffee/5.jpg');
+insert into items values(26, 'coffee', 'カフェラテ', '最も人気のあるエスプレッソ ビバレッジ。リッチなエスプレッソにスチームミルクを注ぎ、フォームミルクを丁寧にトッピングしました。ミルキーな味わいで気持ちを温かくしてくれます。', 340, 460, '/img_coffee/6.jpg');
+insert into items values(27, 'coffee', 'カプチーノ', 'リッチなエスプレッソに一気にミルクを注ぐことで、一口飲んだときからコーヒー感が感じられるビバレッジです。ベルベットのようにきめ細かいフォームミルクをお楽しみください。', 340, 460, '/img_coffee/7.jpg');
+insert into items values(28, 'coffee', 'キャラメルマキアート', 'バニラシロップとスチームミルクのコンビネーションになめらかなフォームミルクをたっぷりのせ、その上からエスプレッソを注いでアクセントを付けました。仕上げにオリジナルキャラメルソースをトッピングしています。', 390, 510, '/img_coffee/8.jpg');
+insert into items values(29, 'coffee', 'キャラメルフラペチーノ', 'コーヒー、ミルク、キャラメルシロップを氷とブレンドした、多くのお客様に愛されているフローズン ビバレッジです。トッピングしたホイップクリームとキャラメルソースと混ぜながら、豊かでほんのり香ばしいキャラメルの風味をお楽しみください。', 490, 570, '/img_coffee/9.jpg');
+insert into items values(30, 'coffee',  'バニラ クリーム フラペチーノ', 'ミルクとバニラシロップを氷とブレンドし、ホイップクリームをトッピングした、クリーミーな味わいのフローズン ビバレッジ。真っ白な見た目も爽やかです。ミルクとバニラシロップというシンプルな組み合わせはいろいろなカスタマイズとも好相性。', 490, 570, '/img_coffee/10.jpg');
+insert into items values(31, 'coffee',  'ダークモカフラペチーノ', 'コーヒー、ミルク、ダークチョコレートパウダー、そして人気のチョコレートチップを氷とブレンドした、チョコレートラバーズに人気のフローズンビバレッジ。コーヒーとダークチョコレートのほろ苦い味わいと、チョコレートチップの食感が織り成すハーモニーは、ブラックコーヒーファンにも支持されています。', 500, 580, '/img_coffee/11.jpg');
+insert into items values(32, 'coffee',  '抹茶クリームフラペチーノ', '世界中で様々な形で飲用されている抹茶ですが、スターバックスではミルクと甘みを加えて氷でブレンドしたリフレッシングなフラペチーノ®に仕上げました。', 490, 570, '/img_coffee/12.jpg');
+insert into items values(33, 'coffee',  'ドリップコーヒー', '世界中のコーヒー産地から厳選された高品質のアラビカ種コーヒー豆を使用したスターバックスの定番商品です。バラエティあふれるコーヒー豆を通して、スターバックスのコーヒージャーニーをお楽しみください。異なるローストレベルのコーヒーを日替わりでご用意していますので、お気に入りの1杯を見つけてみませんか。', 290, 410, '/img_coffee/13.jpg');
+insert into items values(34, 'coffee',  'アイスコーヒー', '熱を加えずに14時間かけてゆっくりと水で抽出したコールドブリュー コーヒー。香り高い風味が引き出されるよう、特別にブレンド、ローストしたコーヒー豆を使用しています。豊かな味わいとなめらかな口あたりをお楽しみください。', 330, 450, '/img_coffee/14.jpg');
+insert into items values(35, 'coffee',  'アメリカン', 'エスプレッソに熱いお湯を注いだ、すっきりとしたのどごしのコーヒーです。ドリップ コーヒーのお好きな方にもおすすめです。', 310, 430, '/img_coffee/15.jpg');
+insert into items values(36, 'coffee',  'エスプレッソ', 'キャラメルのような甘く力強い味とナッツを感じさせる後味。スターバックスのすべてのエスプレッソ ビバレッジに使われているエスプレッソです。どうぞ、お早めにお召し上がりください。', 310, 350, '/img_coffee/16.jpg');
+insert into items values(37, 'coffee',  'ナッティホワイトモカ', 'ホワイトチョコレートとヘーゼルナッツに香り高いエスプレッソを加えた風味豊かなホワイト モカ。ホイップクリームをツリーに見立て、ナッツ&ホワイトチョコレートソースのリボンと、3色のチョコレート、シルバーのアラザンをイルミネーションのようにちりばめました。ホリデーシーズンにぴったりのあたたかな一杯で、特別なひと時をお楽しみください。', 450, 570, '/img_coffee/17.jpg');
+insert into items values(38, 'coffee',  'ジンジャーブレッドラテ', 'スターバックスのホリデーといえばやっぱりジンジャーブレッド ラテ、という人も多いのではないでしょうか。ジンジャーブレッドクッキーをイメージした、ほんのり甘くてスパイシーな風味は、この時期にしか味わえない特別なビバレッジです。体の中からじんわりとあたためてくれる一杯で、ほっとリラックスしたひと時をお過ごしください。', 450, 570, '/img_coffee/18.jpg');
+
+-- curry
+insert into items values(41, 'curry', 'カツカレー', '食べると勝負に勝てると言われる勝つカレー。ラクラクカレー定番の１品です', 1490, 2570, '/img_curry/1.jpg');
+insert into items values(42, 'curry', 'ポークポークカレー・ミート', 'グリーンアスパラと相性の良いベーコンにいろどりのフレッシュトマトをトッピングし特製マヨソースでまとめた商品です', 1490, 2570, '/img_curry/2.jpg');
+insert into items values(43, 'curry', '牛すじカレー', 'トロトロの牛すじとネギの風味が格別な味わいシンプルなカレーです！', 1490, 2570, '/img_curry/3.jpg');
+insert into items values(44, 'curry', '味噌カツカレー', 'マイルドな味付けのカレーに大きくカットした味噌カツをのせた、バターとチーズの風味が食欲をそそるお子様でも楽しめる商品です', 1900, 2980, '/img_curry/4.jpg');
+insert into items values(45, 'curry', 'とんかつカレーラーメン', 'カレーはライスだけではありません。ラクラクピザが開発したカレーラーメンは絶品の美味しさ！', 1900, 2980, '/img_curry/5.jpg');
+insert into items values(46, 'curry', 'ヒレカツカレー', 'やわらかくあっさりとしたヒレ肉を上質な衣で包み込みました。4種類の濃厚な味わいが一つで楽しめるカレーです', 2700, 4050, '/img_curry/6.jpg');
+insert into items values(47, 'curry', '濃厚Gorgeous4', 'こだわりのソースで、旨みとコクを堪能！濃厚Gorgeous4とは、動物由来の原材料を使用していないカレーです。ベジタリアンの方にオススメです', 2570, 3780, '/img_curry/7.jpg');
+insert into items values(48, 'curry', 'カレーうどん', 'ラクラクカレー自慢のカレーに魚介のダシ、ローストオニオンのコクが加わった絶妙なスープをお楽しみください', 2160, 3380, '/img_curry/8.jpg');
+insert into items values(49, 'curry', 'Charity4', 'にんにくとトマトの旨みが効いたスパイスカレー。食べると思わず元気が出るラクラクカレーの自信作', 2700, 4050, '/img_curry/9.jpg');
+insert into items values(50, 'curry',  'ほうれん草のカレードリア', 'カレードリアの王道！ホワイトソースとカレーのダブルソースとなす、ほうれん草、チーズのおいしい組み合わせ', 2160, 3380, '/img_curry/10.jpg');
+insert into items values(51, 'curry',  'Specialドリア4', 'ホワイトソースとカレーのダブルソースにハンバーグを合わせました', 2700, 4050, '/img_curry/11.jpg');
+insert into items values(52, 'curry',  '季節の野菜カレー', '季節の野菜が一つになった4種の栄養満点カレー。ラクラクカレーオリジナル商品でベジタリアンの方にオススメです', 2160, 3380, '/img_curry/12.jpg');
+insert into items values(53, 'curry',  'バラエティー４', 'あらびきスライス牛肉とイタリアンチーズを、トマトソースと特製マヨソースの2種類のソースで召し上がって頂く商品です', 2160, 3380, '/img_curry/13.jpg');
+insert into items values(54, 'curry',  'えびナスカレー', 'デミグラスソースでじっくり煮込んだ旨味たっぷりのえびとナスのカレー', 2980, 4460, '/img_curry/14.jpg');
+insert into items values(55, 'curry',  'Family４', 'ラクラクピザ自慢「特うまプルコギ」定番「デラックス」お子様に人気「ツナマイルド」女性に好評「チーズ＆チーズ」の４種のおいしさを贅沢に組み合わせました', 2440, 3650, '/img_curry/15.jpg');
+insert into items values(56, 'curry',  'シンプルイズベスト', '人気ナンバー１！魚介の旨みたっぷり！人気の海の幸と、野菜のリッチなおいしさ', 2700, 4050, '/img_curry/16.jpg');
+insert into items values(57, 'curry',  '学芸会カレー', 'みんな大好き！学芸会で作るような味を再現！定番のおいしさを味わえます', 2440, 3650, '/img_curry/17.jpg');
+insert into items values(58, 'curry',  '黄金に輝くチキンカレー', 'カレーが黄金に輝く、超高級鶏肉を使用したカレーです', 2700, 4050, '/img_curry/18.jpg');
+
+-- noodle
+insert into items values(61, 'noodle', 'とんこつラーメン', '創業当時から今に引き継ぐとんこつラーメンの本流であり、原点の味。18時間の調理と、丸1日の熟成を経て、とんこつの旨味を極限まで抽出した豊かで香り高いシルキーなスープに、博多らしい細麺がマッチします。', 700, 800, '/img_noodle/1.jpg');
+insert into items values(62, 'noodle', '赤ラーメン', '自家製の香味油と辛みそを加えることで、一杯のラーメンの中でいくつもの味の奥行きと調和を楽しめます。白丸が正統派のとんこつラーメンならば、赤丸新味は豚骨ラーメンの可能性を広げた“革新派”。 コクと深みを追求した、自信作です。', 750, 850, '/img_noodle/2.jpg');
+insert into items values(63, 'noodle', 'からか麺', '博多絹ごしとんこつをベースに、豆板醤や甜麺醤などを独自に配合した肉味噌を大胆にトッピング。山椒などのスパイスを効かせた自家製ラー油が全体をピリリとまとめあげ、中太のストレート麺がうま味と辛味を余すところなくすくいあげます。1989年に大名本店で登場以来、進化を続ける根強い人気の一杯です。', 800, 900, '/img_noodle/3.jpg');
+insert into items values(64, 'noodle', 'かさね味Special', '2001年、本店限定メニューとして誕生。とんこつと鶏ガラを素材に、それぞれの旨みを抽出しながら絶妙なバランスで合わせた鶏豚骨スープは、さっぱりとしながらも深みがあり、加水率の高い中太麺を引き立てています。', 900, 1000, '/img_noodle/4.jpg');
+insert into items values(65, 'noodle', '百福元味', 'ラーメンに生涯を捧げた麺翁、日清食品創業者・安藤百福氏を想い、一風堂店主・河原成美が手掛けた醤油ラーメン。 国産の丸鶏を使用したスープ、国産小麦を2種類使用した平打ちちぢれ麺、自家製のごぼう香油など、こだわり抜かれた一杯です。', 980, 1080, '/img_noodle/5.jpg');
+insert into items values(66, 'noodle', '川越とんこつ醤油', '埼玉県・川越のラーメン店と醤油メーカーが中心となって行っている「川越醤油ラーメン」プロジェクトに一風堂も参加！松本醤油商店さんの「はつかり醤油」と川越産の小松菜を一風堂のとんこつスープを合わせた「川越とんこつ醤油」です。', 880, 980, '/img_noodle/6.jpg');
+insert into items values(67, 'noodle', '元祖・白丸元味／元祖・赤丸新味', '1985年に創業した博多 一風堂の1号店である大名本店限定メニュー。創業当時のトロリとしたポタージュのようなスープを再現し、通常よりも一段と濃厚な白丸/赤丸に仕上げています。全国のラーメンファン、観光客の方が、この味を求めて足を運んでくださいます。', 900, 1000, '/img_noodle/7.jpg');
+insert into items values(68, 'noodle', '鶏とんこつ麺', '関西のラーメン激戦区で修行を積んだ親父による珠玉の一品。濃厚な鶏の凝縮されたコクのあるスープの旨味と極太麺に海苔の風味が上品かつ風情を醸し出した自信作。', 800, 900, '/img_noodle/8.jpg');
+insert into items values(69, 'noodle', '辛味噌ちゃあしゅう麺', '九州で伝統的に伝わる発酵手法で作られた秘伝味噌をふんだんに使用したコクのある味噌ラーメン。チャーシューは低温調理で豚本来の旨味をぎゅっと閉じ込めた贅沢な一杯。', 820, 920, '/img_noodle/9.jpg');
+insert into items values(70, 'noodle',  '追い鰹チャーシュー', '関西のラーメンランキングでNo.1をとったこともある名店で仕込まれた味。香り高い追い鰹でとられたスープはただ飲むだけでなく、添えられた車麩に浸しても楽しめる。ここでしか食べられない極上の一杯。', 1050, 1100, '/img_noodle/10.jpg');
+insert into items values(71, 'noodle',  '鶏白湯坦々麺', '鶏の部位でも上質な部位のみを厳選し、旨味を閉じ込めた白湯スープ。10種類のスパイスが組み合わさった爽やかな辛さとナッツの甘味が香ばしさを引き立てた一杯。', 980, 1080, '/img_noodle/11.jpg');
+insert into items values(72, 'noodle',  '貝出汁らーめん原点', '人気の魚「貝」系らーめん。あさりやしじみの貝の旨味を閉じ込め、淡口醤油であっさり仕上げている。', 900, 1000, '/img_noodle/12.jpg');
+insert into items values(73, 'noodle',  '澄み切った醤油らーめん', '喉越しの良さを突き詰めた王道醤油ラーメン。すっきりとした見た目とは裏腹にじっくりのコクのある最後までスープを飲み干したくなる一杯。', 950, 1050, '/img_noodle/13.jpg');
+insert into items values(74, 'noodle',  '煮干しつけ麺', '煮干しでとられた醤油ベースのスープが喉越しの良いもっちりとした麺の味を引き立てるつけ麺。', 750, 850, '/img_noodle/14.jpg');
+insert into items values(75, 'noodle',  '旨辛味噌麺', '味噌ラーメンの常識を変える一杯。濃厚かつコクと深みのあるスープ、小麦の味がこみ上げる極太麺、ジューシーなチャーシューが胃袋を鷲掴みにする。', 680, 800, '/img_noodle/15.jpg');
+insert into items values(76, 'noodle',  'まぜ麺Gorgeous4', '食欲をそそるエスニックでスパイシーな一杯。しっかり混ぜて広がるまぜ麺に最後は追い飯をすれば、1度だけでなく2度楽しめるお得感のあるラーメンです。', 780, 880, '/img_noodle/16.jpg');
+insert into items values(77, 'noodle',  '台湾まぜそば', 'ピリ辛!!の台湾まぜそば汗をジンワリとかく程度の辛さで魚粉の香りが引き立ち、辛く味付けした挽肉が非常にマッチした一品。タレが残ったら追いめしが楽しめます。', 1200, 1300, '/img_noodle/17.jpg');
+insert into items values(78, 'noodle',  '真・澄み切った塩らーめん', '岩塩でキリッとさせた鶏スープがまとまりがある仕上がり。透明度の高いスープは旨味が凝縮された丁寧な一杯。何度でも食べたくなる味のラーメンです。', 990, 1090, '/img_noodle/18.jpg');
+
+-- pizza
+insert into items values(81, 'pizza', 'じゃがバターベーコン', 'ホクホクのポテトと旨味が凝縮されたベーコンを特製マヨソースで味わって頂く商品です。バター風味豊かなキューブチーズが食材の味を一層引き立てます。', 1490, 2570, '/img_pizza/1.jpg');
+insert into items values(82, 'pizza', 'アスパラ・ミート', 'グリーンアスパラと相性の良いベーコンにいろどりのフレッシュトマトをトッピングし特製マヨソースでまとめた商品です', 1490, 2570, '/img_pizza/2.jpg');
+insert into items values(83, 'pizza', '熟成ベーコンとマッシュルーム', 'マッシュルームと熟成ベーコンにブラックペッパーをトッピングしたシンプルなピザ！', 1490, 2570, '/img_pizza/3.jpg');
+insert into items values(84, 'pizza', 'カレーじゃがバター', 'マイルドな味付けのカレーに大きくカットしたポテトをのせた、バターとチーズの風味が食欲をそそるお子様でも楽しめる商品です', 1900, 2980, '/img_pizza/4.jpg');
+insert into items values(85, 'pizza', '明太バターチーズ', '大きくカットしたポテトにコーンとベーコンをトッピングして、明太クリームソース、バター、チーズを合わせた、家族で楽しめるピザです', 1900, 2980, '/img_pizza/5.jpg');
+insert into items values(86, 'pizza', '濃厚Gorgeous4', '「厚切イベリコ」、「贅沢フォルマッジ」「ラクラクピザ・シュプリーム」「アボカドシュリンプ」4種類の濃厚な味わいが一つで楽しめるピザです', 2700, 4050, '/img_pizza/6.jpg');
+insert into items values(87, 'pizza', 'ピザベスト4', 'ラクラクピザの人気ピザ"ベスト4"（「アイダホ風ほっくりポテマヨ」、「フレッシュモッツァレラのマルゲリータ」、「特うまプルコギ」', 2570, 3780, '/img_pizza/7.jpg');
+insert into items values(88, 'pizza', 'Charity4', '「デラックス」、「ミート・シュプリーム」、「ツナマイルド」、「ガーリック・トマト」の組み合わせ。「チャリティー4」1枚のご注文につき、世界の飢餓救済に', 2160, 3380, '/img_pizza/8.jpg');
+insert into items values(89, 'pizza', '特うまプルコギ', 'ミートナンバー１！甘辛ダレの焼肉がクセになる！食べると思わず元気が出るラクラクピザの自信作', 2700, 4050, '/img_pizza/9.jpg');
+insert into items values(90, 'pizza',  'フレッシュモッツァレラ', 'ピザの王道！トマトとフレッシュモッツァレラが絶妙です', 2160, 3380, '/img_pizza/10.jpg');
+insert into items values(91, 'pizza',  'Specialミート4', 'お肉好きの方必見！ラクラクピザ人気のミートシリーズが1枚のピザになって新登場！「厚切イベリコ」「ワイルド・ガーリック」「特うまプルコギ」', 2700, 4050, '/img_pizza/11.jpg');
+insert into items values(92, 'pizza',  'バラエティー４', '「めちゃマヨ・ミート」「ガーリック・トマト」「えびマヨコーン」、「フレッシュモッツァレラのマルゲリータ」が一つになった4種のピザ', 2160, 3380, '/img_pizza/12.jpg');
+insert into items values(93, 'pizza',  'めちゃマヨミート', 'あらびきスライスソーセージとイタリアンソーセージの2種類のソーセージを、トマトソースと特製マヨソースの2種類のソースで召し上がって頂く商品です', 2160, 3380, '/img_pizza/13.jpg');
+insert into items values(94, 'pizza',  'とろけるビーフシチュー', 'デミグラスソースでじっくり煮込んだ旨味たっぷりのビーフシチューのピザ', 2980, 4460, '/img_pizza/14.jpg');
+insert into items values(95, 'pizza',  'シーフードミックス', 'シーフードナンバー１！魚介の旨みたっぷり！人気の海の幸と、野菜のリッチなおいしさ', 2700, 4050, '/img_pizza/15.jpg');
+insert into items values(96, 'pizza',  'Family４', 'ラクラクピザ自慢「特うまプルコギ」定番「デラックス」お子様に人気「ツナマイルド」女性に好評「チーズ＆チーズ」の４種のおいしさを贅沢に組み合わせました', 2440, 3650, '/img_pizza/16.jpg');
+insert into items values(97, 'pizza',  'アイダホ風ほっくりポテマヨ', 'みんな大好き！ポテトと特製マヨソースの組み合わせ！定番のおいしさを味わえます', 2440, 3650, '/img_pizza/17.jpg');
+insert into items values(98, 'pizza',  '贅沢フォルマッジ', '濃厚なカマンベールソース＆カマンベールと香りとコクのパルメザンチーズをトッピング', 2700, 4050, '/img_pizza/18.jpg');
+
+-- toy
+insert into items values(101, 'toy', 'ビニールプール', '製品サイズ:(約)幅157×奥行157×高さ122cm
+材質:塩化ビニル樹脂(非フタル酸系可塑剤使用)
+水量目安:高さ22cmまで入れて295L
+付属品:修理用パッチ
+対象年齢:2歳以上
+原産国:中国
+INTEX社製のサンシェード付プール。
+高さのある壁で安定します。
+サンシェードは取り外し可能です。
+プール底に排水口付き。
+修理用パッチ付。
+ご注意:子供は必ず、監視者のもとで遊ばせてください。
+レンタル等による貸出、オークション等による販売や中古販売、
+及び譲渡によって発生した故障・破損・損害・事故などにつきましては
+一切責任を負いかねますので予めご了承ください。', 1490, 2570, '/img_toy/1.jpg');
+insert into items values(102, 'toy', 'ラジコンバギー ボブキャットEX', '防塵防水仕様1/20スケールラジコンバギー。
+生活防水だから水たまりでの走行可能、汚れたら水かけ洗いもできる。
+前後サスペンション搭載で悪路を走破。
+登坂力35度、ハイスピード15キロ。
+デフギア搭載でクイックなコーナーリング。
+アウトドアでもガンガン走るラジコンバギー。
+<本体サイズ>H11.5×W16×D27.5cm', 1490, 2570, '/img_toy/2.jpg');
+insert into items values(103, 'toy', 'シルバニアファミリーSylvanian Families(赤い屋根の大きなお家)', 'お家は90度や180度に開いたり、閉じたりして遊ぶことができます。
+お家を閉じると、どこから見てもきれいなお家の形になり、窓からこぼれるお家のあかりがとてもきれいです。
+３階のお部屋「えんとつのお部屋」と「屋根ユニット」が取り外せるようになっています。
+これらのお部屋を組みかえることで、３階建てのお家としても遊ぶことができます。
+別売りの「はじめてのシルバニアファミリー」（DH-06）をと組み合わせると、シルバニア村で一番大きな「赤い屋根の夢の大きなお家」になります。
+また、別売りの人形や家具セットをお部屋に入れて遊ぶと、楽しいごっこ遊びができます。', 1490, 2570, '/img_toy/3.jpg');
+insert into items values(104, 'toy', 'ハピネスチャージプリキュア! キュアライン', 'ハピネスチャージプリキュア!が使用するスマホ「キュアライン」が登場!!
+流行のスタンプメールやTV電話でプリキュアたちとコミュニケーション!
+メールがきたら選択をして返信!スタンプも送れる!メールは800パターン以上!
+スタンプは100種類以上!
+メール&TV電話で仲良し度を上げてプロフをゲット!
+さらに、歴代プリキュアたちともスタンプメールができちゃう!
+また、遊んで学べる知育アプリやゲーム、実用アプリがいっぱい!
+タッチペンで文字や数字の書き方を学んだり、遊びながら学べる知育アプリが盛りだくさん。
+さらに!専用ホームページからデータをダウンロードしてゲームやキャラクターを追加できる!
+(ゲーム、メールできるキャラクター、スタンプ)
+ 使用電池:単4×4 (別売)
+【商品内容】キュアライン本体1個、タッチペン1個', 1900, 2980, '/img_toy/4.jpg');
+insert into items values(105, 'toy', 'こえだちゃん キキ & ララ 月のおうち', '過去大ヒットした『キキ＆ララ月のおうち』の復刻版です。
+家具や色味など、現代バージョンにアレンジし、パワーアップして登場です。', 1900, 2980, '/img_toy/5.jpg');
+insert into items values(106, 'toy', 'キラキラ プリキュアアラモード まぜまぜ変身!スイーツパクトDX', 'キラキラ プリキュアアラモードより、まぜまぜ変身!スイーツパクトDXが登場!
+プリキュア5人全員の変身&攻撃あそびが楽しめるオールインワンセット!
+スイーツづくりみたいな「まぜまぜアクション」で5人のなりきりあそびができる!!
+セット内容:スイーツパクト本体 1個 まぜまぜスティック 1本 アニマルスイーツ
+うさぎショートケーキ1個 リスプリン1個 ライオンアイス1個 キャットマカロン1個
+ドッグチョコレート1個 ボールチェーン1個 使用電池:単4×2(別売)
+ ※デビューキャンペーンの先着購入特典、アニマルスイーツ「ペコリンムースケーキ」は付属しません。', 2700, 4050, '/img_toy/6.jpg');
+insert into items values(107, 'toy', 'アンパンマンタウン ようこそ！たのしいパンこうじょうハウス', '遊びやすい2面のドールハウスがラインナップ！
+「アンパンマンタウン ようこそ！たのしいパンこうじょうハウス」は、
+大きさ約25センチサイズのパン工場です。
+3階建ての建物はお部屋スペース側、キッチン、お風呂、リビング、
+ベッド、はしご、階段、ブランコ、ポスト、野菜やお花の抜きさしや
+アンパンマン号あそびが楽しめ、もう片面はパン工場でパン転がしあそび、
+かまど遊び、パンこね遊びができる遊びたくさんのドールハウスです。
+アンパンマンとメロンパンナちゃんのドールフィギュアも付属で、
+ハウス各所にある星型の突起に乗せやすい作りになっています。
+アンパンマンの世界観を表現した本商品で、楽しくドール遊びをしちゃおう！', 2570, 3780, '/img_toy/7.jpg');
+insert into items values(108, 'toy', '人生ゲーム（2016年ver.）', '人生ゲームシリーズのフラッグシップモデルが8年ぶりにリニューアル!!
+4つの追加エリアを組み合わせることで、色んなテイストの人生ゲームが楽しめます!組み合わせパターンは全16種。
+【セット内容】
+億万長者ステージ(1),追加用ステージ(仮)(4), 山(ゲーム版に貼り付いているもの以外)(1),
+家(ゲーム版に貼りついているもの以外)(4), ビル群(1),追加ステージ用橋(4),橋(1),
+自動車ゴマ(6色 各1個)(6),旗(6色 各1本)(6), 人物ピン(水色36本、ピンク36本))(72),
+職業カード(A4サイズ)(1), お宝カード(A4サイズ)(1),保険証券(火災保険、生命保険、自動車保険)(24),
+株券(8),お札一式(1)', 2160, 3380, '/img_toy/8.jpg');
+insert into items values(109, 'toy', '野球盤 3Dエース', '野球盤史上初！｢3Dピッチング機能｣を搭載し、ピッチャーの投球が本物のように飛びます！
+オーバースローとアンダースローで投げ分けて、ホームランバッターに挑め！ めざせ！完・全・試・合！
+[セット内容]
+野球盤本体1、電光掲示板1、ホームランフェンス（直線・曲線）各2、外周フェンス（照明パーツ含む）2、
+ グローブポケット4、バッターウィンドウ1、ボール6、バッター人形2、ピッチャー人形1、ランナー人形3、
+ フィールダー人形7、カウントピン3、シール1、バット用ゴム3、取扱説明書1', 2700, 4050, '/img_toy/9.jpg');
+insert into items values(110, 'toy', 'ベイブレードバースト　B-86 スターター', 'ギミック付きのレイヤー搭載したディフェンスタイプの新型ベイブレード！
+※ライトランチャーLR付属
+＜セット内容＞
+ レイヤー(1),ディスク(1),ドライバー(1),ランチャー(1),ワインダー(1),取説(1),シール(1)', 2160, 3380, '/img_toy/10.jpg');
+insert into items values(111, 'toy', '仮面ライダーエグゼイド　ダブル装填　DXガシャコン キースラッシャー', 'ダブルアクションゲーマー専用武器。3つのモードにチェンジ！
+キーを入力して攻撃！ 別売りのライダーガシャットをセットして必殺技発動！
+＜セット内容＞本体×1', 2700, 4050, '/img_toy/11.jpg');
+insert into items values(112, 'toy', 'トミカハイパーシリーズ ドライブヘッド', '石野ジン・石野ミコトの双子が操縦する機動救急警察ハイパーレスキューが開発した警察機能に特化したドライブヘッド。
+ カーフォームとウォーカービークルフォームの変形が可能！
+ ＜セット内容＞ボディ(1),左腕(1),右腕(1),左脚(1),右脚(1),
+ インジェクトガン(1),インジェクトガンステイ(1),★ホープドライブヘッド１号(1),
+ ★ホープドライブヘッド2号(1),ラベル(1),取扱説明書(1) ※「★」マークは新規金型
+ ＜主な材質＞ABS', 2160, 3380, '/img_toy/12.jpg');
+insert into items values(113, 'toy', 'ミニ四駆スターターパック　MAパワータイプ（ブラストアロー）', 'ブラストアローのキットと、レース参加に欠かせない
+基本的なパーツやドライバーなどの工具をワンセットにしたスペシャル仕様です。
+完成時の全長155mm。全幅104mm。全高41mm。
+＜セット内容＞
+本体、組立説明書、モーター
+＜主な材質＞
+PS', 2160, 3380, '/img_toy/13.jpg');
+insert into items values(114, 'toy', 'ミニ四駆スターターパック　MAパワータイプ（ブラストアロー）', 'ミニ四駆に熊本県のゆるキャラ、
+『くまモン』が搭乗！ 彼の選んだミニ四駆は、アスチュートオープントップ（スーパーIIシャーシ、モーター付き）でした！
+※くまモン人形は組み立て塗装済みです。くまもとサプライズ・くまモンは熊本県の登録商標です。', 2980, 4460, '/img_toy/14.jpg');
+insert into items values(115, 'toy', '機動戦士ガンダムZZ ダブルゼータガンダム', '待望のMG ダブルゼータガンダム Ver.Kaが遂に登場!! 各部の広い可動域とコア・ブロック・システムの搭載、各形態への変形を実現!', 2440, 3650, '/img_toy/15.jpg');
+insert into items values(116, 'toy', 'こえだちゃんと木のおうち', '今度のこえだちゃんは「まほうのカギ」で動きだす！！ カギでうごくよシリーズの「木のおうち」新登場！
+1.鍵を左にまわすと、素敵な音とともに木のおうちがオープン。
+2.鍵を右にまわすと、エレベーターが自動で上下できるモードになります。
+3.玄関におしゃべりスイッチがあり、キャラクターの声やこえだちゃんのテーマ曲が流れます。
+4.屋根の一番上についているお花のクルクルゴーランドは、エレベーターの上下と連動して大きく回転します。
+5.その他、クルクル回るリスの切り株、ブランコ、屋上のくぼみなど、子どもの想像力で遊べるポイントが増えました。', 2700, 4050, '/img_toy/16.jpg');
+insert into items values(117, 'toy', 'キラペットドーム <アクセパーティー>', 'キラキラのスノードームが作れるおもちゃです! 人形とベースの組み合わせを選んで、
+デコチャームを入れ、ドームに水とラメタブレットを入れて、封入! !
+スノードームをデザインするデザイナーの気分が味わえます。
+ 出来上がったキラドームは付属のアクセパーツに取りつけて、身に着けることが出来ます。
+ キラドームとアクセパーツは簡単に付け替えられるので、気分に合わせて、付け替えて遊ぶことが出来ます。
+  他のキラペットドームシリーズに同梱しているディスプレイパーツに取り付けて遊べます。
+  【セット内容】
+  ドームメーカー、水ボトル、ドーム×8、人形×8、ベースプレート×8、ラメタブレット×10、デコチャーム×24、
+  指輪×2、ネックレス×2、ブレスレット×2、ディスプレー(ティーカップ、ティーポット)、取扱説明書', 2440, 3650, '/img_toy/17.jpg');
+insert into items values(118, 'toy', 'おはじきシール ゆめかわDX', 'ゆめかわ系のおはじきシールが150個作ることができます。
+カードやお手紙などに貼ったりお友達と交換することで遊びが広がります。', 2700, 4050, '/img_toy/18.jpg');
+
+
+-- トッピング
+drop table if exists toppings cascade;
+
+create table toppings (
+  id integer primary key
+  , type text not null
+  , name text not null
+  , price_m integer not null
+  , price_l integer not null
+) ;
+
+-- aloha
+insert into toppings values(1,  'aloha', 'ハワイアンソルト', 200, 300);
+insert into toppings values(2,  'aloha', 'ハワイアンマヨネーズ', 200, 300);
+insert into toppings values(3,  'aloha', 'ハワイアントマト', 200, 300);
+insert into toppings values(4,  'aloha', 'ブルーチーズ', 200, 300);
+insert into toppings values(5,  'aloha', 'ハワイアンチョコレート', 200, 300);
+insert into toppings values(6,  'aloha', 'アンチョビ', 200, 300);
+insert into toppings values(7,  'aloha', 'エビ', 200, 300);
+insert into toppings values(8,  'aloha', 'ガーリックスライス', 200, 300);
+insert into toppings values(9,  'aloha', 'トロピカルフルーツ', 200, 300);
+insert into toppings values(10, 'aloha',  'ハワイ産はちみつ', 200, 300);
+insert into toppings values(11, 'aloha',  'ココナッツ', 200, 300);
+insert into toppings values(12, 'aloha',  'マンゴー', 200, 300);
+insert into toppings values(13, 'aloha',  'パイナップル', 200, 300);
+insert into toppings values(14, 'aloha',  'もち', 200, 300);
+insert into toppings values(15, 'aloha',  'コーヒー', 200, 300);
+insert into toppings values(16, 'aloha',  'スプライト', 200, 300);
+insert into toppings values(17, 'aloha',  'ジンジャエール', 200, 300);
+insert into toppings values(18, 'aloha',  'コーラ', 200, 300);
+
+-- coffee
+insert into toppings values(21, 'coffee', 'コーヒークリーム', 200, 300);
+insert into toppings values(22, 'coffee', '低脂肪牛乳', 200, 300);
+insert into toppings values(23, 'coffee', '無脂肪牛乳', 200, 300);
+insert into toppings values(24, 'coffee', '豆乳', 200, 300);
+insert into toppings values(25, 'coffee', 'オールミルク', 200, 300);
+insert into toppings values(26, 'coffee', 'キャラメルソース', 200, 300);
+insert into toppings values(27, 'coffee', 'チョコソース', 200, 300);
+insert into toppings values(28, 'coffee', 'チョコチップ', 200, 300);
+insert into toppings values(29, 'coffee', '蜂蜜', 200, 300);
+insert into toppings values(30, 'coffee',  'ホイップクリーム増量', 200, 300);
+insert into toppings values(31, 'coffee',  'シナモン', 200, 300);
+insert into toppings values(32, 'coffee',  'メープル', 200, 300);
+insert into toppings values(33, 'coffee',  'きなこ', 200, 300);
+insert into toppings values(34, 'coffee',  'ココナッツ', 200, 300);
+insert into toppings values(35, 'coffee',  'アイス', 200, 300);
+insert into toppings values(36, 'coffee',  'マシュマロ', 200, 300);
+insert into toppings values(37, 'coffee',  'タピオカ', 200, 300);
+insert into toppings values(38, 'coffee',  'ナッツ', 200, 300);
+insert into toppings values(39, 'coffee',  'ココアパウダー', 200, 300);
+
+-- curry
+insert into toppings values(41, 'curry', 'オニオン', 200, 300);
+insert into toppings values(42, 'curry', 'ツナマヨ', 200, 300);
+insert into toppings values(43, 'curry', 'イタリアントマト', 200, 300);
+insert into toppings values(44, 'curry', 'イカ', 200, 300);
+insert into toppings values(45, 'curry', 'プルコギ', 200, 300);
+insert into toppings values(46, 'curry', 'アンチョビ', 200, 300);
+insert into toppings values(47, 'curry', 'エビ', 200, 300);
+insert into toppings values(48, 'curry', 'コーン', 200, 300);
+insert into toppings values(49, 'curry', 'ピーマン', 200, 300);
+insert into toppings values(50, 'curry',  'フレッシュスライストマト', 200, 300);
+insert into toppings values(51, 'curry',  'ベーコン', 200, 300);
+insert into toppings values(52, 'curry',  'ペパロニ･サラミ', 200, 300);
+insert into toppings values(53, 'curry',  '熟成ベーコン', 200, 300);
+insert into toppings values(54, 'curry',  '特製マヨソース', 200, 300);
+insert into toppings values(55, 'curry',  'カマンベールチーズ', 200, 300);
+insert into toppings values(56, 'curry',  'フレッシュモッツァレラチーズ', 200, 300);
+insert into toppings values(57, 'curry',  'イタリアンソーセージ', 200, 300);
+insert into toppings values(58, 'curry',  'ガーリックスライス', 200, 300);
+insert into toppings values(59, 'curry',  'あらびきスライスソｰセｰジ', 200, 300);
+
+-- noodle
+insert into toppings values(61, 'noodle', 'チャーシュー', 200, 300);
+insert into toppings values(62, 'noodle', '煮たまご', 200, 300);
+insert into toppings values(63, 'noodle', 'メンマ', 200, 300);
+insert into toppings values(64, 'noodle', 'のり', 200, 300);
+insert into toppings values(65, 'noodle', 'もやし', 200, 300);
+insert into toppings values(66, 'noodle', 'ほうれん草', 200, 300);
+insert into toppings values(67, 'noodle', '車麩', 200, 300);
+insert into toppings values(68, 'noodle', 'バター', 200, 300);
+insert into toppings values(69, 'noodle', '白髪ねぎ', 200, 300);
+insert into toppings values(70, 'noodle',  '紫たまねぎ', 200, 300);
+insert into toppings values(71, 'noodle',  'うずら煮卵', 200, 300);
+insert into toppings values(72, 'noodle',  '薫製たまご', 200, 300);
+insert into toppings values(73, 'noodle',  'つみれ', 200, 300);
+insert into toppings values(74, 'noodle',  'ワンタン', 200, 300);
+insert into toppings values(75, 'noodle',  'ザーサイ', 200, 300);
+insert into toppings values(76, 'noodle',  '大トロチャーシュー', 200, 300);
+insert into toppings values(77, 'noodle',  '太麺に変更', 200, 300);
+insert into toppings values(78, 'noodle',  '追い飯', 200, 300);
+
+-- pizza
+insert into toppings values(81, 'pizza', 'オニオン', 200, 300);
+insert into toppings values(82, 'pizza', 'ツナマヨ', 200, 300);
+insert into toppings values(83, 'pizza', 'イタリアントマト', 200, 300);
+insert into toppings values(84, 'pizza', 'イカ', 200, 300);
+insert into toppings values(85, 'pizza', 'プルコギ', 200, 300);
+insert into toppings values(86, 'pizza', 'アンチョビ', 200, 300);
+insert into toppings values(87, 'pizza', 'エビ', 200, 300);
+insert into toppings values(88, 'pizza', 'コーン', 200, 300);
+insert into toppings values(89, 'pizza', 'ピーマン', 200, 300);
+insert into toppings values(90, 'pizza',  'フレッシュスライストマト', 200, 300);
+insert into toppings values(91, 'pizza',  'ベーコン', 200, 300);
+insert into toppings values(92, 'pizza',  'ペパロニ･サラミ', 200, 300);
+insert into toppings values(93, 'pizza',  '熟成ベーコン', 200, 300);
+insert into toppings values(94, 'pizza',  '特製マヨソース', 200, 300);
+insert into toppings values(95, 'pizza',  'カマンベールチーズ', 200, 300);
+insert into toppings values(96, 'pizza',  'フレッシュモッツァレラチーズ', 200, 300);
+insert into toppings values(97, 'pizza',  'イタリアンソーセージ', 200, 300);
+insert into toppings values(98, 'pizza',  'ガーリックスライス', 200, 300);
+insert into toppings values(99, 'pizza',  'あらびきスライスソｰセｰジ', 200, 300);
+
+-- toy
+insert into toppings values(101, 'toy', '男の子用シール', 200, 300);
+insert into toppings values(102, 'toy', '女の子用シール', 200, 300);
+insert into toppings values(103, 'toy', 'AC電源ケーブル', 200, 300);
+insert into toppings values(104, 'toy', '片付け用きんちゃく袋', 200, 300);
+insert into toppings values(105, 'toy', '単一電池４本', 200, 300);
+insert into toppings values(106, 'toy', '単二電池４本', 200, 300);
+insert into toppings values(107, 'toy', '単三電池４本', 200, 300);
+insert into toppings values(108, 'toy', '単四電池２本', 200, 300);
+insert into toppings values(109, 'toy', 'おもちゃ腕時計', 200, 300);
+insert into toppings values(110, 'toy',  '変身ベルト', 200, 300);
+insert into toppings values(111, 'toy',  'ゆびわの形の飴', 200, 300);
+insert into toppings values(112, 'toy',  'ビックリマンチョコレート', 200, 300);
+insert into toppings values(113, 'toy',  'ヘルメット', 200, 300);
+insert into toppings values(114, 'toy',  'ベビーシート', 200, 300);
+insert into toppings values(115, 'toy',  'USBケーブル', 200, 300);
+insert into toppings values(116, 'toy',  '携帯用ストラップ', 200, 300);
+insert into toppings values(117, 'toy',  '男の子用下敷き', 200, 300);
+insert into toppings values(118, 'toy',  '女の子用下敷き', 200, 300);
+insert into toppings values(119, 'toy',  'ニンテンドーSwitch', 200, 300);
+
+-- 注文
+drop table if exists orders cascade;
+
+create table orders (
+  id serial primary key
+  , user_id integer not null
+  , status integer not null
+  , total_price integer not null
+  , order_date date
+  , destination_name varchar(100)
+  , destination_email varchar(100)
+  , destination_zipcode varchar(8)
+  , destination_address varchar(200)
+  , destination_tel varchar(15)
+  , delivery_time timestamp
+  , payment_method integer
+  ) ;
+
+-- 注文商品
+drop table if exists order_items cascade;
+
+create table order_items (
+  id serial primary key
+  , item_id integer not null
+  , order_id integer not null
+  , quantity integer not null
+  , size varchar(1)
+  , FOREIGN KEY (order_id) REFERENCES orders (id) on delete cascade
+) ;
+
+-- 注文トッピング
+drop table if exists order_toppings cascade;
+
+create table order_toppings (
+  id serial primary key
+  , topping_id integer not null
+  , order_item_id integer not null
+, FOREIGN KEY (order_item_id) REFERENCES order_items (id) on delete cascade
+) ;
