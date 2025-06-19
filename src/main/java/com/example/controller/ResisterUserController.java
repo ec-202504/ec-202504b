@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/resisterUser")
+@RequestMapping("")
 public class ResisterUserController {
 
     @Autowired
     private ResisterUserService resisterUserService;
 
-    @GetMapping("/")
+    @GetMapping("/topPage")
     public String registerUser(ResisterUserForm resisterUserForm){
         return "top";
     }
 
-    @PostMapping("/resisterUser")
+    @PostMapping("/registerUser")
     public String toResisterUser(
             @Validated ResisterUserForm resisterUserForm
             ,BindingResult result
