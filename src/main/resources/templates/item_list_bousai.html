@@ -74,7 +74,7 @@
         <div class="items">
           <div th:each="item : ${itemList}" class="item">
             <div class="item-icon">
-              <img th:src="@{../static/img/} + ${item.imagePath}" />
+              <img th:src="@{/img/} + ${item.imagePath}" />
             </div>
             <a
               th:href="@{/showItemDetail?itemId=} + ${item.id}"
