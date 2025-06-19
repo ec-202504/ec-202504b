@@ -1,6 +1,7 @@
 package com.example.repository;
 
 import com.example.domain.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -29,6 +30,7 @@ public class UserRepository {
         return user;
     };
 
+    @Autowired
     private NamedParameterJdbcTemplate template;
 
     /**
@@ -58,6 +60,25 @@ public class UserRepository {
         SqlParameterSource param = new MapSqlParameterSource().addValue("email", email).addValue("password", password);
         List<User> userList = template.query(sql, param, USER_ROW_MAPPER);
         if (userList.isEmpty()) {
+            return null;
+        }
+        return userList.get(0);
+    }
+
+
+    /**
+     * メールアドレスからユーザーを取得
+     *
+     * @param email メールアドレス
+     * @return ユーザー 存在しない場合はnull
+     */
+    public User findByMailAddress(String email) {
+        String sql =  """
+				SELECT name, email, password, zipcode, prefecture, municipalities, address, telephone FROM users where email = :email;
+				""";
+        SqlParameterSource param = new MapSqlParameterSource().addValue("email", email);
+        List<User> userList = template.query(sql, param, USER_ROW_MAPPER);
+        if (userList.size() == 0) {
             return null;
         }
         return userList.get(0);
