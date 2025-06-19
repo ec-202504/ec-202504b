@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,9 @@ public class HandleCartController {
     @Autowired
     private HandleCartService handleCartService;
 
+    @Autowired
+    private HttpSession session;
+
     /**
      * カートに商品を追加します.
      *
@@ -32,11 +36,19 @@ public class HandleCartController {
      */
     @PostMapping("/add")
     public String add(@Valid OrderItemForm orderItemForm, BindingResult result) {
-        Integer userId = 1; // 仮のユーザーID。実際は認証情報から取得する必要があります。
+        // セッションからユーザーIDを取得
+        Integer userId = (Integer) session.getAttribute("userId");
+        // セッションが切れた時にlogin画面へリダイレクト
+        if (userId == null) {
+            return "redirect:/login";
+        }
+        // 入力チェックエラーがある場合、商品詳細画面に戻る
         if(result.hasErrors()){
             return "itemDetail";
         }
-        handleCartService.add(orderItemForm);
+        // 商品をカートに追加
+        handleCartService.add(orderItemForm, userId);
+        // カート画面へリダイレクト
         return "redirect:/cart/show";
     }
 
@@ -50,8 +62,14 @@ public class HandleCartController {
      */
     @RequestMapping("/delete")
     public String delete(Integer orderItemId) {
+        // セッションからユーザーIDを取得
+        Integer userId = (Integer) session.getAttribute("userId");
+        //セッションが切れた時にlogin画面へリダイレクト
+        if (userId == null) {
+            return "redirect:/login";
+        }
         //商品をカートから削除
-        handleCartService.delete(orderItemId);
+        handleCartService.delete(orderItemId, userId);
         // カート画面へリダイレクト
         return "redirect:/cart/show";
     }
@@ -63,9 +81,19 @@ public class HandleCartController {
      */
     @RequestMapping("/show")
     public String showCart(Model model) {
-        //
-        Integer userId = 1; // 仮のユーザーID。実際は認証情報から取得する必要があります。
+        // セッションからユーザーIDを取得
+        Integer userId = (Integer) session.getAttribute("userId");
+        //セッションが切れた時にlogin画面へリダイレクト
+        if (userId == null) {
+            return "redirect:/login";
+        }
+        // カートの内容を取得
         Order order = handleCartService.showCart(userId);
+        // カートが空の場合、orderはnullになる可能性があるため、nullチェックを行う
+        if (order == null) {
+            order = new Order(); // 空のOrderオブジェクトを作成
+        }
+        // カートの内容を追加
         model.addAttribute("order", order);
         //カート画面を表示
         return "cart";

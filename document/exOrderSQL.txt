@@ -111,21 +111,4 @@ INSERT INTO order_items (order_id, item_id, quantity, shoes_size) VALUES
 INSERT INTO order_items (order_id, item_id, quantity, shoes_size) VALUES
 (3, 5, 1, 'S'),   -- ケーキ（Sサイズ）
 (3, 6, 2, NULL);  -- コーヒー ×2（1250円/杯）
--- items テーブル
-DROP TABLE IF EXISTS items;
-CREATE TABLE items (
-    id SERIAL PRIMARY KEY,            -- 商品ID（自動採番）
-    name VARCHAR(100) NOT NULL,       -- 商品名
-    description TEXT NOT NULL,        -- 商品説明
-    price INTEGER NOT NULL,           -- 税抜き価格（単位: 円）
-    image_path VARCHAR(255),          -- 商品画像ファイルのパス
-    deleted BOOLEAN DEFAULT FALSE,  -- 論理削除フラグ
-    itemtype BOOLEAN
-);
-INSERT INTO items (name, description, price, image_path) VALUES
-('1番の商品', '1番の商品です', 1280, 'images/pizza_margherita.jpg'),
-('2番の商品', '2番の商品です', 1580, 'images/quattro_cheese.jpg'),
-('3番の商品', '3番の商品です', 980, 'images/grilled_chicken.jpg'),
-('4番の商品', '4番の商品です', 890, 'images/tonkotsu_ramen.jpg'),
-('5番の商品', '5番の商品です', 850, 'images/miso_ramen.jpg'),
-('6番の商品', '6番の商品です', 620, 'images/strawberry_cake.jpg');
+
