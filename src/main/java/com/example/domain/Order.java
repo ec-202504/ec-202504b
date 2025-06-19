@@ -39,6 +39,20 @@ public class Order {
     /** 注文商品リスト */
     private List<OrderItem> orderItemList;
 
+
+//    /**
+//     * 注文の合計値
+//     *
+//     * @return orderItemListの価格の合計値
+//     */
+//    public Integer getTotalPrice(){
+//        int sum = 0;
+//        for(OrderItem orderItem: orderItemList){
+//            sum += orderItem.getQuantity() * orderItem.getItem().getPrice();
+//        }
+//        return sum;
+//    }
+
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
     public Integer getUserId() { return userId; }
@@ -69,6 +83,7 @@ public class Order {
     public void setPaymentMethod(Integer paymentMethod) { this.paymentMethod = paymentMethod; }
     public java.util.List<OrderItem> getOrderItemList() { return orderItemList; }
     public void setOrderItemList(java.util.List<OrderItem> orderItemList) { this.orderItemList = orderItemList; }
+
 
     @Override
     public String toString() {

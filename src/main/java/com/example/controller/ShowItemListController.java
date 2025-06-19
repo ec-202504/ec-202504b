@@ -26,7 +26,7 @@ public class ShowItemListController {
         List<Item> itemList = showItemListService.searchAll();
         model.addAttribute("itemList", itemList);
 
-        return "item_list_pizza";
+        return "item_list_bousai";
     }
 
     @PostMapping("/searchByName")
@@ -34,6 +34,14 @@ public class ShowItemListController {
         List<Item> itemList = showItemListService.findByName(name);
         model.addAttribute("itemList", itemList);
 
-        return "item_list_pizza";
+        return "item_list_bousai";
+    }
+
+    @GetMapping("/showItemDetail")
+    public String showItemDetail(Integer itemId, Model model) {
+        Item item = showItemListService.showItemDetail(itemId);
+        model.addAttribute("item", item);
+
+        return "item_detail";
     }
 }

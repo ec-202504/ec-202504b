@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
   <head>
     <!--Import Google Icon Font-->
     <link
@@ -16,17 +16,17 @@
       href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../static/css/common.css" />
-    <link rel="stylesheet" href="../static/css/header.css" />
-    <link rel="stylesheet" href="../static/css/footer.css" />
-    <link rel="stylesheet" href="../static/css/register_user.css" />
-    <link rel="stylesheet" href="../static/css/login.css" />
-    <link rel="stylesheet" href="../static/css/item_list.css" />
-    <link rel="stylesheet" href="../static/css/item_detail.css" />
-    <link rel="stylesheet" href="../static/css/cart_list.css" />
-    <link rel="stylesheet" href="../static/css/order_confirm.css" />
-    <link rel="stylesheet" href="../static/css/order_finished.css" />
-    <link rel="stylesheet" href="../static/css/responsive.css" />
+    <link rel="stylesheet" th:href="@{/css/common.css}" />
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/footer.css}" />
+    <link rel="stylesheet" th:href="@{/css/register_user.css}" />
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
+    <link rel="stylesheet" th:href="@{/css/item_list.css}" />
+    <link rel="stylesheet" th:href="@{/css/item_detail.css}" />
+    <link rel="stylesheet" th:href="@{/css/cart_list.css}" />
+    <link rel="stylesheet" th:href="@{/css/order_confirm.css}" />
+    <link rel="stylesheet" th:href="@{/css/order_finished.css}" />
+    <link rel="stylesheet" th:href="@{/css/responsive.css}" />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -38,7 +38,7 @@
         <div class="header">
           <div class="header-left">
             <a href="top.html">
-              <img class="logo" src="../static/img_aloha/header_logo.png" />
+              <img class="logo" th:src="@{/img_aloha/header_logo.png}" />
             </a>
           </div>
 
@@ -59,14 +59,16 @@
     </header>
     <div class="top-wrapper">
       <div class="container">
-        <h1 class="page-title">Hawaiianパラダイス</h1>
+        <h1 class="page-title" th:text="${item.name}">Hawaiianパラダイス</h1>
         <div class="row">
           <div class="row item-detail">
             <div class="item-icon">
-              <img src="../static/img_aloha/1.jpg" />
+              <img th:src="@{/img_aloha/1.jpg}" />
             </div>
             <div class="item-intro">
-              ハワイで取れる名産物でかつオーガニックな食料がふんだんに使われたローカルフーズです。健康志向の方に大人気の商品です。
+              <span th:text="${item.description}">
+                ハワイで取れる名産物でかつオーガニックな食料がふんだんに使われたローカルフーズです。健康志向の方に大人気の商品です。
+              </span>
             </div>
           </div>
           <div class="row item-size">
