@@ -73,14 +73,14 @@
             </thead>
 
             <tbody>
-              <div th:each=" orderItem : ${{order.orderItemList}"></div>
+              <div th:each=" orderItem : ${order.orderItemList}"></div>
 
               <tr>
                 <td class="cart-item-name">
                   <div class="cart-item-icon">
                     <img src="../static/img_aloha/1.jpg" />
                   </div>
-                  <span th:text="${orderItem.name}}">ハワイアンパラダイス</span>
+                  <span th:text="${orderItem.item.name}">ハワイアンパラダイス</span>
                 </td>
                 <td>
                   <span class="price" th:text="${orderItem.price}">&nbsp;Ｌ</span>&nbsp;&nbsp;2,380円

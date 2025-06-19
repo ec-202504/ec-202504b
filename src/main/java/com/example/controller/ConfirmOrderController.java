@@ -1,12 +1,16 @@
 package com.example.controller;
 
 import com.example.domain.Order;
+import com.example.domain.OrderItem;
 import com.example.service.ConfirmOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 
 /**
@@ -30,6 +34,19 @@ public class ConfirmOrderController {
     String toConfirmOrder(Integer orderId, Model model) {
 //        final orderId = 1; //デバッグ用
         Order order = service.showCart(orderId);
+        model.addAttribute("order", order);
+        return "confirmOrder";
+    }
+
+    @GetMapping("/test")
+    String toTest(Model model){
+        final  int orderId = 1;
+        Order order = service.showCart(orderId);
+        List<OrderItem> orderItemList = order.getOrderItemList();
+        System.out.println("-------------------------------");
+        for(OrderItem orderItem: orderItemList){
+            System.out.println(orderItem);
+        }
         model.addAttribute("order", order);
         return "confirmOrder";
     }
