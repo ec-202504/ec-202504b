@@ -28,6 +28,11 @@ public class UserRepository {
 
     private NamedParameterJdbcTemplate template;
 
+    /**
+     * ユーザーを登録する.
+     *
+     * @param user ユーザー
+     */
     public void insert(User user){
         SqlParameterSource param = new BeanPropertySqlParameterSource(user);
         String sql = """

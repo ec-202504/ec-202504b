@@ -7,12 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * ユーザー情報を操作するサービス.
+ */
 @Service
 @Transactional
 public class ResisterUserService {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * ユーザーを登録する
+     * .
+     * @param resisterUserForm　ユーザー登録フォーム
+     */
     public void resisterUser(ResisterUserForm resisterUserForm){
         User user = new User();
         user.setName(resisterUserForm.getLastName() + " " + resisterUserForm.getFirstName());

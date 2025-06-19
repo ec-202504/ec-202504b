@@ -18,11 +18,25 @@ public class ResisterUserController {
     @Autowired
     private ResisterUserService resisterUserService;
 
+    /**
+     * トップページを表示する.
+     *
+     * @param resisterUserForm ユーザー登録フォーム
+     * @return トップページ
+     */
     @GetMapping("/topPage")
     public String registerUser(ResisterUserForm resisterUserForm){
         return "top";
     }
 
+    /**
+     * ユーザーを登録し、商品一覧に遷移する.
+     *
+     * @param resisterUserForm ユーザー登録フォーム
+     * @param result エラー
+     * @param model リクエストスコープ
+     * @return 商品一覧（もしくはトップページ）
+     */
     @PostMapping("/registerUser")
     public String toResisterUser(
             @Validated ResisterUserForm resisterUserForm
