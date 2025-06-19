@@ -1,20 +1,28 @@
 package com.example.form;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 public class OrderItemForm {
     /**
-     * Item ID
+     * 商品ID(正の整数)
      */
+    @NotNull(message = "商品IDは必須です")
+    @Positive(message = "商品IDは正の整数で入力してください")
     private Integer itemId;
     /**
-     * 数量
+     * 数量(必須、1以上)
      */
+    @NotNull(message = "数量は必須です")
+    @Min(value = 1, message = "数量は1以上で入力してください")
     private Integer quantity;
     /**
-     * アイテムのサイズ
+     * アイテムのサイズ(任意)
      */
     private Integer optionItmSize;
     /**
-     * 靴のサイズ
+     * 靴のサイズ(任意)
      */
     private Integer optionShoesSize;
 

@@ -20,19 +20,23 @@ public class HandleCartService {
     private OrderItemRepository orderItemRepository;
 
 
+    /**
+     * カートに商品を追加します.
+     *
+     * @param orderItemForm 追加する商品の情報を持つフォーム
+     */
     public void add(OrderItemForm orderItemForm) {
         // 1. ログインユーザーID取得
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String username = userDetails.getUsername();
-        // ここではusernameからユーザーIDを取得する想定（実際はUserRepository等でID取得が必要）
-        // 仮にuserId=1とする（本来はDBから取得）
+        // TODO: usernameからuserIdを取得する実装に修正
         Integer userId = 1;
 
-        // 2. カート（注文前Order）の有無確認
+        // カート（注文前Order）の有無を確認
         Order order = orderRepository.findByUserIdAndStatus(userId, 0);
 
-        // 3. なければ新規作成
+        // カートがなければ新規作成
         if (order == null) {
             order = new Order();
             order.setUserId(userId);
@@ -41,24 +45,35 @@ public class HandleCartService {
             orderRepository.insert(order);
         }
 
-        // 4. FormからOrderItem生成
+        // OrderItem生成しフォーム値をセット
         OrderItem orderItem = new OrderItem();
         orderItem.setOrderId(order.getId());
         orderItem.setItemId(orderItemForm.getItemId());
         orderItem.setQuantity(orderItemForm.getQuantity());
-        orderItem.setOption1(orderItemForm.getOptionItmSize());
-        orderItem.setOption2(orderItemForm.getOptionShoesSize());
-        // 必要に応じて他の項目もセット
-
-        // 5. OrderItemをDBに保存
+        orderItem.setOptionItemSize(orderItemForm.getOptionItmSize());
+        orderItem.setOptionShoesSize(orderItemForm.getOptionShoesSize());
+        // OrderItemをDBに保存
         orderItemRepository.insert(orderItem);
     }
 
-    public void delete(Integer orderId) {
-
+    /**
+     * カートから商品を削除します.
+     *
+     * @param orderItemId 削除する商品のID
+     */
+    public void delete(Integer orderItemId) {
+        // 指定IDの商品をカートから削除
+        orderItemRepository.deleteByOrderItemId(orderItemId);
     }
 
-    public Order showCart(){
-        return null; // This should return an Order object representing the user's cart
+    /**
+     * 現在ログイン中のユーザーのカートを取得.
+     *
+     * @param userId　ユーザーID
+     * @return カートの中身
+     */
+    public Order showCart(Integer userId){
+        // カート状態（stat=0 購入前）のorderを取得
+        return orderRepository.findByUserIdAndStatus(userId, 0); // This should return an Order object representing the user's cart
     }
 }
