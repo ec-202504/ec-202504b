@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>title</title>
+  </head>
+  <body>
+    <form
+      th:action="@{/registerUser}"
+      method="post"
+      th:object="${registerUserForm}"
+    >
+      <!-- 姓 -->
+      <div>
+        <label for="lastName">姓：</label>
+        <input type="text" th:field="*{lastName}" id="lastName" />
+        <div
+          th:if="${#fields.hasErrors('lastName')}"
+          th:errors="*{lastName}"
+          style="color: red"
+        ></div>
+      </div>
+
+      <!-- 名 -->
+      <div>
+        <label for="firstName">名：</label>
+        <input type="text" th:field="*{firstName}" id="firstName" />
+        <div
+          th:if="${#fields.hasErrors('firstName')}"
+          th:errors="*{firstName}"
+          style="color: red"
+        ></div>
+      </div>
+
+      <!-- メールアドレス -->
+      <div>
+        <label for="email">メールアドレス：</label>
+        <input type="text" th:field="*{email}" id="email" />
+        <div
+          th:if="${#fields.hasErrors('email')}"
+          th:errors="*{email}"
+          style="color: red"
+        ></div>
+      </div>
+
+      <!-- パスワード -->
+      <div>
+        <label for="password">パスワード：</label>
+        <input type="password" th:field="*{password}" id="password" />
+        <div
+          th:if="${#fields.hasErrors('password')}"
+          th:errors="*{password}"
+          style="color: red"
+        ></div>
+      </div>
+
+      <!-- 確認用パスワード -->
+      <div>
+        <label for="confirmPassword">確認用パスワード：</label>
+        <input
+          type="password"
+          th:field="*{confirmPassword}"
+          id="confirmPassword"
+        />
+        <div
+          th:if="${#fields.hasErrors('confirmPassword')}"
+          th:errors="*{confirmPassword}"
+          style="color: red"
+        ></div>
+      </div>
+
+      <!-- 郵便番号 -->
+      <div>
+        <label for="zipcode">郵便番号：</label>
+        <input
+          type="text"
+          th:field="*{zipcode}"
+          id="zipcode"
+          placeholder="123-4567"
+        />
+        <div
+          th:if="${#fields.hasErrors('zipcode')}"
+          th:errors="*{zipcode}"
+          style="color: red"
+        ></div>
+      </div>
+
+      <!-- 都道府県 -->
+      <div>
+        <label for="prefecture">都道府県：</label>
+        <input type="text" th:field="*{prefecture}" id="prefecture" />
+        <div
+          th:if="${#fields.hasErrors('prefecture')}"
+          th:errors="*{prefecture}"
+          style="color: red"
+        ></div>
+      </div>
+
+      <!-- 市区町村 -->
+      <div>
+        <label for="municipalities">市区町村：</label>
+        <input type="text" th:field="*{municipalities}" id="municipalities" />
+        <div
+          th:if="${#fields.hasErrors('municipalities')}"
+          th:errors="*{municipalities}"
+          style="color: red"
+        ></div>
+      </div>
+
+      <!-- 住所 -->
+      <div>
+        <label for="address">住所：</label>
+        <input type="text" th:field="*{address}" id="address" />
+        <div
+          th:if="${#fields.hasErrors('address')}"
+          th:errors="*{address}"
+          style="color: red"
+        ></div>
+      </div>
+
+      <!-- 電話番号 -->
+      <div>
+        <label for="telephone">電話番号：</label>
+        <input
+          type="text"
+          th:field="*{telephone}"
+          id="telephone"
+          placeholder="012-3456-7890"
+        />
+        <div
+          th:if="${#fields.hasErrors('telephone')}"
+          th:errors="*{telephone}"
+          style="color: red"
+        ></div>
+      </div>
+
+      <div>
+        <button>登録</button>
+      </div>
+    </form>
+  </body>
+</html>
