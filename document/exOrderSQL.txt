@@ -1,0 +1,131 @@
+--ユーザのテーブル
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY, -- 主キー、自動採番
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    zipcode VARCHAR(10),
+    prefecture VARCHAR(100),
+    municipalities VARCHAR(100),
+    address VARCHAR(255),
+    telephone VARCHAR(20)
+);
+INSERT INTO users (name, email, password, zipcode, prefecture, municipalities, address, telephone)
+VALUES
+('山田 太郎', 'taro.yamada@example.com', 'hashed_password_123', '100-0001', '東京都', '千代田区', '千代田1-1-1', '03-1234-5678'),
+('テストユーザー', 'test', 'test', '100-0001', '東京都', '千代田区', '千代田1-1-1', '03-1234-5678');
+--注文のテーブル
+DROP TABLE IF EXISTS orders;
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,                      -- 注文ID（自動採番）
+    user_id INTEGER NOT NULL,                   -- ユーザーID（外部キー予定）
+    status INTEGER NOT NULL,                    -- 注文ステータス
+    total_price INTEGER,                        -- 合計金額
+    order_date DATE,                            -- 注文日
+    destination_name VARCHAR(100),              -- 宛先名
+    destination_email VARCHAR(255),             -- 宛先メール
+    destination_zipcode VARCHAR(10),            -- 宛先郵便番号
+    destination_prefecture VARCHAR(100),        -- 宛先都道府県
+    destination_municipalities VARCHAR(100),    -- 宛先自治体
+    destination_address VARCHAR(255),           -- 宛先住所
+    destination_tel VARCHAR(20),                -- 宛先電話番号
+    delivery_time TIMESTAMP,                    -- 配達日時
+    payment_method INTEGER                      -- 支払方法（0:代引き, 1:クレカなど）
+);
+INSERT INTO orders (
+    user_id, status, total_price, order_date,
+    destination_name, destination_email, destination_zipcode,
+    destination_prefecture, destination_municipalities, destination_address,
+    destination_tel, delivery_time, payment_method
+) VALUES
+-- 注文①：未発送、代引き
+(
+    1,
+    0,
+    4980,
+    '2025-06-18',
+    '佐藤 健太',
+    'kenta.sato@example.com',
+    '160-0022',
+    '東京都',
+    '新宿区',
+    '新宿3-4-1',
+    '03-1234-5678',
+    '2025-06-20 18:00:00',
+    0
+),
+-- 注文②：配送中、クレジット決済
+(
+    2,
+    2,
+    10230,
+    '2025-06-17',
+    '高橋 真由美',
+    'mayumi.takahashi@example.com',
+    '460-0008',
+    '愛知県',
+    '名古屋市中区',
+    '栄3-5-1',
+    '052-987-6543',
+    '2025-06-21 10:30:00',
+    1
+),
+-- 注文③：配達完了、電子マネー支払い
+(
+    3,
+    3,
+    7850,
+    '2025-06-15',
+    '中村 直人',
+    'naoto.nakamura@example.com',
+    '530-0001',
+    '大阪府',
+    '大阪市北区',
+    '梅田1-1-1',
+    '06-2222-1111',
+    '2025-06-18 14:00:00',
+    2
+);
+-- 注文商品のテーブル
+DROP TABLE IF EXISTS order_items;
+CREATE TABLE order_items (
+    id SERIAL PRIMARY KEY,               -- 注文商品ID（自動採番）
+    item_id INTEGER NOT NULL,            -- 商品ID（別テーブル item を想定）
+    order_id INTEGER NOT NULL,           -- 注文ID（orders テーブルへの外部キー）
+    quantity INTEGER NOT NULL,           -- 数量
+    shoes_size CHAR(1)                  -- 靴サイズ（例: 'S', 'M', 'L', 'X' など）
+    -- -- 外部キー制約（必要に応じて）
+    -- FOREIGN KEY (order_id) REFERENCES orders(id),
+    -- FOREIGN KEY (item_id) REFERENCES items(id)
+);
+-- 注文①（order_id = 1）: ピザとドリンク
+INSERT INTO order_items (order_id, item_id, quantity, shoes_size) VALUES
+(1, 1, 1, 'M'),   -- ピザ（Mサイズ）
+(1, 2, 2, NULL);  -- ドリンク ×2（750円/本）
+-- 注文②（order_id = 2）: ラーメンセット
+INSERT INTO order_items (order_id, item_id, quantity, shoes_size) VALUES
+(2, 3, 2, NULL),  -- ラーメン ×2（2250円/杯）
+(2, 4, 1, NULL);  -- サイドメニュー（餃子セット）
+-- 注文③（order_id = 3）: ケーキとコーヒー
+INSERT INTO order_items (order_id, item_id, quantity, shoes_size) VALUES
+(3, 5, 1, 'S'),   -- ケーキ（Sサイズ）
+(3, 6, 2, NULL);  -- コーヒー ×2（1250円/杯）
+-- items テーブル
+DROP TABLE IF EXISTS items;
+CREATE TABLE items (
+    id SERIAL PRIMARY KEY,            -- 商品ID（自動採番）
+    name VARCHAR(100) NOT NULL,       -- 商品名
+    description TEXT NOT NULL,        -- 商品説明
+    price INTEGER NOT NULL,           -- 税抜き価格（単位: 円）
+    image_path VARCHAR(255),          -- 商品画像ファイルのパス
+    deleted BOOLEAN DEFAULT FALSE,  -- 論理削除フラグ
+    itemtype BOOLEAN
+);
+INSERT INTO items (name, description, price, image_path) VALUES
+('1番の商品', '1番の商品です', 1280, 'images/pizza_margherita.jpg'),
+('2番の商品', '2番の商品です', 1580, 'images/quattro_cheese.jpg'),
+('3番の商品', '3番の商品です', 980, 'images/grilled_chicken.jpg'),
+('4番の商品', '4番の商品です', 890, 'images/tonkotsu_ramen.jpg'),
+('5番の商品', '5番の商品です', 850, 'images/miso_ramen.jpg'),
+('6番の商品', '6番の商品です', 620, 'images/strawberry_cake.jpg');
