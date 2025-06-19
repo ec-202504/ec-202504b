@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * ユーザー情報を
+ * ユーザー情報を操作するコントローラ.
  */
 @Controller
 @RequestMapping("")
@@ -29,7 +29,7 @@ public class RegisterUserController {
      */
     @GetMapping("/topPage")
     public String registerUser(RegisterUserForm registerUserForm){
-        return "top";
+        return "topBosai";
     }
 
     /**
@@ -48,13 +48,13 @@ public class RegisterUserController {
     ){
         if(!registerUserForm.getPassword().equals(registerUserForm.getConfirmPassword())){
             result.rejectValue("confirmPassword","confirmPwdError","パスワードが一致していません");
-            return "registerUser";
+            return "topBosai";
         }
         if(result.hasErrors()){
-            return "registerUser";
+            return "topBosai";
         }
         registerUserService.registerUser(registerUserForm);
-        return "itemList";
+        return "item_list_bousai";
     }
 
 }

@@ -36,4 +36,14 @@ public class ShowItemListService {
     public List<Item> findByName(String name) {
         return itemRepository.findByName(name);
     }
+
+    /**
+     * 主キーで商品を検索します.
+     *
+     * @param itemId 商品ID
+     * @return 商品情報
+     */
+    public Item showItemDetail(Integer itemId) {
+        return itemRepository.findById(itemId);
+    }
 }

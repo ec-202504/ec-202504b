@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!--Import Google Icon Font-->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- Import Materialize CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <!-- Import Font Awesome -->
+    <link
+      href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/common.css}" />
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/footer.css}" />
+    <link rel="stylesheet" th:href="@{/css/register_user.css}" />
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
+    <link rel="stylesheet" th:href="@{/css/item_list.css}" />
+    <link rel="stylesheet" th:href="@{/css/item_detail.css}" />
+    <link rel="stylesheet" th:href="@{/css/cart_list.css}" />
+    <link rel="stylesheet" th:href="@{/css/order_confirm.css}" />
+    <link rel="stylesheet" th:href="@{/css/order_finished.css}" />
+    <link rel="stylesheet" th:href="@{/css/responsive.css}" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ラクラクアロハ</title>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="header">
+          <div class="header-left">
+            <a href="top.html">
+              <img class="logo" th:src="@{/img_aloha/header_logo.png}" />
+            </a>
+          </div>
+
+          <div class="header-right">
+            <a href="item_list_bousai.html">商品一覧</a>
+            <a href="register_user.html">会員登録</a>
+            <a href="cart_list.html">
+              <i class="fas fa-shopping-cart"> </i>カート
+            </a>
+            <a href="login.html" class="login">
+              <i class="fas fa-sign-in-alt"></i>ログイン
+            </a>
+            <a href="order_history.html">注文履歴</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- search form -->
+    <div class="search-wrapper">
+      <div class="container">
+        <form method="post" class="search-form">
+          <input type="text" name="name" class="search-name-input" />
+          <button class="btn search-btn" type="button">
+            <span>検　索</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- item list -->
+    <div class="item-wrapper">
+      <div class="container">
+        <div class="items">
+          <div th:each="item : ${itemList}" class="item">
+            <div class="item-icon">
+              <img th:src="@{/img/} + ${item.imagePath}" />
+            </div>
+            <a
+              th:href="@{/showItemDetail?itemId=} + ${item.id}"
+              th:text="${item.name}"
+              >防災セット</a
+            ><br />
+            <span class="price">Ｍ</span
+            ><span th:text="${item.price}">1,800円(税抜)</span>円<br />
+            <span class="price">Ｌ</span>2,700円(税抜)<br />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <img th:src="@{/img_aloha/header_logo.png}" />
+        <p>アロハな気分をあなたにお届け！</p>
+      </div>
+    </footer>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </body>
+</html>
