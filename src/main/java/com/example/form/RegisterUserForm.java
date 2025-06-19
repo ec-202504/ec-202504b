@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Size;
 /**
  * 会員登録用のフォーム.
  */
-public class ResisterUserForm {
+public class RegisterUserForm {
     /** 姓 */
     @NotBlank(message = "名前を入力して下さい")
     private String lastName;
