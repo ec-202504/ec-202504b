@@ -104,7 +104,7 @@ public class OrderRepository {
                 i.name AS i_name,
                 i.description AS i_description,
                 i.price AS i_price,
-                i.image_path AS i_image_path
+                i.imagepath AS i_image_path
                 FROM orders AS o
                 INNER JOIN order_items AS oi
                 ON o.id = oi.order_id
