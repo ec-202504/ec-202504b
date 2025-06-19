@@ -7,7 +7,7 @@ import com.example.domain.Order;
 public class OrderRepository {
 
     /**
-     * ユーザーIDとステータスに基づいて注文を検索します。
+     * ユーザーIDとステータスに基づいて注文を検索します.
      * @param userId ユーザーID
      * @param status 注文ステータス
      * @return 該当する注文オブジェクト、存在しない場合はnull
@@ -18,7 +18,7 @@ public class OrderRepository {
     }
 
     /**
-     * 新しい注文をデータベースに挿入します。
+     * 新しい注文をデータベースに挿入します.
      * @param order 挿入する注文オブジェクト
      */
     public void insert(Order order) {

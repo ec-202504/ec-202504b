@@ -1,3 +1,15 @@
+DROP TABLE IF EXISTS items;
+
+CREATE TABLE items (
+    id SERIAL PRIMARY KEY,                 -- 自動採番されるID
+    name VARCHAR(255) NOT NULL,            -- 商品名
+    description TEXT,                      -- 説明文
+    price INTEGER NOT NULL,                -- 価格
+    imagepath VARCHAR(255),                -- 画像ファイルパス
+    deleted BOOLEAN DEFAULT FALSE,         -- 論理削除フラグ
+    itemtype BOOLEAN DEFAULT FALSE         -- 種別（例：0＝通常、1＝衣類など）
+);
+
 INSERT INTO items (name, description, price, imagepath, deleted, itemtype) VALUES ('防災セット', '防災セットは災害時に必要なアイテムです。持ち運びやすく、非常時に役立ちます。', 4980, '1.png', false, false);
 INSERT INTO items (name, description, price, imagepath, deleted, itemtype) VALUES ('ヘルメット', 'ヘルメットは頭部を保護する重要な装備です。災害時の落下物から身を守ります。', 3200, '2.png', false, false);
 INSERT INTO items (name, description, price, imagepath, deleted, itemtype) VALUES ('L字金具・耐震マット', '家具の転倒を防ぐための金具とマットです。地震の揺れに備える必須アイテムです。', 2800, '3.png', false, false);
