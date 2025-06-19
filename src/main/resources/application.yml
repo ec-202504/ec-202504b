@@ -5,8 +5,7 @@ spring:
         username: postgres
         password: postgres
     jmx:
-        default-domain: ex-emp-management
-    # Spring Security .defaultSuccessUrl("/employee/showList", false)とした場合に初回のログインが失敗する現象に対応
-#    autoconfigure:
-#        exclude:
-#            org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
+        dafault-domain: ec-202504b
+server:
+    servlet:
+        context-path: /ec-202504b
