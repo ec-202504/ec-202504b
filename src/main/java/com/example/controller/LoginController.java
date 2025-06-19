@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * ログインに関連するコントローラ.
  */
 @Controller
-@RequestMapping("/login")
+@RequestMapping("")
 public class LoginController {
     @Autowired
     private LoginService loginService;
@@ -28,7 +28,7 @@ public class LoginController {
      * @param loginForm フォーム
      * @return ログイン画面
      */
-    @GetMapping("")
+    @GetMapping("/")
     public String login(LoginForm loginForm){
         return "loginBosai";
     }

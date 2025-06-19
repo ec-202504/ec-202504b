@@ -8,7 +8,7 @@
     <form
       method="post"
       action="../ec-202504b/login.html"
-      th:action="@{/login/toLogin}"
+      th:action="@{/login}"
       th:object="${loginForm}"
     >
       <fieldset>
@@ -17,6 +17,11 @@
           <div th:if="${errorMessage}" class="alert alert-danger">
             <p th:text="${errorMessage}">
               メールアドレスまたはパスワードが間違っています
+            </p>
+          </div>
+          <div th:if="${param.error}">
+            <p style="color: red">
+              メールアドレスまたはパスワードが間違っています。
             </p>
           </div>
         </div>
@@ -49,11 +54,6 @@
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-primary">ログイン</button>
-        </div>
-        <div class="form-group">
-          <a href="insert.html" th:href="@{/toInsert}"
-            >管理者登録はこちらから</a
-          >
         </div>
       </fieldset>
     </form>
