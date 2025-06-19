@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 注文確認処理を行うコントローラ.
  */
 @Controller
-@RequestMapping("") //TODO:後で返る
+@RequestMapping("") //TODO:後で変える
 public class ConfirmOrderController {
 
     @Autowired
@@ -26,7 +26,7 @@ public class ConfirmOrderController {
      * @param orderId 注文ID
      * @return 注文確認に遷移する.
      */
-    @PostMapping("toConfirmOrder")
+    @PostMapping("/toConfirmOrder")
     String toConfirmOrder(Integer orderId, Model model) {
 //        final orderId = 1; //デバッグ用
         Order order = service.showCart(orderId);

@@ -6,7 +6,9 @@ import com.example.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+/**
+ * 注文確認処理を行うためのサービス
+ */
 @Service
 public class ConfirmOrderService {
 
