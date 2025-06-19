@@ -38,15 +38,17 @@ public class ConfirmOrderController {
         return "confirmOrder";
     }
 
+    /**
+     * TODO:テスト用のクラス，後で消す
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/test")
     String toTest(Model model){
         final  int orderId = 1;
         Order order = service.showCart(orderId);
         List<OrderItem> orderItemList = order.getOrderItemList();
-        System.out.println("-------------------------------");
-        for(OrderItem orderItem: orderItemList){
-            System.out.println(orderItem);
-        }
         model.addAttribute("order", order);
         return "confirmOrder";
     }
