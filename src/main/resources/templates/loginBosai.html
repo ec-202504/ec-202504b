@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>title</title>
+  </head>
+  <body>
+    <form
+      method="post"
+      action="../ec-202504b/login.html"
+      th:action="@{/login/toLogin}"
+      th:object="${loginForm}"
+    >
+      <fieldset>
+        <legend>ログイン</legend>
+        <div class="form-group">
+          <div th:if="${errorMessage}" class="alert alert-danger">
+            <p th:text="${errorMessage}">
+              メールアドレスまたはパスワードが間違っています
+            </p>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="alert alert-danger" th:errors="*{email}">
+            <p>メールアドレスの入力規約違反</p>
+          </div>
+          <label for="email">メールアドレス:</label>
+          <input
+            type="text"
+            name="email"
+            id="email"
+            class="form-control"
+            placeholder="Email"
+            th:field="*{email}"
+          />
+        </div>
+        <div class="form-group">
+          <div class="alert alert-danger" th:errors="*{password}">
+            <p>パスワードの入力規約違反</p>
+          </div>
+          <label for="inputPassword">パスワード:</label>
+          <input
+            type="password"
+            name="password"
+            id="inputPassword"
+            class="form-control"
+            placeholder="Password"
+          />
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">ログイン</button>
+        </div>
+        <div class="form-group">
+          <a href="insert.html" th:href="@{/toInsert}"
+            >管理者登録はこちらから</a
+          >
+        </div>
+      </fieldset>
+    </form>
+  </body>
+</html>

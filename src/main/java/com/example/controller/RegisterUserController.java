@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * ユーザー情報を
+ * ユーザー情報を操作するコントローラ.
  */
 @Controller
 @RequestMapping("")
