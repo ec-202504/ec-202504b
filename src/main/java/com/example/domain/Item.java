@@ -1,7 +1,7 @@
 package com.example.domain;
 
 /**
- * 商品情報を表すエンティティ。
+ * 商品情報を表すエンティティ.
  * <p>商品名や価格、カテゴリ情報などを保持します。</p>
  */
 public class Item {
@@ -17,10 +17,8 @@ public class Item {
     private String imagePath;
     /** 削除フラグ */
     private Boolean deleted;
-    /** 洋服サイズオプション */
-    private Integer clothesSizeOption;
-    /** 靴サイズオプション */
-    private Integer shoesSizeOption;
+    /** サイズがある物かどうか */
+    private boolean itemType;
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -34,10 +32,12 @@ public class Item {
     public void setImagePath(String imagePath) { this.imagePath = imagePath; }
     public Boolean getDeleted() { return deleted; }
     public void setDeleted(Boolean deleted) { this.deleted = deleted; }
-    public Integer getClothesSizeOption() { return clothesSizeOption; }
-    public void setClothesSizeOption(Integer clothesSizeOption) { this.clothesSizeOption = clothesSizeOption; }
-    public Integer getShoesSizeOption() { return shoesSizeOption; }
-    public void setShoesSizeOption(Integer shoesSizeOption) { this.shoesSizeOption = shoesSizeOption; }
+    public boolean isItemType() {
+        return itemType;
+    }
+    public void setItemType(boolean itemType) {
+        this.itemType = itemType;
+    }
 
     @Override
     public String toString() {
@@ -48,8 +48,7 @@ public class Item {
                 ", price=" + price +
                 ", imagePath='" + imagePath + '\'' +
                 ", deleted=" + deleted +
-                ", clothesSizeOption=" + clothesSizeOption +
-                ", shoesSizeOption=" + shoesSizeOption +
+                ", itemType=" + itemType +
                 '}';
     }
-} 
+}

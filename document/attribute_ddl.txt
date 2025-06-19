@@ -1,0 +1,31 @@
+-- 性別
+drop table if exists genders cascade;
+create table genders(
+	item_id integer,
+	gender text,
+	FOREIGN KEY (item_id) REFERENCES items (id) on delete cascade
+);
+
+-- 年齢層
+drop table if exists ageGroups cascade;
+create table ageGroups(
+	item_id integer,
+	age text,
+	FOREIGN KEY (item_id) REFERENCES items (id) on delete cascade
+);
+
+-- ペットの有無
+drop table if exists pets cascade;
+create table pets(
+	item_id integer,
+	pet boolean,
+	FOREIGN KEY (item_id) REFERENCES items (id) on delete cascade
+);
+
+-- 災害種別
+drop table if exists disasters cascade;
+create table disasters(
+	item_id integer,
+	disaster text,
+	FOREIGN KEY (item_id) REFERENCES items (id) on delete cascade
+);
