@@ -1,11 +1,12 @@
 spring:
     datasource:
-        driver-class-name: org.postgresql.Driver
-        url: jdbc:postgresql://localhost:5432/student
+        driverClassName: org.postgresql.Driver
+        url: jdbc:postgresql://localhost:5432/ec-202504b
         username: postgres
         password: postgres
     jmx:
-        dafault-domain: ec-202504b
-server:
-    servlet:
-        context-path: /ec-202504b
+        default-domain: ex-emp-management
+    # Spring Security .defaultSuccessUrl("/employee/showList", false)とした場合に初回のログインが失敗する現象に対応
+#    autoconfigure:
+#        exclude:
+#            org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
