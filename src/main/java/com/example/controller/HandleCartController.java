@@ -24,6 +24,7 @@ public class HandleCartController {
      * @return カート表示画面へのリダイレクト
      */
     public String add(OrderItemForm orderItemForm) {
+        Integer userId = 1; // 仮のユーザーID。実際は認証情報から取得する必要があります。
         handleCartService.add(orderItemForm);
         return "redirect:/cart/show";
     }
