@@ -1,17 +1,29 @@
 package com.example.form;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
 import java.sql.Timestamp;
 
 public class OrderForm {
+    /** 注文ID */
     private Integer orderId;
+
+    /** 名前 */
     private String name;
+
+    /** メールアドレス */
+    @NotBlank(message = "メールアドレスを入力してください")
+    @Pattern(regexp = "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$", message = "メールアドレスの形式が不正です")
     private String email;
+
+    /** 郵便番号 */
     private String zipcode;
     private String prefecture;
     private String municipalities;
     private String address;
     private String telephone;
-    private java.sql.Timestamp deliveryTime; //配達日
+    private String deliveryTime; //配達日
     private Integer paymentMethod; // 支払方法
 
 
@@ -79,11 +91,11 @@ public class OrderForm {
         this.telephone = telephone;
     }
 
-    public Timestamp getDeliveryTime() {
+    public String getDeliveryTime() {
         return deliveryTime;
     }
 
-    public void setDeliveryTime(Timestamp deliveryTime) {
+    public void setDeliveryTime(String deliveryTime) {
         this.deliveryTime = deliveryTime;
     }
 

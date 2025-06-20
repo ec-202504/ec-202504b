@@ -85,4 +85,24 @@ public class UserRepository {
     }
 
 
+    /**
+     *  ユーザーIDからユーザーを取得.
+     *
+     * @param id ユーザーテーブルのID
+     * @return ユーザー，存在しない場合はnull
+     */
+    public User findById(Integer id){
+        String sql =  """
+				SELECT name, email, password, zipcode, prefecture, municipalities, address, telephone 
+				FROM users where id = :id;
+				""";
+        SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
+        List<User> userList = template.query(sql, param, USER_ROW_MAPPER);
+        if (userList.size() == 0) {
+            return null;
+        }
+        return userList.get(0);
+    }
+
+
 }

@@ -47,8 +47,7 @@ public class ConfirmOrderController {
     @GetMapping("/test")
     String toTest(Model model){
         final  int orderId = 1;
-        Order order = service.showCart(orderId);
-        List<OrderItem> orderItemList = order.getOrderItemList();
+        Order order = service.showCart(orderId);;
         model.addAttribute("order", order);
         return "confirmOrder";
     }
