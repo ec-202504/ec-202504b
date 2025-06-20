@@ -173,7 +173,7 @@
           <div>ご注文金額合計：38,000円 (税込)</div>
         </div>
 
-        <form th:action="@{executeOrder}" th:object="${orderForm}">
+        <form th:action="@{executeOrder}" th:object="${orderForm}" method="post">
           <h2 class="page-title">お届け先情報</h2>
           <div class="order-confirm-delivery-info">
             <div class="row">
@@ -362,17 +362,17 @@
               </label>
             </span>
           </div>
-        </form>
+       
 
         <div class="row order-confirm-btn">
           <button
             class="btn"
-            type="button"
-            onclick="location.href='order_finished.html'"
+            type="submit"
           >
             <span>この内容で注文する</span>
           </button>
         </div>
+         </form>
       </div>
       <!-- end container -->
     </div>
