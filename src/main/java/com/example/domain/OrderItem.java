@@ -17,11 +17,6 @@ public class OrderItem {
     private Character size;
     /** 商品情報 */
     private Item item;
-    /** アイテムのサイズ */
-    private Integer optionItemSize;
-    /** 靴のサイズ */
-    private Integer optionShoesSize;
-   
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -35,10 +30,6 @@ public class OrderItem {
     public void setSize(Character size) { this.size = size; }
     public Item getItem() { return item; }
     public void setItem(Item item) { this.item = item; }
-    public Integer getOptionItemSize() { return optionItemSize; }
-    public void setOptionItemSize(Integer optionItemSize) { this.optionItemSize = optionItemSize; }
-    public Integer getOptionShoesSize() { return optionShoesSize; }
-    public void setOptionShoesSize(Integer optionShoesSize) { this.optionShoesSize = optionShoesSize; }
 
     @Override
     public String toString() {
@@ -49,8 +40,6 @@ public class OrderItem {
                 ", quantity=" + quantity +
                 ", size=" + size +
                 ", item=" + item +
-                ", optionItemSize=" + optionItemSize +
-                ", optionShoesSize=" + optionShoesSize +
                 '}';
     }
 

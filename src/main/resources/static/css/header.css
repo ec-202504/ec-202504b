@@ -49,6 +49,27 @@ header {
   ); /* マウスが乗せられた際の色と透明度を設定 */
 }
 
+.header-right button {
+  line-height: 65px; /* 行の高さを指定(文字が上下の真ん中に配置される) */
+  padding: 0 25px;
+  color: gray;
+  background-color: white;
+  display: block; /* a要素をブロック要素に変更(borderまでがクリックできるようになる) */
+  /* float: left; */
+  transition: all 0.5s; /* アニメーションの設定 all=変化の対象 0.5s=変化にかかる時間 hoverと組み合わせることが多い */
+  border: none;
+}
+
+.header-right button:hover {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.5
+  ); /* マウスが乗せられた際の色と透明度を設定 */
+  cursor: pointer;
+}
+
 /* fontawesome(カートアイコン＆ログインアイコンの設定) */
 .fas {
   margin-right: 5px;

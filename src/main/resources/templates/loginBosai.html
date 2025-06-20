@@ -11,6 +11,11 @@
       th:action="@{/login}"
       th:object="${loginForm}"
     >
+      <input
+        type="hidden"
+        th:name="${_csrf.parameterName}"
+        th:value="${_csrf.token}"
+      />
       <fieldset>
         <legend>ログイン</legend>
         <div class="form-group">

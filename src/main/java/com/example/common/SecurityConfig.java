@@ -28,8 +28,9 @@ public class SecurityConfig {
                         .passwordParameter("password")
                 )
                 .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
+//                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout**"))
+                                .logoutUrl("/logout")
+                                .logoutSuccessUrl("/")
                         .deleteCookies("JSESSIONID")
                         .invalidateHttpSession(true)
                 )

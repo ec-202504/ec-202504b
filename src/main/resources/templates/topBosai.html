@@ -10,6 +10,11 @@
       method="post"
       th:object="${registerUserForm}"
     >
+      <input
+        type="hidden"
+        th:name="${_csrf.parameterName}"
+        th:value="${_csrf.token}"
+      />
       <!-- 姓 -->
       <div>
         <label for="lastName">姓：</label>

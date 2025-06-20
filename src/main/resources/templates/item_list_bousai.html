@@ -43,15 +43,42 @@
           </div>
 
           <div class="header-right">
-            <a href="item_list_bousai.html">商品一覧</a>
-            <a href="register_user.html">会員登録</a>
+            <a th:href="@{/showItemList}">商品一覧</a>
+            <a th:href="@{/topPage}">会員登録</a>
             <a th:href="@{/cart/show}">
               <i class="fas fa-shopping-cart"> </i>カート
             </a>
-            <a href="login.html" class="login">
+            <a
+              href="login.html"
+              th:href="@{/}"
+              sec:authorize="!isAuthenticated()"
+              class="login"
+            >
               <i class="fas fa-sign-in-alt"></i>ログイン
             </a>
-            <a href="order_history.html" th:href="@{/showOrderHistory}"
+            <!-- <a
+              href="login.html"
+              th:href="@{/logout}"
+              sec:authorize="isAuthenticated()"
+              class="login"
+            >
+              <i class="fas fa-sign-in-alt"></i>ログアウト
+            </a> -->
+            <form
+              th:action="@{/logout}"
+              method="post"
+              sec:authorize="isAuthenticated()"
+            >
+              <input
+                type="hidden"
+                th:name="${_csrf.parameterName}"
+                th:value="${_csrf.token}"
+              />
+              <button type="submit" class="login">
+                <i class="fas fa-sign-out-alt"></i>ログアウト
+              </button>
+            </form>
+            <a th:href="@{/showOrderHistory}"
               >注文履歴</a
             >
           </div>
@@ -61,9 +88,16 @@
     <!-- search form -->
     <div class="search-wrapper">
       <div class="container">
-        <form method="post" class="search-form">
+        <form method="post" class="search-form" th:action="@{/searchByName}">
+          <div
+            th:if="${nonExistError}"
+            th:text="${nonExistError}"
+            style="color: red"
+          >
+            該当する商品がありません
+          </div>
           <input type="text" name="name" class="search-name-input" />
-          <button class="btn search-btn" type="button">
+          <button class="btn search-btn">
             <span>検　索</span>
           </button>
         </form>
@@ -84,8 +118,9 @@
               >防災セット</a
             ><br />
             <span class="price">Ｍ</span
-            ><span th:text="${item.price}">1,800円(税抜)</span>円<br />
-            <span class="price">Ｌ</span>2,700円(税抜)<br />
+            ><span th:text="${#numbers.formatInteger(item.price,0,'COMMA')}"
+              >1,800円(税抜)</span
+            >円
             <form th:action="@{/cart/add}" method="post">
               <input type="hidden" name="itemId" th:value="${item.id}" />
               <input type="number" name="quantity" value="1" min="1" style="width:60px;" />
