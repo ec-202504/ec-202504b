@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ラクラクアロハ</title>
+  </head>
+  <body>
+    <div>
+      <h2>質問</h2>
+      <form
+        th:action="@{/recommend}"
+        method="post"
+        th:object="${questionnaireForm}"
+      >
+        Q1. 性別を教えてください<br />
+        <input
+          type="radio"
+          name="gender"
+          id="male"
+          value=""
+          th:field="*{targetGender}"
+        /><label for="male">男性</label>
+        <input
+          type="radio"
+          name="gender"
+          id="female"
+          value="女性向け"
+          th:field="*{targetGender}"
+        /><label for="female">女性</label><br />
+        Q2. 家族に幼児（0~6歳）はいますか？<br />
+        <input
+          type="radio"
+          name="exist-infant"
+          id="exist-infant"
+          value="幼児向け"
+          th:field="*{existInfant}"
+        /><label for="exist-infant">はい</label>
+        <input
+          type="radio"
+          name="exist-infant"
+          id="dont-exist-infant"
+          value=""
+          th:field="*{existInfant}"
+        /><label for="dont-exist-infant">いいえ</label><br />
+        Q3. 家族に高齢者（65歳以上）はいますか？<br />
+        <input
+          type="radio"
+          name="exist-senior"
+          id="exist-senior"
+          value="高齢者向け"
+          th:field="*{existSenior}"
+        /><label for="exist-senior">はい</label>
+        <input
+          type="radio"
+          name="exist-senior"
+          id="dont-exist-senior"
+          value=""
+          th:field="*{existSenior}"
+        /><label for="dont-exist-senior">いいえ</label><br />
+        Q4. ペットと一緒に暮らしていますか？<br />
+        <input
+          type="radio"
+          name="exist-pets"
+          id="exist-pets"
+          value="0"
+          th:field="*{existPets}"
+        /><label for="exist-pets">はい</label>
+        <input
+          type="radio"
+          name="exist-pets"
+          id="dont-exist-pets"
+          value="1"
+          th:field="*{existPets}"
+        /><label for="dont-exist-pets">いいえ</label><br />
+        Q5. お住まいの近くに以下の地形はありますか？（複数選択可）<br />
+        <input type="checkbox" name="terrainList" id="river" value="0" /><label
+          for="river"
+          th:field="*{terrainList}"
+          >川・用水路</label
+        ><br />
+        <input type="checkbox" name="terrainList" id="sea" value="1" /><label
+          for="sea"
+          th:field="*{terrainList}"
+          >海・湖</label
+        ><br />
+        <input
+          type="checkbox"
+          name="terrainList"
+          id="mountain"
+          value="2"
+        /><label for="mountain" th:field="*{terrainList}">山・崖・斜面</label
+        ><br />
+        <input type="checkbox" name="terrainList" id="none" value="3" /><label
+          for="none"
+          th:field="*{terrainList}"
+          >特になし</label
+        ><br />
+        <button>回答</button>
+      </form>
+    </div>
+  </body>
+</html>
