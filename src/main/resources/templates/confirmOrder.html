@@ -45,14 +45,14 @@
           </div>
 
           <div class="header-right">
-            <a href="item_list_aloha.html">商品一覧</a>
-            <a href="register_user.html">会員登録</a>
-            <a href="#"><i class="fas fa-shopping-cart"></i>カート</a>
-            <a href="login.html" class="login">
+            <a th:href="@{/showItemList}">商品一覧</a>
+            <a th:href="@{/topPage}">会員登録</a>
+            <a th:href="@{/cart/show}"><i class="fas fa-shopping-cart"></i>カート</a>
+            <a th:href="@{/}" class="login">
               <i class="fas fa-sign-in-alt"></i>ログイン
             </a>
 
-            <a href="order_history.html">注文履歴</a>
+            <a th:href="@{/showItemList}">注文履歴</a>
           </div>
         </div>
       </div>
