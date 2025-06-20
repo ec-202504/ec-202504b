@@ -73,12 +73,47 @@ public class ItemRepository {
     public Item findById(Integer id) {
         String sql = """
                 SELECT id,name,description,price,imagepath,deleted,itemtype FROM
-                 items WHERE id = :id
+                 items WHERE id=:id
                 """;
 
         SqlParameterSource param
                 = new MapSqlParameterSource().addValue("id", id);
 
         return template.queryForObject(sql, param, ITEM_ROW_MAPPER);
+    }
+
+    /**
+     * おすすめ商品のリストを取得します.
+     *
+     * @param infant
+     * @param senior
+     * @param gender
+     * @param pet
+     * @param disaster
+     * @return
+     */
+    public List<Item> recommend(String infant, String senior, String gender,
+                                Boolean pet, String disaster) {
+        String sql = """
+                 SELECT id,name,description,price,imagepath,deleted,itemtype FROM
+                 items WHERE id IN
+                 (SELECT DISTINCT COALESCE(g.item_id,a.item_id,p.item_id,d.item_id) FROM genders g
+                 FULL OUTER JOIN ageGroups a ON g.item_id = a.item_id
+                 FULL OUTER JOIN pets p ON g.item_id = p.item_id
+                 FULL OUTER JOIN disasters d ON g.item_id = d.item_id
+                 WHERE g.gender=:gender OR a.age=:infant
+                 OR a.age=:senior OR p.pet=:pet OR d.disaster=:disaster)
+                 ORDER BY price
+                """;
+
+        SqlParameterSource param
+                = new MapSqlParameterSource()
+                .addValue("gender", gender)
+                .addValue("infant", infant)
+                .addValue("senior", senior)
+                .addValue("pet", pet)
+                .addValue("disaster", disaster);
+
+        return template.query(sql, param, ITEM_ROW_MAPPER);
     }
 }
