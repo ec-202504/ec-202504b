@@ -23,11 +23,11 @@ public class LoginUser extends org.springframework.security.core.userdetails.Use
     }
 
     /**
-     * 管理者情報を返します.
+     * ユーザー情報を返す.
      *
-     * @return 管理者情報
+     * @return ユーザー情報
      */
-    public com.example.domain.User getAdministrator() {
+    public com.example.domain.User getUser() {
         return user;
     }
 }
