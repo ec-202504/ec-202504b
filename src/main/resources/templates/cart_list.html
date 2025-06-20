@@ -75,7 +75,7 @@
         <tr th:each="orderItem : ${order.orderItemList}" th:if="${orderItem.item != null}">
           <td class="cart-item-name">
             <div class="cart-item-icon">
-              <img th:src="@{/img/} + ${orderItem.item.imagePath}" />
+              <img th:src="@{/img/} + ${orderItem.item.imagePath}" width="80" height="80" style="object-fit:cover;"/>
             </div>
             <span th:text="${orderItem.item.name}">商品名</span>
           </td>
