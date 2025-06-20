@@ -31,6 +31,10 @@ public class OrderItem {
     public Item getItem() { return item; }
     public void setItem(Item item) { this.item = item; }
 
+    public int getCalcSubTotalPrice() {
+        return this.getItem().getPrice() * this.quantity;
+    }
+
     @Override
     public String toString() {
         return "OrderItem{" +
