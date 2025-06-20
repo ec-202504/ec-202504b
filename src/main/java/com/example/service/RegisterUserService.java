@@ -27,6 +27,7 @@ public class RegisterUserService {
         user.setEmail(registerUserForm.getEmail());
         user.setPassword(registerUserForm.getPassword());
         user.setZipcode(registerUserForm.getZipcode());
+        user.setPrefecture(registerUserForm.getPrefecture());
         user.setMunicipalities(registerUserForm.getMunicipalities());
         user.setAddress(registerUserForm.getAddress());
         user.setTelephone(registerUserForm.getTelephone());

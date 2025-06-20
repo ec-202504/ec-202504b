@@ -54,7 +54,7 @@ public class RegisterUserController {
             return "topBosai";
         }
         registerUserService.registerUser(registerUserForm);
-        return "item_list_bousai";
+        return "redirect:/showItemList";
     }
 
 }
