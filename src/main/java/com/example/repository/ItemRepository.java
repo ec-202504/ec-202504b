@@ -39,7 +39,8 @@ public class ItemRepository {
      */
     public List<Item> findAll() {
         String sql = """
-                SELECT * FROM items WHERE deleted = false ORDER BY price
+                SELECT id,name,description,price,imagepath,deleted,itemtype FROM
+                 items WHERE deleted = false ORDER BY price
                 """;
 
         return template.query(sql, ITEM_ROW_MAPPER);
@@ -53,12 +54,31 @@ public class ItemRepository {
      */
     public List<Item> findByName(String name) {
         String sql = """
-                SELECT * FROM items WHERE name LIKE :name ORDER BY price
+                SELECT id,name,description,price,imagepath,deleted,itemtype FROM
+                 items WHERE name LIKE :name ORDER BY price
                 """;
 
         SqlParameterSource param =
                 new MapSqlParameterSource().addValue("name", "%" + name + "%");
 
         return template.query(sql, param, ITEM_ROW_MAPPER);
+    }
+
+    /**
+     * 主キーで商品を検索します.
+     *
+     * @param id itmesテーブルの主キーである商品ID
+     * @return 商品情報
+     */
+    public Item findById(Integer id) {
+        String sql = """
+                SELECT id,name,description,price,imagepath,deleted,itemtype FROM
+                 items WHERE id = :id
+                """;
+
+        SqlParameterSource param
+                = new MapSqlParameterSource().addValue("id", id);
+
+        return template.queryForObject(sql, param, ITEM_ROW_MAPPER);
     }
 }

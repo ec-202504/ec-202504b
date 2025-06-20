@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja">
   <head>
+    <html lang="ja" xmlns:th="http://www.thymeleaf.org"></html>
+
     <!--Import Google Icon Font-->
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -69,8 +71,40 @@
                 <th>小計</th>
               </tr>
             </thead>
+
             <tbody>
-              <tr>
+              <div th:each=" orderItem : ${order.orderItemList}">
+                <tr>
+                  <td class="cart-item-name">
+                    <div class="cart-item-icon">
+                      <img src="../static/img_aloha/1.jpg" />
+                    </div>
+                    <span th:text="${orderItem.item.name}"
+                      >ハワイアンパラダイス</span
+                    >
+                  </td>
+                  <td>
+                    <span class="price" th:text="${orderItem.item.price}"
+                      >&nbsp;Ｌ</span
+                    >&nbsp;&nbsp;2,380円 &nbsp;&nbsp;1個
+                  </td>
+                  <td>
+                    <!-- <ul>
+                    <li>ピーマン300円</li>
+                    <li>オニオン300円</li>
+                    <li>あらびきソーセージ300円</li>
+                  </ul> -->
+                  </td>
+                  <td>
+                    <div class="text-center" th:text="${order.totalPrice}">
+                      3,280円
+                    </div>
+                  </td>
+                </tr>
+              </div>
+
+              <!-- HTMLモックの部分 -->
+              <!-- <tr>
                 <td class="cart-item-name">
                   <div class="cart-item-icon">
                     <img src="../static/img_aloha/1.jpg" />
@@ -129,7 +163,7 @@
                   </ul>
                 </td>
                 <td><div class="text-center">3,280円</div></td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
