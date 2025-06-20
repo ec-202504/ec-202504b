@@ -173,33 +173,36 @@
           <div>ご注文金額合計：38,000円 (税込)</div>
         </div>
 
-        <form th:action="@{fillOutFormByUserInfo}" 
-        th:object="${orderForm}"
-        method="post">
+        <form th:action="@{executeOrder}" th:object="${orderForm}">
           <h2 class="page-title">お届け先情報</h2>
           <div class="order-confirm-delivery-info">
             <div class="row">
               <div class="input-field">
-                <button class="btn" type="submit">
+                <a th:href="@{fillOutFormByUserInfo}" class="btn">
                   <span>ログイン者情報を入力</span>
-                </button>
+                </a>
               </div>
             </div>
             <div class="row">
               <div class="input-field">
-                <input id="name" type="text" />
+                <input id="name" type="text" th:field="*{name}" />
                 <label for="name">お名前</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field">
-                <input id="email" type="email" />
+                <input id="email" type="email" th:field="*{email}" />
                 <label for="email">メールアドレス</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field">
-                <input id="zipcode" type="text" maxlength="7" />
+                <input
+                  id="zipcode"
+                  type="text"
+                  maxlength="7"
+                  th:field="*{zipcode}"
+                />
                 <label for="zipcode">郵便番号</label>
                 <button class="btn" type="button">
                   <span>住所検索</span>
@@ -208,7 +211,11 @@
             </div>
             <div class="row">
               <div class="input-field col s4">
-                <select class="browser-default" id="pref">
+                <select
+                  class="browser-default"
+                  id="pref"
+                  th:field="*{prefecture}"
+                >
                   <option value="" disabled selected>都道府県</option>
                   <option value="北海道">北海道</option>
                   <option value="青森県">青森県</option>
@@ -260,23 +267,31 @@
                 </select>
               </div>
               <div class="input-field col s4">
-                <input id="municipalities" type="text" />
+                <input
+                  id="municipalities"
+                  type="text"
+                  th:field="*{municipalities}"
+                />
                 <label for="municipalities">市区町村</label>
               </div>
               <div class="input-field col s4">
-                <input id="address" type="text" />
+                <input id="address" type="text" th:field="*{address}" />
                 <label for="address">住所</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field">
-                <input id="tel" type="tel" />
+                <input id="tel" type="tel" th:field="*{telephone}" />
                 <label for="tel">電話番号</label>
               </div>
             </div>
             <div class="row order-confirm-delivery-datetime">
               <div class="input-field">
-                <input id="deliveryDate" type="date" />
+                <input
+                  id="deliveryDate"
+                  type="date"
+                  th:field="*{deliveryTime}"
+                />
                 <label for="address">配達日時</label>
               </div>
               <label class="order-confirm-delivery-time">
@@ -330,13 +345,19 @@
                 <input
                   name="paymentMethod"
                   type="radio"
-                  value="1"
                   checked="checked"
+                  value="1"
+                  th:field="*{paymentMethod}"
                 />
                 <span>代金引換</span>
               </label>
               <label class="order-confirm-payment-method-radio">
-                <input name="paymentMethod" type="radio" value="2" />
+                <input
+                  name="paymentMethod"
+                  type="radio"
+                  value="2"
+                  th:field="*{paymentMethod}"
+                />
                 <span>クレジットカード</span>
               </label>
             </span>
@@ -364,5 +385,15 @@
     </footer>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script>
+      // ログイン情報を入力するよう
+      function submitTo(url) {
+        console.log("ボタンが押された");
+        const form = document.getElementById("orderForm");
+        form.action = url;
+        form.submit();
+      }
+    </script>
   </body>
 </html>
