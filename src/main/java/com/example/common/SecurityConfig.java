@@ -22,7 +22,7 @@ public class SecurityConfig {
                 .formLogin(login -> login
                         .loginPage("/")
                         .loginProcessingUrl("/login") //---
-//                        .defaultSuccessUrl("/employee/showList", false)
+                        .defaultSuccessUrl("/showItemList", false)
                         .failureUrl("/?error=true")
                         .usernameParameter("email")
                         .passwordParameter("password")
