@@ -43,8 +43,8 @@
           </div>
 
           <div class="header-right">
-            <a href="item_list_bousai.html">商品一覧</a>
-            <a href="register_user.html">会員登録</a>
+            <a th:href="@{/showItemList}">商品一覧</a>
+            <a th:href="@{/topPage}">会員登録</a>
             <a href="cart_list.html">
               <i class="fas fa-shopping-cart"> </i>カート
             </a>
@@ -78,7 +78,7 @@
                 <i class="fas fa-sign-out-alt"></i>ログアウト
               </button>
             </form>
-            <a href="order_history.html" th:href="@{/showOrderHistory}"
+            <a th:href="@{/showOrderHistory}"
               >注文履歴</a
             >
           </div>
@@ -88,9 +88,16 @@
     <!-- search form -->
     <div class="search-wrapper">
       <div class="container">
-        <form method="post" class="search-form">
+        <form method="post" class="search-form" th:action="@{/searchByName}">
+          <div
+            th:if="${nonExistError}"
+            th:text="${nonExistError}"
+            style="color: red"
+          >
+            該当する商品がありません
+          </div>
           <input type="text" name="name" class="search-name-input" />
-          <button class="btn search-btn" type="button">
+          <button class="btn search-btn">
             <span>検　索</span>
           </button>
         </form>
@@ -111,8 +118,9 @@
               >防災セット</a
             ><br />
             <span class="price">Ｍ</span
-            ><span th:text="${item.price}">1,800円(税抜)</span>円<br />
-            <span class="price">Ｌ</span>2,700円(税抜)<br />
+            ><span th:text="${#numbers.formatInteger(item.price,0,'COMMA')}"
+              >1,800円(税抜)</span
+            >円
           </div>
         </div>
       </div>

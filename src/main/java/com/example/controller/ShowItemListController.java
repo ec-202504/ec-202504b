@@ -32,6 +32,14 @@ public class ShowItemListController {
     @PostMapping("/searchByName")
     public String searchByName(String name, Model model) {
         List<Item> itemList = showItemListService.findByName(name);
+
+        // あいまい検索で一件もヒットしなかったらエラーメッセージとともに全件表示する。
+        if (itemList.isEmpty()) {
+            model.addAttribute("nonExistError", "該当する商品がありません。");
+            model.addAttribute("itemList", showItemListService.searchAll());
+            return "item_list_bousai";
+        }
+
         model.addAttribute("itemList", itemList);
 
         return "item_list_bousai";
