@@ -1,6 +1,7 @@
 package com.example.service;
 
 import com.example.domain.Order;
+import com.example.domain.OrderItem;
 import com.example.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,13 +16,13 @@ public class ConfirmOrderService {
     OrderRepository repository;
 
     /**
-     * ユーザーIDから注文を返す.
+     * 注文IDから注文を返す.
      *
-     * @param userId ユーザーID
+     * @param orderId 注文ID
      * @return 注文商品一覧を含めた注文を返す
      */
-    public Order getOrder(Integer userId) {
-        Order order = repository.findByUserIdAndStatus0(userId);
+    public Order showCart(Integer orderId) {
+        Order order = repository.findById(orderId);
         return order;
     }
 }

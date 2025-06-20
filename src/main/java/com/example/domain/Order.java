@@ -39,34 +39,19 @@ public class Order {
     /** 注文商品リスト */
     private List<OrderItem> orderItemList;
 
-    /**
-     * この注文の合計金額にかかる消費税を計算する.
-     *
-     * @return カートの商品の消費税の金額を返す
-     */
-    public int getTax(){
-        int sum = 0;
-        for(OrderItem orderItem: orderItemList){
-            sum += orderItem.getQuantity() * orderItem.getItem().getPrice();
-        }
 
-        int tax = sum/10; //合計金額の税率10%
-        return tax;
-    }
-
-    /**
-     * この注文の消費税込みの合計金額を計算する.
-     *
-     * @return 合計金額
-     */
-    public int getCalcTotalPrice(){
-        int totalPrice = 0;
-        for(OrderItem orderItem: orderItemList){
-            totalPrice += orderItem.getQuantity() * orderItem.getItem().getPrice();
-        }
-        totalPrice += this.getTax(); //消費税分を加算する
-        return totalPrice;
-    }
+//    /**
+//     * 注文の合計値
+//     *
+//     * @return orderItemListの価格の合計値
+//     */
+//    public Integer getTotalPrice(){
+//        int sum = 0;
+//        for(OrderItem orderItem: orderItemList){
+//            sum += orderItem.getQuantity() * orderItem.getItem().getPrice();
+//        }
+//        return sum;
+//    }
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }

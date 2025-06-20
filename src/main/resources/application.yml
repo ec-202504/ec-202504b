@@ -1,0 +1,11 @@
+spring:
+    datasource:
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://localhost:5432/ec-202504b
+        username: postgres
+        password: postgres
+    jmx:
+        dafault-domain: ec-202504b
+server:
+    servlet:
+        context-path: /ec-202504b

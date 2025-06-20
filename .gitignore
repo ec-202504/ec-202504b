@@ -36,4 +36,3 @@ out/
 ### VS Code ###
 .vscode/
 /src/main/java/com/example/testClass.java
-/src/main/resources/application.yml
