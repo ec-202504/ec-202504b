@@ -25,13 +25,13 @@ public class ExecuteOrderService {
     public void executeOrder(OrderForm form){
         Order order = repository.findById(form.getOrderId());
         order.setId(form.getOrderId());
-        order.setDistationName(form.getName());
-        order.setDistationEmail(form.getEmail());
-        order.setDistationZipcode(form.getZipcode());
-        order.setDistationPrefecture(form.getPrefecture());
-        order.setDistationMunicipalities(form.getMunicipalities());
-        order.setDistationAddress(form.getAddress());
-        order.setDistationTel(form.getTelephone());
+        order.setDestinationName(form.getName());
+        order.setDestinationEmail(form.getEmail());
+        order.setDestinationZipcode(form.getZipcode());
+        order.setDestinationPrefecture(form.getPrefecture());
+        order.setDestinationMunicipalities(form.getMunicipalities());
+        order.setDestinationAddress(form.getAddress());
+        order.setDestinationTel(form.getTelephone());
 
 
         //TODO:
