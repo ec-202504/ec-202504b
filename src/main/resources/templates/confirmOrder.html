@@ -167,8 +167,8 @@
         </div>
 
         <div class="row cart-total-price">
-          <div>消費税：<span th:text="${order.tax}">0</span>円</div>
-          <div>ご注文金額合計：<span th:text="${order.calcTotalPrice}">0</span>円 (税込)</div>
+          <div>消費税：<span th:text="${order.getTax()}">0</span>円</div>
+          <div>ご注文金額合計：<span th:text="${order.getCalcTotalPrice()}">0</span>円 (税込)</div>
         </div>
 
         <form th:action="@{executeOrder}" th:object="${orderForm}" method="post">

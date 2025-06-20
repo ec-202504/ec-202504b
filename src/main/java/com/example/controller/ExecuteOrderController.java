@@ -58,9 +58,11 @@ public class ExecuteOrderController {
      * @param orderForm 入力フォーム
      * @return 注文確認に遷移する.
      */
-    @GetMapping("/toConfirmOrder")
+    @PostMapping("/toConfirmOrder")
     String toConfirmOrder(OrderForm orderForm, Model model, @AuthenticationPrincipal LoginUser loginUser) {
         final int userId = loginUser.getUser().getId();
+        System.out.println("------------");
+        System.out.println("userId=" + userId);
         Order order = confirmOrderService.getOrder(userId);
 
         model.addAttribute("order", order);

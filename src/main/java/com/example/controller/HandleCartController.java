@@ -43,7 +43,7 @@ public class HandleCartController {
     public String add(@Valid OrderItemForm orderItemForm, BindingResult result, @AuthenticationPrincipal LoginUser loginUser) {
         // セッションからユーザーIDを取得
         // Integer userId = (Integer) session.getAttribute("userId");
-        Integer userId = loginUser != null ? loginUser.getAdministrator().getId() : null;
+        Integer userId = loginUser.getUser().getId();
         // セッションが切れた時にlogin画面へリダイレクト
         if (userId == null) {
             return "redirect:/";
@@ -69,8 +69,8 @@ public class HandleCartController {
     @RequestMapping("/delete")
     public String delete(Integer orderItemId, @AuthenticationPrincipal LoginUser loginUser) {
         // セッションからユーザーIDを取得
-        // Integer userId = (Integer) session.getAttribute("userId");
-        Integer userId = loginUser != null ? loginUser.getAdministrator().getId() : null;
+        Integer userId = loginUser.getUser().getId();
+
         //セッションが切れた時にlogin画面へリダイレクト
         if (userId == null) {
             return "redirect:/";
@@ -90,7 +90,7 @@ public class HandleCartController {
     public String showCart(Model model, @AuthenticationPrincipal LoginUser loginUser) {
         // セッションからユーザーIDを取得
         // Integer userId = (Integer) session.getAttribute("userId");
-        Integer userId = loginUser != null ? loginUser.getAdministrator().getId() : null;
+        Integer userId = loginUser.getUser().getId();
         //セッションが切れた時にlogin画面へリダイレクト
         if (userId == null) {
             return "redirect:/";
