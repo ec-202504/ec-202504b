@@ -114,7 +114,7 @@ public class OrderRepository {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         // jdbcTemplateを使用して注文を挿入
         jdbcTemplate.update(con -> {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement(sql, new String[]{"id"});
             ps.setInt(1, order.getUserId());
             ps.setInt(2, order.getStatus());
             ps.setObject(3, order.getTotalPrice(), Types.INTEGER);

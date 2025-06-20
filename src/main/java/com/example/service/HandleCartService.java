@@ -8,6 +8,7 @@ import com.example.domain.OrderItem;
 import com.example.form.OrderItemForm;
 import com.example.repository.OrderItemRepository;
 import com.example.repository.OrderRepository;
+import com.example.repository.ItemRepository;
 
 @Service
 public class HandleCartService {
@@ -17,6 +18,9 @@ public class HandleCartService {
 
     @Autowired
     private OrderItemRepository orderItemRepository;
+
+    @Autowired
+    private ItemRepository itemRepository;
 
 
     /**
@@ -42,6 +46,8 @@ public class HandleCartService {
         orderItem.setItemId(orderItemForm.getItemId());
         orderItem.setQuantity(orderItemForm.getQuantity());
         orderItem.setShoesSize(orderItemForm.getShoesSize());
+        // 商品情報もセット
+        orderItem.setItem(itemRepository.findById(orderItemForm.getItemId()));
         // OrderItemをDBに保存
         orderItemRepository.insert(orderItem);
     }

@@ -65,13 +65,14 @@
         <tr>
           <th class="cart-table-th">商品名</th>
           <th>サイズ、価格(税抜)、数量</th>
-          <th>トッピング、価格(税抜)</th>
+          <th>トッピング</th>
           <th>小計</th>
+          <th>操作</th>
         </tr>
         </thead>
         <tbody>
         <!-- 動的なカート内容（バックエンド連携） -->
-        <tr th:each="orderItem : ${order.orderItemList}">
+        <tr th:each="orderItem : ${order.orderItemList}" th:if="${orderItem.item != null}">
           <td class="cart-item-name">
             <div class="cart-item-icon">
               <img th:src="@{/img/} + ${orderItem.item.imagePath}" />
@@ -82,6 +83,9 @@
             <span th:text="${orderItem.shoesSize}"></span>&nbsp;
             <span th:text="${#numbers.formatInteger(orderItem.item.price,0,'COMMA')}"></span>円
             &nbsp;&nbsp;<span th:text="${orderItem.quantity}"></span>個
+          </td>
+          <td>
+            <!-- トッピングは仕様上なし。空欄でOK -->
           </td>
           <td>
             <div class="text-center" th:text="${orderItem.calcSubTotalPrice}">小計</div>
@@ -104,18 +108,14 @@
             <span>ハワイアンパラダイス</span>
           </td>
           <td>
-            <span class="price">&nbsp;Ｌ</span>&nbsp;&nbsp;2,380円
+            <span class="price">Ｌ</span>&nbsp;&nbsp;2,380円
             &nbsp;&nbsp;1個
           </td>
           <td>
-            <ul>
-              <li>ピーマン300円</li>
-              <li>オニオン300円</li>
-              <li>あらびきソーセージ300円</li>
-            </ul>
+            <!-- トッピングなし -->
           </td>
           <td>
-            <div class="text-center" th:text="${orderItem.calcSubTotalPrice}">小計</div>
+            <div class="text-center">2,380</div>
           </td>
           <td>
             <button class="btn" type="button">
@@ -123,33 +123,7 @@
             </button>
           </td>
         </tr>
-        <tr>
-          <td class="cart-item-name">
-            <div class="cart-item-icon">
-              <img src="../static/img_aloha/1.jpg" />
-            </div>
-            <span>ハワイアンパラダイス</span>
-          </td>
-          <td>
-            <span class="price">&nbsp;Ｌ</span>&nbsp;&nbsp;2,380円
-            &nbsp;&nbsp;1個
-          </td>
-          <td>
-            <ul>
-              <li>ピーマン300円</li>
-              <li>オニオン300円</li>
-              <li>あらびきソーセージ300円</li>
-            </ul>
-          </td>
-          <td>
-            <div class="text-center" th:text="${orderItem.calcSubTotalPrice}">小計</div>
-          </td>
-          <td>
-            <button class="btn" type="button">
-              <span>削除</span>
-            </button>
-          </td>
-        </tr>
+        <!-- 他のモック行も同様に修正 -->
         </tbody>
       </table>
     </div>

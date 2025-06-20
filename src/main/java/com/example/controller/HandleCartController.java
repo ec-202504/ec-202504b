@@ -2,6 +2,9 @@ package com.example.controller;
 
 import com.example.service.HandleCartService;
 import jakarta.servlet.http.HttpSession;
+
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -98,9 +101,13 @@ public class HandleCartController {
         if (order == null) {
             order = new Order(); // 空のOrderオブジェクトを作成
         }
+        // ここでorderItemListがnullなら空リストで初期化
+        if (order.getOrderItemList() == null) {
+            order.setOrderItemList(new ArrayList<>());
+        }
         // カートの内容を追加
         model.addAttribute("order", order);
         //カート画面を表示
-        return "cart";
+        return "cart_list";
     }
 }
