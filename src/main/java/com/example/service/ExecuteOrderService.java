@@ -9,8 +9,6 @@ import com.example.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-
 /**
  * 注文処理を行うコントローラ.
  */
@@ -27,8 +25,8 @@ public class ExecuteOrderService {
      *
      * @param orderForm 注文情報の入力フォーム
      */
-    public void executeOrder(OrderForm orderForm){
-        Order order = orderRepository.findById(orderForm.getOrderId());
+    public void executeOrder(int userId, OrderForm orderForm){
+        Order order = orderRepository.findByUserIdAndStatus0(userId);
         order.setId(orderForm.getOrderId());
         order.setDistationName(orderForm.getName());
         order.setDistationEmail(orderForm.getEmail());
@@ -39,21 +37,23 @@ public class ExecuteOrderService {
         order.setDistationTel(orderForm.getTelephone());
 
         //TODO:
-        order.setStatus(OrderStatus.UNPAID.getCode());
+        order.setStatus(OrderStatus.UNPAID.getCode()); //入金待ちに変更
+        order.setTotalPrice(order.getTotalPrice()); //税込み合計金額
 
-//        // Timestamp から java.util.Date に変換
+        // Timestamp から java.util.Date に変換
 //        if (orderForm.getDeliveryTime() != null) {
 //            order.setDeliveryTime(new Date(orderForm.getDeliveryTime().getTime()));
 //        }
 
         order.setPaymentMethod(orderForm.getPaymentMethod());
+
         orderRepository.update(order);
     }
 
     /**
      * ユーザーIDからユーザーを取得する.
      *
-     * @param userId
+     * @param userId ユーザーID
      * @return ユーザー，存在しない場合はnull
      */
     public User findByUserId(Integer userId){

@@ -94,7 +94,7 @@ public class UserRepository {
      */
     public User findById(Integer id){
         String sql =  """
-				SELECT name, email, password, zipcode, prefecture, municipalities, address, telephone 
+				SELECT id, name, email, password, zipcode, prefecture, municipalities, address, telephone 
 				FROM users where id = :id;
 				""";
         SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
