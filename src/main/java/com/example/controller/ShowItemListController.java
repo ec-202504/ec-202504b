@@ -14,7 +14,7 @@ import com.example.domain.Item;
 import java.util.List;
 
 /**
- * 商品関連機能の制御を行うコントローラクラス.
+ * 商品リストを表示する機能の制御を行うコントローラクラス.
  */
 @Controller
 @RequestMapping("/")
@@ -45,13 +45,5 @@ public class ShowItemListController {
         model.addAttribute("itemList", itemList);
 
         return "item_list_bousai";
-    }
-
-    @GetMapping("/showItemDetail")
-    public String showItemDetail(Integer itemId, Model model) {
-        Item item = showItemListService.showItemDetail(itemId);
-        model.addAttribute("item", item);
-
-        return "item_detail";
     }
 }

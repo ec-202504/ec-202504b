@@ -1,8 +1,8 @@
 package com.example.repository;
 
+import com.example.domain.Item;
 import com.example.domain.Order;
 import com.example.domain.OrderItem;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.*;
 import java.util.List;
 
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import com.example.domain.Item;
@@ -20,6 +21,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 注文情報を管理するリポジトリクラス。
@@ -219,11 +221,12 @@ public class OrderRepository {
     private NamedParameterJdbcTemplate template;
 
     /**
-     * @param id 注文ID
+     * status=0(注文前)の注文を検索する.
+     *
+     * @param userId 注文ID
      * @return 注文
      */
-    public Order findById(Integer id) {
-//            TODO:未実装
+    public Order findByUserIdAndStatus0(Integer userId) {
         final String sql = """
                 SELECT
                 o.id AS o_id,
@@ -254,9 +257,9 @@ public class OrderRepository {
                 ON o.id = oi.order_id
                 INNER JOIN items AS i
                 ON oi.item_id = i.id
-                WHERE o.id = :id;
+                WHERE o.id = :userId AND o.status=0;
                 """;
-        SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
+        SqlParameterSource param = new MapSqlParameterSource().addValue("userId", userId);
         List<Order> orderList = template.query(sql, param, ORDER_RESULT_ROW_MAPPER);
 
         if (orderList.size() == 0)
@@ -271,7 +274,25 @@ public class OrderRepository {
      * @param order 注文
      */
     public void update(Order order) {
-//        TODO:未実装
+        final String sql = """
+                UPDATE orders SET
+                user_id = :userId,
+                status = :status,
+                total_price = :totalPrice, 
+                order_date = :orderDate,           
+                destination_name = :distationName,
+                destination_email = :distationEmail,          
+                destination_zipcode = :distationZipcode,       
+                destination_prefecture = :distationPrefecture,     
+                destination_municipalities = :distationMunicipalities,   
+                destination_address = :distationAddress,       
+                destination_tel = :distationTel,         
+                delivery_time = :deliveryTime,                
+                payment_method = :paymentMethod
+                WHERE id = :id;
+                """;
+        SqlParameterSource param = new BeanPropertySqlParameterSource(order);
+        template.update(sql, param);
     }
 
     /**

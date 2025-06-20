@@ -32,7 +32,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ラクラクアロハ</title>
+    <title>注文確認画面</title>
   </head>
   <body>
     <header>
@@ -171,180 +171,214 @@
           <div>ご注文金額合計：<span th:text="${order.calcTotalPrice}">0</span>円 (税込)</div>
         </div>
 
-        <h2 class="page-title">お届け先情報</h2>
-        <div class="order-confirm-delivery-info">
-          <div class="row">
-            <div class="input-field">
-              <button class="btn" type="button">
-                <span>ログイン者情報を入力</span>
-              </button>
+        <form th:action="@{executeOrder}" th:object="${orderForm}" method="post">
+          <h2 class="page-title">お届け先情報</h2>
+          <div class="order-confirm-delivery-info">
+            <div class="row">
+              <div class="input-field">
+                <a th:href="@{fillOutFormByUserInfo}" class="btn">
+                  <span>ログイン者情報を入力</span>
+                </a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field">
+                <label th:errors="*{name}" class="error-messages"></label>
+                <input id="name" type="text" th:field="*{name}" />
+                <label for="name">お名前</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field">
+                <label th:errors="*{email}" class="error-messages"></label>
+                <input id="email" type="email" th:field="*{email}" />
+                <label for="email">メールアドレス</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field">
+                <input
+                  id="zipcode"
+                  type="text"
+                  maxlength="7"
+                  th:field="*{zipcode}"
+                />
+               
+                <label for="zipcode">郵便番号</label>
+                <button class="btn" type="button">
+                  <span>住所検索</span>
+                </button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s4">
+                <label th:errors="*{prefecture}" class="error-messages"></label>
+                <select
+                  class="browser-default"
+                  id="pref"
+                  th:field="*{prefecture}"
+                >
+                  <option value="" disabled selected>都道府県</option>
+                  <option value="北海道">北海道</option>
+                  <option value="青森県">青森県</option>
+                  <option value="岩手県">岩手県</option>
+                  <option value="宮城県">宮城県</option>
+                  <option value="秋田県">秋田県</option>
+                  <option value="山形県">山形県</option>
+                  <option value="福島県">福島県</option>
+                  <option value="茨城県">茨城県</option>
+                  <option value="栃木県">栃木県</option>
+                  <option value="群馬県">群馬県</option>
+                  <option value="埼玉県">埼玉県</option>
+                  <option value="千葉県">千葉県</option>
+                  <option value="東京都">東京都</option>
+                  <option value="神奈川県">神奈川県</option>
+                  <option value="新潟県">新潟県</option>
+                  <option value="富山県">富山県</option>
+                  <option value="石川県">石川県</option>
+                  <option value="福井県">福井県</option>
+                  <option value="山梨県">山梨県</option>
+                  <option value="長野県">長野県</option>
+                  <option value="岐阜県">岐阜県</option>
+                  <option value="静岡県">静岡県</option>
+                  <option value="愛知県">愛知県</option>
+                  <option value="三重県">三重県</option>
+                  <option value="滋賀県">滋賀県</option>
+                  <option value="京都府">京都府</option>
+                  <option value="大阪府">大阪府</option>
+                  <option value="兵庫県">兵庫県</option>
+                  <option value="奈良県">奈良県</option>
+                  <option value="和歌山県">和歌山県</option>
+                  <option value="鳥取県">鳥取県</option>
+                  <option value="島根県">島根県</option>
+                  <option value="岡山県">岡山県</option>
+                  <option value="広島県">広島県</option>
+                  <option value="山口県">山口県</option>
+                  <option value="徳島県">徳島県</option>
+                  <option value="香川県">香川県</option>
+                  <option value="愛媛県">愛媛県</option>
+                  <option value="高知県">高知県</option>
+                  <option value="福岡県">福岡県</option>
+                  <option value="佐賀県">佐賀県</option>
+                  <option value="長崎県">長崎県</option>
+                  <option value="熊本県">熊本県</option>
+                  <option value="大分県">大分県</option>
+                  <option value="宮崎県">宮崎県</option>
+                  <option value="鹿児島県">鹿児島県</option>
+                  <option value="沖縄県">沖縄県</option>
+                </select>
+              </div>
+              <div class="input-field col s4">
+                <input
+                  id="municipalities"
+                  type="text"
+                  th:field="*{municipalities}"
+                />
+                <label for="municipalities">市区町村</label>
+              </div>
+              <div class="input-field col s4">
+                <label th:errors="*{address}" class="error-messages"></label>
+                <input id="address" type="text" th:field="*{address}" />
+                <label for="address">住所</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field">
+                <label th:errors="*{telephone}" class="error-messages"></label>
+                <input id="tel" type="tel" th:field="*{telephone}" />
+                <label for="tel">電話番号</label>
+              </div>
+            </div>
+            <div class="row order-confirm-delivery-datetime">
+              <div class="input-field">
+                <input
+                  id="deliveryDate"
+                  type="date"
+                  th:field="*{deliveryTime}"
+                />
+                <label th:errors="*{address}" class="error-messages"></label>
+                <label for="address">配達日時</label>
+              </div>
+              <label class="order-confirm-delivery-time">
+                <input
+                  name="deliveryTime"
+                  type="radio"
+                  value="10時"
+                  checked="checked"
+                />
+                <span>10時</span>
+              </label>
+              <label class="order-confirm-delivery-time">
+                <input name="deliveryTime" type="radio" value="11時" />
+                <span>11時</span>
+              </label>
+              <label class="order-confirm-delivery-time">
+                <input name="deliveryTime" type="radio" value="12時" />
+                <span>12時</span>
+              </label>
+              <label class="order-confirm-delivery-time">
+                <input name="deliveryTime" type="radio" value="13時" />
+                <span>13時</span>
+              </label>
+              <label class="order-confirm-delivery-time">
+                <input name="deliveryTime" type="radio" value="14時" />
+                <span>14時</span>
+              </label>
+              <label class="order-confirm-delivery-time">
+                <input name="deliveryTime" type="radio" value="15時" />
+                <span>15時</span>
+              </label>
+              <label class="order-confirm-delivery-time">
+                <input name="deliveryTime" type="radio" value="16時" />
+                <span>16時</span>
+              </label>
+              <label class="order-confirm-delivery-time">
+                <input name="deliveryTime" type="radio" value="17時" />
+                <span>17時</span>
+              </label>
+              <label class="order-confirm-delivery-time">
+                <input name="deliveryTime" type="radio" value="18時" />
+                <span>18時</span>
+              </label>
             </div>
           </div>
-          <div class="row">
-            <div class="input-field">
-              <input id="name" type="text" />
-              <label for="name">お名前</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field">
-              <input id="email" type="email" />
-              <label for="email">メールアドレス</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field">
-              <input id="zipcode" type="text" maxlength="7" />
-              <label for="zipcode">郵便番号</label>
-              <button class="btn" type="button">
-                <span>住所検索</span>
-              </button>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s4">
-              <select class="browser-default" id="pref">
-                <option value="" disabled selected>都道府県</option>
-                <option value="北海道">北海道</option>
-                <option value="青森県">青森県</option>
-                <option value="岩手県">岩手県</option>
-                <option value="宮城県">宮城県</option>
-                <option value="秋田県">秋田県</option>
-                <option value="山形県">山形県</option>
-                <option value="福島県">福島県</option>
-                <option value="茨城県">茨城県</option>
-                <option value="栃木県">栃木県</option>
-                <option value="群馬県">群馬県</option>
-                <option value="埼玉県">埼玉県</option>
-                <option value="千葉県">千葉県</option>
-                <option value="東京都">東京都</option>
-                <option value="神奈川県">神奈川県</option>
-                <option value="新潟県">新潟県</option>
-                <option value="富山県">富山県</option>
-                <option value="石川県">石川県</option>
-                <option value="福井県">福井県</option>
-                <option value="山梨県">山梨県</option>
-                <option value="長野県">長野県</option>
-                <option value="岐阜県">岐阜県</option>
-                <option value="静岡県">静岡県</option>
-                <option value="愛知県">愛知県</option>
-                <option value="三重県">三重県</option>
-                <option value="滋賀県">滋賀県</option>
-                <option value="京都府">京都府</option>
-                <option value="大阪府">大阪府</option>
-                <option value="兵庫県">兵庫県</option>
-                <option value="奈良県">奈良県</option>
-                <option value="和歌山県">和歌山県</option>
-                <option value="鳥取県">鳥取県</option>
-                <option value="島根県">島根県</option>
-                <option value="岡山県">岡山県</option>
-                <option value="広島県">広島県</option>
-                <option value="山口県">山口県</option>
-                <option value="徳島県">徳島県</option>
-                <option value="香川県">香川県</option>
-                <option value="愛媛県">愛媛県</option>
-                <option value="高知県">高知県</option>
-                <option value="福岡県">福岡県</option>
-                <option value="佐賀県">佐賀県</option>
-                <option value="長崎県">長崎県</option>
-                <option value="熊本県">熊本県</option>
-                <option value="大分県">大分県</option>
-                <option value="宮崎県">宮崎県</option>
-                <option value="鹿児島県">鹿児島県</option>
-                <option value="沖縄県">沖縄県</option>
-              </select>
-            </div>
-            <div class="input-field col s4">
-              <input id="municipalities" type="text" />
-              <label for="municipalities">市区町村</label>
-            </div>
-            <div class="input-field col s4">
-              <input id="address" type="text" />
-              <label for="address">住所</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field">
-              <input id="tel" type="tel" />
-              <label for="tel">電話番号</label>
-            </div>
-          </div>
-          <div class="row order-confirm-delivery-datetime">
-            <div class="input-field">
-              <input id="deliveryDate" type="date" />
-              <label for="address">配達日時</label>
-            </div>
-            <label class="order-confirm-delivery-time">
-              <input
-                name="deliveryTime"
-                type="radio"
-                value="10時"
-                checked="checked"
-              />
-              <span>10時</span>
-            </label>
-            <label class="order-confirm-delivery-time">
-              <input name="deliveryTime" type="radio" value="11時" />
-              <span>11時</span>
-            </label>
-            <label class="order-confirm-delivery-time">
-              <input name="deliveryTime" type="radio" value="12時" />
-              <span>12時</span>
-            </label>
-            <label class="order-confirm-delivery-time">
-              <input name="deliveryTime" type="radio" value="13時" />
-              <span>13時</span>
-            </label>
-            <label class="order-confirm-delivery-time">
-              <input name="deliveryTime" type="radio" value="14時" />
-              <span>14時</span>
-            </label>
-            <label class="order-confirm-delivery-time">
-              <input name="deliveryTime" type="radio" value="15時" />
-              <span>15時</span>
-            </label>
-            <label class="order-confirm-delivery-time">
-              <input name="deliveryTime" type="radio" value="16時" />
-              <span>16時</span>
-            </label>
-            <label class="order-confirm-delivery-time">
-              <input name="deliveryTime" type="radio" value="17時" />
-              <span>17時</span>
-            </label>
-            <label class="order-confirm-delivery-time">
-              <input name="deliveryTime" type="radio" value="18時" />
-              <span>18時</span>
-            </label>
-          </div>
-        </div>
 
-        <h2 class="page-title">お支払い方法</h2>
-        <div class="row order-confirm-payment-method">
-          <span>
-            <label class="order-confirm-payment-method-radio">
-              <input
-                name="paymentMethod"
-                type="radio"
-                value="1"
-                checked="checked"
-              />
-              <span>代金引換</span>
-            </label>
-            <label class="order-confirm-payment-method-radio">
-              <input name="paymentMethod" type="radio" value="2" />
-              <span>クレジットカード</span>
-            </label>
-          </span>
-        </div>
+          <h2 class="page-title">お支払い方法</h2>
+          <div class="row order-confirm-payment-method">
+            <span>
+              <label th:errors="*{paymentMethod}" class="error-messages"></label>
+              <label class="order-confirm-payment-method-radio">
+                <input
+                  name="paymentMethod"
+                  type="radio"
+                  checked="checked"
+                  value="1"
+                  th:field="*{paymentMethod}"
+                />
+                <span>代金引換</span>
+              </label>
+              <label class="order-confirm-payment-method-radio">
+                <input
+                  name="paymentMethod"
+                  type="radio"
+                  value="2"
+                  th:field="*{paymentMethod}"
+                />
+                <span>クレジットカード</span>
+              </label>
+            </span>
+          </div>
+       
+
         <div class="row order-confirm-btn">
           <button
             class="btn"
-            type="button"
-            onclick="location.href='order_finished.html'"
+            type="submit"
           >
             <span>この内容で注文する</span>
           </button>
         </div>
+         </form>
       </div>
       <!-- end container -->
     </div>
@@ -357,5 +391,15 @@
     </footer>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script>
+      // ログイン情報を入力するよう
+      function submitTo(url) {
+        console.log("ボタンが押された");
+        const form = document.getElementById("orderForm");
+        form.action = url;
+        form.submit();
+      }
+    </script>
   </body>
 </html>
