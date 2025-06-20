@@ -43,14 +43,13 @@
       </div>
 
       <div class="header-right">
-        <a href="item_list_aloha.html">商品一覧</a>
-        <a href="register_user.html">会員登録</a>
-        <a href="cart_list.html"><i class="fas fa-shopping-cart"></i>カート</a>
-        <a href="login.html" class="login">
+        <a th:href="@{/items/list}">商品一覧</a>
+        <a href="@{/register_user}">会員登録</a>
+        <a href="@{/cart/show}"><i class="fas fa-shopping-cart"></i>カート</a>
+        <a href="@{/login}" class="login">
           <i class="fas fa-sign-in-alt"></i>ログイン
         </a>
-
-        <a href="order_history.html">注文履歴</a>
+        <a href="@{/order/history}">注文履歴</a>
       </div>
     </div>
   </div>
@@ -139,6 +138,11 @@
               onclick="location.href='order_confirm.html'"
       >
         <span>注文に進む</span>
+      </button>
+    </div>
+    <div class="row">
+      <button class="btn grey lighten-1" type="button" th:onclick="'location.href=\'' + @{/items/list} + '\'"'>
+        <span>商品一覧に戻る</span>
       </button>
     </div>
   </div>
