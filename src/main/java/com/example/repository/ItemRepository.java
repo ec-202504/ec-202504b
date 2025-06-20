@@ -85,12 +85,12 @@ public class ItemRepository {
     /**
      * おすすめ商品のリストを取得します.
      *
-     * @param infant
-     * @param senior
-     * @param gender
-     * @param pet
-     * @param disaster
-     * @return
+     * @param infant   乳児向けかどうか
+     * @param senior   高齢者向けかどうか
+     * @param gender   女性向けかどうか
+     * @param pet      ペットがいるかどうか
+     * @param disaster 災害種別
+     * @return 条件に合致する商品一覧
      */
     public List<Item> recommend(String infant, String senior, String gender,
                                 Boolean pet, String disaster) {

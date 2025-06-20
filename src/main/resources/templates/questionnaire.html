@@ -1,104 +1,192 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
   <head>
+    <!--Import Google Icon Font-->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- Import Materialize CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <!-- Import Font Awesome -->
+    <link
+      href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/footer.css}" />
+    <link rel="stylesheet" th:href="@{/css/register_user.css}" />
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
+    <link rel="stylesheet" th:href="@{/css/item_list.css}" />
+    <link rel="stylesheet" th:href="@{/css/item_detail.css}" />
+    <link rel="stylesheet" th:href="@{/css/cart_list.css}" />
+    <link rel="stylesheet" th:href="@{/css/order_confirm.css}" />
+    <link rel="stylesheet" th:href="@{/css/order_finished.css}" />
+    <link rel="stylesheet" th:href="@{/css/responsive.css}" />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ラクラクアロハ</title>
   </head>
   <body>
-    <div>
-      <h2>質問</h2>
-      <form
-        th:action="@{/recommend}"
-        method="post"
-        th:object="${questionnaireForm}"
-      >
-        Q1. 性別を教えてください<br />
-        <input
-          type="radio"
-          name="gender"
-          id="male"
-          value=""
-          th:field="*{targetGender}"
-        /><label for="male">男性</label>
-        <input
-          type="radio"
-          name="gender"
-          id="female"
-          value="女性向け"
-          th:field="*{targetGender}"
-        /><label for="female">女性</label><br />
-        Q2. 家族に幼児（0~6歳）はいますか？<br />
-        <input
-          type="radio"
-          name="exist-infant"
-          id="exist-infant"
-          value="幼児向け"
-          th:field="*{existInfant}"
-        /><label for="exist-infant">はい</label>
-        <input
-          type="radio"
-          name="exist-infant"
-          id="dont-exist-infant"
-          value=""
-          th:field="*{existInfant}"
-        /><label for="dont-exist-infant">いいえ</label><br />
-        Q3. 家族に高齢者（65歳以上）はいますか？<br />
-        <input
-          type="radio"
-          name="exist-senior"
-          id="exist-senior"
-          value="高齢者向け"
-          th:field="*{existSenior}"
-        /><label for="exist-senior">はい</label>
-        <input
-          type="radio"
-          name="exist-senior"
-          id="dont-exist-senior"
-          value=""
-          th:field="*{existSenior}"
-        /><label for="dont-exist-senior">いいえ</label><br />
-        Q4. ペットと一緒に暮らしていますか？<br />
-        <input
-          type="radio"
-          name="exist-pets"
-          id="exist-pets"
-          value="0"
-          th:field="*{existPets}"
-        /><label for="exist-pets">はい</label>
-        <input
-          type="radio"
-          name="exist-pets"
-          id="dont-exist-pets"
-          value="1"
-          th:field="*{existPets}"
-        /><label for="dont-exist-pets">いいえ</label><br />
-        Q5. お住まいの近くに以下の地形はありますか？（複数選択可）<br />
-        <input type="checkbox" name="terrainList" id="river" value="0" /><label
-          for="river"
-          th:field="*{terrainList}"
-          >川・用水路</label
-        ><br />
-        <input type="checkbox" name="terrainList" id="sea" value="1" /><label
-          for="sea"
-          th:field="*{terrainList}"
-          >海・湖</label
-        ><br />
-        <input
-          type="checkbox"
-          name="terrainList"
-          id="mountain"
-          value="2"
-        /><label for="mountain" th:field="*{terrainList}">山・崖・斜面</label
-        ><br />
-        <input type="checkbox" name="terrainList" id="none" value="3" /><label
-          for="none"
-          th:field="*{terrainList}"
-          >特になし</label
-        ><br />
-        <button>回答</button>
-      </form>
+    <header>
+      <div class="container">
+        <div class="header">
+          <div class="header-left">
+            <a href="top.html">
+              <img class="logo" th:src="@{/img/header_logo.png}" />
+            </a>
+          </div>
+
+          <div class="header-right">
+            <a th:href="@{/showItemList}">商品一覧</a>
+            <a th:href="@{/topPage}">会員登録</a>
+            <a href="cart_list.html">
+              <i class="fas fa-shopping-cart"> </i>カート
+            </a>
+            <a
+              href="login.html"
+              th:href="@{/}"
+              sec:authorize="!isAuthenticated()"
+              class="login"
+            >
+              <i class="fas fa-sign-in-alt"></i>ログイン
+            </a>
+            <!-- <a
+              href="login.html"
+              th:href="@{/logout}"
+              sec:authorize="isAuthenticated()"
+              class="login"
+            >
+              <i class="fas fa-sign-in-alt"></i>ログアウト
+            </a> -->
+            <form
+              th:action="@{/logout}"
+              method="post"
+              sec:authorize="isAuthenticated()"
+            >
+              <input
+                type="hidden"
+                th:name="${_csrf.parameterName}"
+                th:value="${_csrf.token}"
+              />
+              <button type="submit" class="login">
+                <i class="fas fa-sign-out-alt"></i>ログアウト
+              </button>
+            </form>
+            <a th:href="@{/showOrderHistory}">注文履歴</a>
+            <a th:href="@{/toQuestionnaire}">まずはこちら</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="top-wrapper">
+      <div class="container">
+        質問<br />
+        <p>質問</p>
+        <div class="row">
+          <form
+            th:action="@{/recommend}"
+            method="post"
+            th:object="${questionnaireForm}"
+          >
+            Q1. 性別を教えてください<br />
+            <input
+              type="radio"
+              name="gender"
+              id="male"
+              value=""
+              th:field="*{targetGender}"
+            /><label for="male">男性</label>
+            <input
+              type="radio"
+              name="gender"
+              id="female"
+              value="女性向け"
+              th:field="*{targetGender}"
+            /><label for="female">女性</label><br />
+            Q2. 家族に幼児（0~6歳）はいますか？<br />
+            <input
+              type="radio"
+              name="exist-infant"
+              id="exist-infant"
+              value="幼児向け"
+              th:field="*{existInfant}"
+            /><label for="exist-infant">はい</label>
+            <input
+              type="radio"
+              name="exist-infant"
+              id="dont-exist-infant"
+              value=""
+              th:field="*{existInfant}"
+            /><label for="dont-exist-infant">いいえ</label><br />
+            Q3. 家族に高齢者（65歳以上）はいますか？<br />
+            <input
+              type="radio"
+              name="exist-senior"
+              id="exist-senior"
+              value="高齢者向け"
+              th:field="*{existSenior}"
+            /><label for="exist-senior">はい</label>
+            <input
+              type="radio"
+              name="exist-senior"
+              id="dont-exist-senior"
+              value=""
+              th:field="*{existSenior}"
+            /><label for="dont-exist-senior">いいえ</label><br />
+            Q4. ペットと一緒に暮らしていますか？<br />
+            <input
+              type="radio"
+              name="exist-pets"
+              id="exist-pets"
+              value="0"
+              th:field="*{existPets}"
+            /><label for="exist-pets">はい</label>
+            <input
+              type="radio"
+              name="exist-pets"
+              id="dont-exist-pets"
+              value="1"
+              th:field="*{existPets}"
+            /><label for="dont-exist-pets">いいえ</label><br />
+            Q5. お住まいの近くに以下の地形はありますか？（複数選択可）<br />
+            <input
+              type="checkbox"
+              name="terrainList"
+              id="river"
+              value="0"
+            /><label for="river" th:field="*{terrainList}">川・用水路</label
+            ><br />
+            <input
+              type="checkbox"
+              name="terrainList"
+              id="sea"
+              value="1"
+            /><label for="sea" th:field="*{terrainList}">海・湖</label><br />
+            <input
+              type="checkbox"
+              name="terrainList"
+              id="mountain"
+              value="2"
+            /><label for="mountain" th:field="*{terrainList}"
+              >山・崖・斜面</label
+            ><br />
+            <input
+              type="checkbox"
+              name="terrainList"
+              id="none"
+              value="3"
+            /><label for="none" th:field="*{terrainList}">特になし</label><br />
+            <button>回答</button>
+          </form>
+        </div>
+      </div>
     </div>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   </body>
 </html>

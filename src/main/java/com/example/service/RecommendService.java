@@ -21,6 +21,7 @@ public class RecommendService {
     @Autowired
     private ItemRepository itemRepository;
 
+    /** ペットがいるかを結びつけるためのmap */
     private final Map<Integer, Boolean> PET_OPTION_MAP;
 
     {
@@ -29,6 +30,7 @@ public class RecommendService {
         PET_OPTION_MAP.put(1, false);
     }
 
+    /** 災害種別を結びつけるためのmap */
     private final Map<Integer, String> DISASTER_TYPE_MAP;
 
     {
