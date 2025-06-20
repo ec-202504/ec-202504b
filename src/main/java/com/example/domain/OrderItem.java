@@ -17,12 +17,6 @@ public class OrderItem {
     private Character size;
     /** 商品情報 */
     private Item item;
-    /** オプション1 */
-    private Integer option1;
-    /** オプション2 */
-    private Integer option2;
-    /** オプション3 */
-    private Integer option3;
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -36,12 +30,6 @@ public class OrderItem {
     public void setSize(Character size) { this.size = size; }
     public Item getItem() { return item; }
     public void setItem(Item item) { this.item = item; }
-    public Integer getOption1() { return option1; }
-    public void setOption1(Integer option1) { this.option1 = option1; }
-    public Integer getOption2() { return option2; }
-    public void setOption2(Integer option2) { this.option2 = option2; }
-    public Integer getOption3() { return option3; }
-    public void setOption3(Integer option3) { this.option3 = option3; }
 
     @Override
     public String toString() {
@@ -52,9 +40,6 @@ public class OrderItem {
                 ", quantity=" + quantity +
                 ", size=" + size +
                 ", item=" + item +
-                ", option1=" + option1 +
-                ", option2=" + option2 +
-                ", option3=" + option3 +
                 '}';
     }
 } 
