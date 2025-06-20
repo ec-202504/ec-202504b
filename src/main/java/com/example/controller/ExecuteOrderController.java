@@ -61,12 +61,12 @@ public class ExecuteOrderController {
     @PostMapping("/toConfirmOrder")
     String toConfirmOrder(OrderForm orderForm, Model model, @AuthenticationPrincipal LoginUser loginUser) {
         final int userId = loginUser.getUser().getId();
-        System.out.println("------------");
-        System.out.println("userId=" + userId);
         Order order = confirmOrderService.getOrder(userId);
 
         model.addAttribute("order", order);
         model.addAttribute("orderForm", orderForm);
+        model.addAttribute("tax", order.getTax());
+        model.addAttribute("totalPrice", order.getTotalPrice());
         return "confirmOrder";
     }
 

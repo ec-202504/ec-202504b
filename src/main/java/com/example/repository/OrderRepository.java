@@ -257,7 +257,7 @@ public class OrderRepository {
                 ON o.id = oi.order_id
                 INNER JOIN items AS i
                 ON oi.item_id = i.id
-                WHERE o.id = :userId AND o.status=0;
+                WHERE o.user_id = :userId AND o.status=0;
                 """;
         SqlParameterSource param = new MapSqlParameterSource().addValue("userId", userId);
         List<Order> orderList = template.query(sql, param, ORDER_RESULT_ROW_MAPPER);
@@ -280,13 +280,13 @@ public class OrderRepository {
                 status = :status,
                 total_price = :totalPrice, 
                 order_date = :orderDate,           
-                destination_name = :distationName,
-                destination_email = :distationEmail,          
-                destination_zipcode = :distationZipcode,       
-                destination_prefecture = :distationPrefecture,     
-                destination_municipalities = :distationMunicipalities,   
-                destination_address = :distationAddress,       
-                destination_tel = :distationTel,         
+                destination_name = :destinationName,
+                destination_email = :destinationEmail,          
+                destination_zipcode = :destinationZipcode,       
+                destination_prefecture = :destinationPrefecture,     
+                destination_municipalities = :destinationMunicipalities,   
+                destination_address = :destinationAddress,       
+                destination_tel = :destinationTel,         
                 delivery_time = :deliveryTime,                
                 payment_method = :paymentMethod
                 WHERE id = :id;
