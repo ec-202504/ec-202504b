@@ -166,14 +166,25 @@
             >円(税抜)
           </div>
           <div class="row item-cart-btn">
-            <button
-              class="btn"
-              type="button"
-              onclick="location.href='cart_list.html'"
-            >
-              <i class="material-icons left">add_shopping_cart</i>
-              <span>カートに入れる</span>
-            </button>
+            <form th:action="@{/cart/add}" method="post">
+              <input type="hidden" name="itemId" th:value="${item.id}" />
+              <div class="input-field col s12">
+                <label>数量：</label>
+                <input type="number" name="quantity" value="1" min="1" style="width:60px;" />
+              </div>
+              <div class="input-field col s12" th:if="${item.itemType}">
+                <label>サイズ：</label>
+                <select name="shoesSize">
+                  <option value="S">S</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                </select>
+              </div>
+              <button class="btn" type="submit">
+                <i class="material-icons left">add_shopping_cart</i>
+                <span>カートに入れる</span>
+              </button>
+            </form>
           </div>
         </div>
       </div>

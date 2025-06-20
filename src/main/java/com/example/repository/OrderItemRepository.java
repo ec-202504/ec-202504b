@@ -25,8 +25,8 @@ public class OrderItemRepository {
         // shoes_sizeはCHAR(1)型なので、nullであればnullをセット
         String shoesSize = null;
         // オプションの靴のサイズが指定されている場合は、1文字目をセット
-        if (orderItem.getOptionShoesSize() != null) {
-            shoesSize = String.valueOf((char) orderItem.getOptionShoesSize().intValue());
+        if (orderItem.getShoesSize() != null) {
+            shoesSize = String.valueOf(orderItem.getShoesSize());
         }
         // 注文商品をデータベースに挿入
         jdbcTemplate.update(

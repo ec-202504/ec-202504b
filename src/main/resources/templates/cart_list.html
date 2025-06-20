@@ -70,33 +70,32 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
+        <!-- 動的なカート内容（バックエンド連携） -->
+        <tr th:each="orderItem : ${order.orderItemList}">
           <td class="cart-item-name">
             <div class="cart-item-icon">
-              <img src="../static/img_aloha/1.jpg" />
+              <img th:src="@{/img/} + ${orderItem.item.imagePath}" />
             </div>
-            <span>ハワイアンパラダイス</span>
+            <span th:text="${orderItem.item.name}">商品名</span>
           </td>
           <td>
-            <span class="price">&nbsp;Ｌ</span>&nbsp;&nbsp;2,380円
-            &nbsp;&nbsp;1個
-          </td>
-          <td>
-            <ul>
-              <li>ピーマン300円</li>
-              <li>オニオン300円</li>
-              <li>あらびきソーセージ300円</li>
-            </ul>
+            <span th:text="${orderItem.shoesSize}"></span>&nbsp;
+            <span th:text="${#numbers.formatInteger(orderItem.item.price,0,'COMMA')}"></span>円
+            &nbsp;&nbsp;<span th:text="${orderItem.quantity}"></span>個
           </td>
           <td>
             <div class="text-center" th:text="${orderItem.calcSubTotalPrice}">小計</div>
           </td>
           <td>
-            <button class="btn" type="button">
-              <span>削除</span>
-            </button>
+            <form th:action="@{/cart/delete}" method="post">
+              <input type="hidden" name="orderItemId" th:value="${orderItem.id}" />
+              <button class="btn" type="submit">
+                <span>削除</span>
+              </button>
+            </form>
           </td>
         </tr>
+        <!-- ここから下は元のモック（静的サンプル） -->
         <tr>
           <td class="cart-item-name">
             <div class="cart-item-icon">

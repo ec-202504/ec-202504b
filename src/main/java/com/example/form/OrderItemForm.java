@@ -17,14 +17,11 @@ public class OrderItemForm {
     @NotNull(message = "数量は必須です")
     @Min(value = 1, message = "数量は1以上で入力してください")
     private Integer quantity;
+
     /**
-     * アイテムのサイズ(任意)
+     * サイズ(オプション、1文字、任意)
      */
-    private Integer optionItmSize;
-    /**
-     * 靴のサイズ(任意)
-     */
-    private Integer optionShoesSize;
+    private Character shoesSize;
 
     public Integer getItemId() {
         return itemId;
@@ -42,20 +39,12 @@ public class OrderItemForm {
         this.quantity = quantity;
     }
 
-    public Integer getOptionItmSize() {
-        return optionItmSize;
+    public Character getShoesSize() {
+        return shoesSize;
     }
 
-    public void setOptionItmSize(Integer optionItmSize) {
-        this.optionItmSize = optionItmSize;
-    }
-
-    public Integer getOptionShoesSize() {
-        return optionShoesSize;
-    }
-
-    public void setOptionShoesSize(Integer optionShoesSize) {
-        this.optionShoesSize = optionShoesSize;
+    public void setShoesSize(Character shoesSize) {
+        this.shoesSize = shoesSize;
     }
 
     /**
@@ -67,8 +56,7 @@ public class OrderItemForm {
         return "OrderItemForm{" +
                 "itemId=" + itemId +
                 ", quantity=" + quantity +
-                ", optionItmSize=" + optionItmSize +
-                ", optionShoesSize=" + optionShoesSize +
+                ", shoesSize=" + shoesSize +
                 '}';
     }
 }

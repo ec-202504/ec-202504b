@@ -68,8 +68,7 @@ public class OrderRepository {
             // shoes_sizeはCHAR(1)型なので、nullでなければ1文字目をセット
             String shoesSize = rs.getString("shoes_size");
             if (shoesSize != null && !shoesSize.isEmpty()) {
-                // 必要に応じて型変換（例：M→77など）
-                item.setOptionShoesSize((int) shoesSize.charAt(0));
+                item.setShoesSize(shoesSize.charAt(0));
             }
             return item;
         }

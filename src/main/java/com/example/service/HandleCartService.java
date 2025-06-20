@@ -41,8 +41,7 @@ public class HandleCartService {
         orderItem.setOrderId(order.getId());
         orderItem.setItemId(orderItemForm.getItemId());
         orderItem.setQuantity(orderItemForm.getQuantity());
-        orderItem.setOptionItemSize(orderItemForm.getOptionItmSize());
-        orderItem.setOptionShoesSize(orderItemForm.getOptionShoesSize());
+        orderItem.setShoesSize(orderItemForm.getShoesSize());
         // OrderItemをDBに保存
         orderItemRepository.insert(orderItem);
     }
