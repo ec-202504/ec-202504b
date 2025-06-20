@@ -92,15 +92,34 @@ public class OrderRepository {
         // 注文情報が存在する場合、最初の注文を返す
         Order order = orderList.get(0);
 
-        //orderItemListを取得するSQL文
-        String itemsql = "SELECT * FROM order_items WHERE order_id = ?";
+        //orderItemListを取得するSQL文（itemsテーブルとJOINしてitem情報も取得）
+        String itemsql = "SELECT oi.*, i.name AS item_name, i.description AS item_description, i.price AS item_price, i.imagepath AS item_image_path " +
+                "FROM order_items oi INNER JOIN items i ON oi.item_id = i.id WHERE oi.order_id = ?";
         //orderItemListを取得する
-        List<OrderItem> orderItemList = jdbcTemplate.query(itemsql, ORDER_ITEM_ROW_MAPPER, order.getId());
+        List<OrderItem> orderItemList = jdbcTemplate.query(itemsql, (rs, rowNum) -> {
+            OrderItem item = new OrderItem();
+            item.setId(rs.getInt("id"));
+            item.setItemId(rs.getInt("item_id"));
+            item.setOrderId(rs.getInt("order_id"));
+            item.setQuantity(rs.getInt("quantity"));
+            String shoesSize = rs.getString("shoes_size");
+            if (shoesSize != null && !shoesSize.isEmpty()) {
+                item.setShoesSize(shoesSize.charAt(0));
+            }
+            // Item情報もセット
+            com.example.domain.Item itemObj = new com.example.domain.Item();
+            itemObj.setId(rs.getInt("item_id"));
+            itemObj.setName(rs.getString("item_name"));
+            itemObj.setDescription(rs.getString("item_description"));
+            itemObj.setPrice(rs.getInt("item_price"));
+            itemObj.setImagePath(rs.getString("item_image_path"));
+            item.setItem(itemObj);
+            return item;
+        }, order.getId());
         // 注文オブジェクトに注文商品リストをセット
         order.setOrderItemList(orderItemList);
         // 注文オブジェクトを返す
         return order;
-        
     }
 
     /**

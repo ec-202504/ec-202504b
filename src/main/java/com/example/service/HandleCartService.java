@@ -29,8 +29,11 @@ public class HandleCartService {
      * @param orderItemForm 追加する商品の情報を持つフォーム
      */
     public void add(OrderItemForm orderItemForm, Integer userId) {
+        System.out.println("[LOG] add() called. userId=" + userId);
+        System.out.println("[LOG] orderItemForm: " + orderItemForm);
         // 1. ログインユーザーID取得
         Order order = orderRepository.findByUserIdAndStatus(userId, 0);
+        System.out.println("[LOG] findByUserIdAndStatus result: " + order);
         // カートがなければ新規作成
         if (order == null) {
             order = new Order();
@@ -38,6 +41,9 @@ public class HandleCartService {
             order.setStatus(0);
             // 必要な初期値をセット
             orderRepository.insert(order);
+            System.out.println("[LOG] new Order inserted. orderId=" + order.getId());
+        } else {
+            System.out.println("[LOG] existing Order. orderId=" + order.getId());
         }
 
         // OrderItem生成しフォーム値をセット
@@ -48,8 +54,10 @@ public class HandleCartService {
         orderItem.setShoesSize(orderItemForm.getShoesSize());
         // 商品情報もセット
         orderItem.setItem(itemRepository.findById(orderItemForm.getItemId()));
+        System.out.println("[LOG] OrderItem to insert: " + orderItem);
         // OrderItemをDBに保存
         orderItemRepository.insert(orderItem);
+        System.out.println("[LOG] OrderItem inserted.");
     }
 
     /**
