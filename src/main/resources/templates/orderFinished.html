@@ -68,13 +68,15 @@
           <p>メールが届かない場合は「注文履歴」からご確認ください。</p>
         </div>
         <div class="row order-finished-btn">
-          <button
-            class="btn"
-            type="button"
-            onclick="location.href='item_list.html'"
-          >
-            <span>トップ画面を表示する</span>
-          </button>
+          <form th:action="@{showItemList}" method="get">
+            <button
+              class="btn"
+              type="submit"
+              onclick="location.href='item_list.html'"
+            >
+              <span>トップ画面を表示する</span>
+            </button>
+          </form>
         </div>
       </div>
       <!-- end container -->

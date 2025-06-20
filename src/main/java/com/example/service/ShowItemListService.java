@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * 商品関連機能の業務処理を行うサービスクラス.
+ * 商品リストを表示する機能の業務処理を行うサービスクラス.
  */
 @Service
 @Transactional
@@ -35,15 +35,5 @@ public class ShowItemListService {
      */
     public List<Item> findByName(String name) {
         return itemRepository.findByName(name);
-    }
-
-    /**
-     * 主キーで商品を検索します.
-     *
-     * @param itemId 商品ID
-     * @return 商品情報
-     */
-    public Item showItemDetail(Integer itemId) {
-        return itemRepository.findById(itemId);
     }
 }
