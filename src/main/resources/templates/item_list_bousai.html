@@ -38,7 +38,7 @@
         <div class="header">
           <div class="header-left">
             <a href="top.html">
-              <img class="logo" th:src="@{/img_aloha/header_logo.png}" />
+              <img class="logo" th:src="@{/img/header_logo.png}" />
             </a>
           </div>
 
@@ -51,7 +51,9 @@
             <a href="login.html" class="login">
               <i class="fas fa-sign-in-alt"></i>ログイン
             </a>
-            <a href="order_history.html">注文履歴</a>
+            <a href="order_history.html" th:href="@{/showOrderHistory}"
+              >注文履歴</a
+            >
           </div>
         </div>
       </div>
@@ -91,7 +93,7 @@
 
     <footer>
       <div class="container">
-        <img th:src="@{/img_aloha/header_logo.png}" />
+        <img th:src="@{/img/header_logo.png}" />
         <p>アロハな気分をあなたにお届け！</p>
       </div>
     </footer>

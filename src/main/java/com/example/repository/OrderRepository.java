@@ -159,8 +159,8 @@ public class OrderRepository {
         boolean isFirstLine = true;
 
 
-        while(rs.next()) {
-            if(isFirstLine){
+        while (rs.next()) {
+            if (isFirstLine) {
                 order.setId(rs.getInt("o_id"));
                 order.setUserId(rs.getInt("o_user_id"));
                 order.setStatus(rs.getInt("o_status"));
@@ -242,10 +242,10 @@ public class OrderRepository {
                 WHERE o.id = :id;
                 """;
         SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
-        List<Order> orderList = template.query(sql,param, ORDER_ROW_MAPPER);
+        List<Order> orderList = template.query(sql, param, ORDER_ROW_MAPPER);
 
         if (orderList.size() == 0)
-                return null;
+            return null;
 
         return orderList.get(0);
     }
@@ -257,5 +257,56 @@ public class OrderRepository {
      */
     public void update(Order order) {
 //        TODO:未実装
+    }
+
+    /**
+     * 注文履歴を取得します.
+     *
+     * @param userId ユーザーID
+     * @return 注文履歴
+     */
+    public List<Order> findByUserId(Integer userId) {
+        String sql = """
+                SELECT
+                o.id AS o_id,
+                o.user_id AS o_user_id,
+                o.status AS o_status,
+                o.total_price AS o_total_price,
+                o.order_date AS o_order_date,
+                o.destination_name AS o_destination_name,
+                o.destination_email AS o_destination_email,
+                o.destination_zipcode AS o_destination_zipcode,    
+                o.destination_prefecture AS o_destination_prefecture,  
+                o.destination_municipalities AS o_destination_municipalities, 
+                o.destination_address AS o_destination_address,   
+                o.destination_tel AS o_destination_tel,
+                o.delivery_time AS o_delivery_time,
+                o.payment_method AS o_payment_method,
+                oi.id AS oi_id,
+                oi.item_id AS oi_item_id,
+                oi.order_id AS oi_order_id,
+                oi.quantity AS oi_quantity,
+                oi.shoes_size AS oi_shoes_size,
+                i.name AS i_name,
+                i.description AS i_description,
+                i.price AS i_price,
+                i.imagepath AS i_image_path
+                FROM orders AS o
+                INNER JOIN order_items AS oi
+                ON o.id = oi.order_id
+                INNER JOIN items AS i
+                ON oi.item_id = i.id
+                WHERE o.user_id = :userId;
+                """;
+
+        SqlParameterSource param
+                = new MapSqlParameterSource().addValue("userId", userId);
+
+        List<Order> orderList = template.query(sql, param, ORDER_ROW_MAPPER);
+
+        if (orderList.size() == 0)
+            return null;
+
+        return orderList;
     }
 }
