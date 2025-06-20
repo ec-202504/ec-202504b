@@ -6,6 +6,7 @@ import com.example.domain.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -79,7 +80,7 @@ public class OrderRepository {
      * @return 注文
      */
     public Order findById(Integer id) {
-//            TODO:未実装
+//            TODO:statusを選べるようにする?
         final String sql = """
                 SELECT
                 o.id AS o_id,
@@ -127,7 +128,25 @@ public class OrderRepository {
      * @param order 注文
      */
     public void update(Order order) {
-//        TODO:未実装
+        final String sql = """
+                UPDATE orders SET
+                user_id = :userId,
+                status = :status,
+                total_price = :totalPrice, 
+                order_date = :orderDate,           
+                destination_name = :distationName,
+                destination_email = :distationEmail,          
+                destination_zipcode = :distationZipcode,       
+                destination_prefecture = :distationPrefecture,     
+                destination_municipalities = :distationMunicipalities,   
+                destination_address = :distationAddress,       
+                destination_tel = :distationTel,         
+                delivery_time = :deliveryTime,                
+                payment_method = :paymentMethod
+                WHERE id = :id;
+                """;
+        SqlParameterSource param = new BeanPropertySqlParameterSource(order);
+        template.update(sql, param);
     }
 
     /**
