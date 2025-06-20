@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.common.AnyTimeFeed;
 import com.example.common.EarthquakeAndVolcanoFeed;
 import com.example.domain.User;
 import com.example.form.LoginForm;
@@ -43,8 +44,12 @@ public class LoginController {
         List<EarthquakeAndVolcanoFeed.EarthquakeReport> earthquakeReports =
                 (List<EarthquakeAndVolcanoFeed.EarthquakeReport>) application.getAttribute("earthquakeReports");
 
+        List<AnyTimeFeed.AnyTimeFeedReport> anyTimeFeedsReports =
+                 (List<AnyTimeFeed.AnyTimeFeedReport>) application.getAttribute("anyTimeFeedsReports");
+
         model.addAttribute("volcanoReports", volcanoReports);
         model.addAttribute("earthquakeReports", earthquakeReports);
+        model.addAttribute("anyTimeFeedsReports", anyTimeFeedsReports);
         return "loginBosai";
     }
 

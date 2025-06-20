@@ -91,6 +91,18 @@
           </li>
         </ul>
 
+    <h1>最新の臨時情報</h1>
+    <ul>
+      <li th:each="report : ${anyTimeFeedsReports}">
+        <strong th:text="${report.title}">タイトル</strong><br />
+        更新: <span th:text="${report.updated}"></span><br />
+        <!-- <a th:href="${report.link}" target="_blank">XMLリンク</a><br /> -->
+        <ul>
+          <li th:each="line : ${report.detailHeadline}">
+            <span th:utext="${line}"></span>
+          </li>
+        </ul>
+
         <hr />
       </li>
     </ul>
