@@ -14,7 +14,7 @@ public class OrderItem {
     /** 数量 */
     private Integer quantity;
     /** サイズ */
-    private Character size;
+    private Character shoesSize;
     /** 商品情報 */
     private Item item;
 
@@ -26,8 +26,8 @@ public class OrderItem {
     public void setOrderId(Integer orderId) { this.orderId = orderId; }
     public Integer getQuantity() { return quantity; }
     public void setQuantity(Integer quantity) { this.quantity = quantity; }
-    public Character getSize() { return size; }
-    public void setSize(Character size) { this.size = size; }
+    public Character getShoesSize() { return shoesSize; }
+    public void setShoesSize(Character shoesSize) { this.shoesSize = shoesSize; }
     public Item getItem() { return item; }
     public void setItem(Item item) { this.item = item; }
 
@@ -38,8 +38,15 @@ public class OrderItem {
                 ", itemId=" + itemId +
                 ", orderId=" + orderId +
                 ", quantity=" + quantity +
-                ", size=" + size +
+                ", shoesSize=" + shoesSize +
                 ", item=" + item +
                 '}';
+    }
+
+    public int getCalcSubTotalPrice() {
+        if (item == null || item.getPrice() == null || quantity == null) {
+            return 0;
+        }
+        return item.getPrice() * quantity;
     }
 } 

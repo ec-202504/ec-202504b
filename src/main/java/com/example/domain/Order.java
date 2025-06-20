@@ -19,19 +19,19 @@ public class Order {
     /** 注文日時 */
     private Date orderDate;
     /** 配送先氏名 */
-    private String distationName;
+    private String destinationName;
     /** 配送先メール */
-    private String distationEmail;
+    private String destinationEmail;
     /** 配送先郵便番号 */
-    private String distationZipcode;
+    private String destinationZipcode;
     /** 配送先都道府県 */
-    private String distationPrefecture;
+    private String destinationPrefecture;
     /** 配送先市区町村 */
-    private String distationMunicipalities;
+    private String destinationMunicipalities;
     /** 配送先住所 */
-    private String distationAddress;
+    private String destinationAddress;
     /** 配送先電話番号 */
-    private String distationTel;
+    private String destinationTel;
     /** 配送希望日時 */
     private Date deliveryTime;
     /** 支払い方法 */
@@ -78,20 +78,20 @@ public class Order {
     public void setTotalPrice(Integer totalPrice) { this.totalPrice = totalPrice; }
     public java.util.Date getOrderDate() { return orderDate; }
     public void setOrderDate(java.util.Date orderDate) { this.orderDate = orderDate; }
-    public String getDistationName() { return distationName; }
-    public void setDistationName(String distationName) { this.distationName = distationName; }
-    public String getDistationEmail() { return distationEmail; }
-    public void setDistationEmail(String distationEmail) { this.distationEmail = distationEmail; }
-    public String getDistationZipcode() { return distationZipcode; }
-    public void setDistationZipcode(String distationZipcode) { this.distationZipcode = distationZipcode; }
-    public String getDistationPrefecture() { return distationPrefecture; }
-    public void setDistationPrefecture(String distationPrefecture) { this.distationPrefecture = distationPrefecture; }
-    public String getDistationMunicipalities() { return distationMunicipalities; }
-    public void setDistationMunicipalities(String distationMunicipalities) { this.distationMunicipalities = distationMunicipalities; }
-    public String getDistationAddress() { return distationAddress; }
-    public void setDistationAddress(String distationAddress) { this.distationAddress = distationAddress; }
-    public String getDistationTel() { return distationTel; }
-    public void setDistationTel(String distationTel) { this.distationTel = distationTel; }
+    public String getDestinationName() { return destinationName; }
+    public void setDestinationName(String destinationName) { this.destinationName = destinationName; }
+    public String getDestinationEmail() { return destinationEmail; }
+    public void setDestinationEmail(String destinationEmail) { this.destinationEmail = destinationEmail; }
+    public String getDestinationZipcode() { return destinationZipcode; }
+    public void setDestinationZipcode(String destinationZipcode) { this.destinationZipcode = destinationZipcode; }
+    public String getDestinationPrefecture() { return destinationPrefecture; }
+    public void setDestinationPrefecture(String destinationPrefecture) { this.destinationPrefecture = destinationPrefecture; }
+    public String getDestinationMunicipalities() { return destinationMunicipalities; }
+    public void setDestinationMunicipalities(String destinationMunicipalities) { this.destinationMunicipalities = destinationMunicipalities; }
+    public String getDestinationAddress() { return destinationAddress; }
+    public void setDestinationAddress(String destinationAddress) { this.destinationAddress = destinationAddress; }
+    public String getDestinationTel() { return destinationTel; }
+    public void setDestinationTel(String destinationTel) { this.destinationTel = destinationTel; }
     public java.util.Date getDeliveryTime() { return deliveryTime; }
     public void setDeliveryTime(java.util.Date deliveryTime) { this.deliveryTime = deliveryTime; }
     public Integer getPaymentMethod() { return paymentMethod; }
@@ -108,13 +108,13 @@ public class Order {
                 ", status=" + status +
                 ", totalPrice=" + totalPrice +
                 ", orderDate=" + orderDate +
-                ", distationName='" + distationName + '\'' +
-                ", distationEmail='" + distationEmail + '\'' +
-                ", distationZipcode='" + distationZipcode + '\'' +
-                ", distationPrefecture='" + distationPrefecture + '\'' +
-                ", distationMunicipalities='" + distationMunicipalities + '\'' +
-                ", distationAddress='" + distationAddress + '\'' +
-                ", distationTel='" + distationTel + '\'' +
+                ", destinationName='" + destinationName + '\'' +
+                ", destinationEmail='" + destinationEmail + '\'' +
+                ", destinationZipcode='" + destinationZipcode + '\'' +
+                ", destinationPrefecture='" + destinationPrefecture + '\'' +
+                ", destinationMunicipalities='" + destinationMunicipalities + '\'' +
+                ", destinationAddress='" + destinationAddress + '\'' +
+                ", destinationTel='" + destinationTel + '\'' +
                 ", deliveryTime=" + deliveryTime +
                 ", paymentMethod=" + paymentMethod +
                 ", orderItemList=" + orderItemList +

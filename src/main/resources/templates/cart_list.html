@@ -1,178 +1,180 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <!--Import Google Icon Font-->
-  <link
-          href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet"
-  />
-  <!-- Import Materialize CSS -->
-  <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-  />
-  <!-- Import Font Wesome -->
-  <link
-          href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
-          rel="stylesheet"
-  />
-  <link rel="stylesheet" href="../static/css/common.css" />
-  <link rel="stylesheet" href="../static/css/header.css" />
-  <link rel="stylesheet" href="../static/css/footer.css" />
-  <link rel="stylesheet" href="../static/css/register_user.css" />
-  <link rel="stylesheet" href="../static/css/login.css" />
-  <link rel="stylesheet" href="../static/css/item_list.css" />
-  <link rel="stylesheet" href="../static/css/item_detail.css" />
-  <link rel="stylesheet" href="../static/css/cart_list.css" />
-  <link rel="stylesheet" href="../static/css/order_confirm.css" />
-  <link rel="stylesheet" href="../static/css/order_finished.css" />
-  <link rel="stylesheet" href="../static/css/responsive.css" />
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ラクラクアロハ</title>
-</head>
-<body>
-<header>
-  <div class="container">
-    <div class="header">
-      <div class="header-left">
-        <a href="top.html">
-          <img class="logo" src="../static/img_aloha/header_logo.png" />
-        </a>
+  <head>
+    <!--Import Google Icon Font-->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- Import Materialize CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <!-- Import Font Wesome -->
+    <link
+      href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../static/css/common.css" />
+    <link rel="stylesheet" href="../static/css/header.css" />
+    <link rel="stylesheet" href="../static/css/footer.css" />
+    <link rel="stylesheet" href="../static/css/register_user.css" />
+    <link rel="stylesheet" href="../static/css/login.css" />
+    <link rel="stylesheet" href="../static/css/item_list.css" />
+    <link rel="stylesheet" href="../static/css/item_detail.css" />
+    <link rel="stylesheet" href="../static/css/cart_list.css" />
+    <link rel="stylesheet" href="../static/css/order_confirm.css" />
+    <link rel="stylesheet" href="../static/css/order_finished.css" />
+    <link rel="stylesheet" href="../static/css/responsive.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ラクラクアロハ</title>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="header">
+          <div class="header-left">
+            <a href="top.html">
+              <img class="logo" src="../static/img_aloha/header_logo.png" />
+            </a>
+          </div>
+
+          <div class="header-right">
+            <a href="item_list_aloha.html">商品一覧</a>
+            <a href="register_user.html">会員登録</a>
+            <a href="cart_list.html"
+              ><i class="fas fa-shopping-cart"></i>カート</a
+            >
+            <a href="login.html" class="login">
+              <i class="fas fa-sign-in-alt"></i>ログイン
+            </a>
+
+            <a href="order_history.html">注文履歴</a>
+          </div>
+        </div>
       </div>
+    </header>
+    <div class="top-wrapper">
+      <div class="container">
+        <h1 class="page-title">ショッピングカート</h1>
+        <!-- table -->
+        <div class="row">
+          <table class="striped">
+            <thead>
+              <tr>
+                <th class="cart-table-th">商品名</th>
+                <th>サイズ、価格(税抜)、数量</th>
+                <th>トッピング</th>
+                <th>小計</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- 動的なカート内容（バックエンド連携） -->
+              <tr
+                th:each="orderItem : ${order.orderItemList}"
+                th:if="${orderItem.item != null}"
+              >
+                <td class="cart-item-name">
+                  <div class="cart-item-icon">
+                    <img
+                      th:src="@{/img/} + ${orderItem.item.imagePath}"
+                      width="80"
+                      height="80"
+                      style="object-fit: cover"
+                    />
+                  </div>
+                  <span th:text="${orderItem.item.name}">商品名</span>
+                </td>
+                <td>
+                  <span th:text="${orderItem.shoesSize}"></span>&nbsp;
+                  <span
+                    th:text="${#numbers.formatInteger(orderItem.item.price,0,'COMMA')}"
+                  ></span
+                  >円 &nbsp;&nbsp;<span th:text="${orderItem.quantity}"></span
+                  >個
+                </td>
+                <td>
+                  <!-- トッピングは仕様上なし。空欄でOK -->
+                </td>
+                <td>
+                  <div
+                    class="text-center"
+                    th:text="${orderItem.calcSubTotalPrice}"
+                  >
+                    小計
+                  </div>
+                </td>
+                <td>
+                  <form th:action="@{/cart/delete}" method="post">
+                    <input
+                      type="hidden"
+                      name="orderItemId"
+                      th:value="${orderItem.id}"
+                    />
+                    <button class="btn" type="submit">
+                      <span>削除</span>
+                    </button>
+                  </form>
+                </td>
+              </tr>
+              <!-- ここから下は元のモック（静的サンプル） -->
+              <tr>
+                <td class="cart-item-name">
+                  <div class="cart-item-icon">
+                    <img src="../static/img_aloha/1.jpg" />
+                  </div>
+                  <span>ハワイアンパラダイス</span>
+                </td>
+                <td>
+                  <span class="price">Ｌ</span>&nbsp;&nbsp;2,380円
+                  &nbsp;&nbsp;1個
+                </td>
+                <td>
+                  <!-- トッピングなし -->
+                </td>
+                <td>
+                  <div class="text-center">2,380</div>
+                </td>
+                <td>
+                  <button class="btn" type="button">
+                    <span>削除</span>
+                  </button>
+                </td>
+              </tr>
+              <!-- 他のモック行も同様に修正 -->
+            </tbody>
+          </table>
+        </div>
 
-      <div class="header-right">
-        <a href="item_list_aloha.html">商品一覧</a>
-        <a href="register_user.html">会員登録</a>
-        <a href="#"><i class="fas fa-shopping-cart"></i>カート</a>
-        <a href="login.html" class="login">
-          <i class="fas fa-sign-in-alt"></i>ログイン
-        </a>
-
-        <a href="order_history.html">注文履歴</a>
+        <div class="row cart-total-price">
+          <div>消費税：<span th:text="${order.tax}">0</span>円</div>
+          <div>
+            ご注文金額合計：<span th:text="${order.calcTotalPrice}">0</span>円
+            (税込)
+          </div>
+        </div>
+        <div class="row order-confirm-btn">
+          <form th:action="@{/toConfirmOrder}" method="post">
+            <button class="btn" type="submit">
+              <span>注文に進む</span>
+            </button>
+          </form>
+        </div>
       </div>
+      <!-- end container -->
     </div>
-  </div>
-</header>
-<div class="top-wrapper">
-  <div class="container">
-    <h1 class="page-title">ショッピングカート</h1>
-    <!-- table -->
-    <div class="row">
-      <table class="striped">
-        <thead>
-        <tr>
-          <th class="cart-table-th">商品名</th>
-          <th>サイズ、価格(税抜)、数量</th>
-          <th>トッピング、価格(税抜)</th>
-          <th>小計</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td class="cart-item-name">
-            <div class="cart-item-icon">
-              <img src="../static/img_aloha/1.jpg" />
-            </div>
-            <span>ハワイアンパラダイス</span>
-          </td>
-          <td>
-            <span class="price">&nbsp;Ｌ</span>&nbsp;&nbsp;2,380円
-            &nbsp;&nbsp;1個
-          </td>
-          <td>
-            <ul>
-              <li>ピーマン300円</li>
-              <li>オニオン300円</li>
-              <li>あらびきソーセージ300円</li>
-            </ul>
-          </td>
-          <td><div class="text-center">3,280円</div></td>
-          <td>
-            <button class="btn" type="button">
-              <span>削除</span>
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td class="cart-item-name">
-            <div class="cart-item-icon">
-              <img src="../static/img_aloha/1.jpg" />
-            </div>
-            <span>ハワイアンパラダイス</span>
-          </td>
-          <td>
-            <span class="price">&nbsp;Ｌ</span>&nbsp;&nbsp;2,380円
-            &nbsp;&nbsp;1個
-          </td>
-          <td>
-            <ul>
-              <li>ピーマン300円</li>
-              <li>オニオン300円</li>
-              <li>あらびきソーセージ300円</li>
-            </ul>
-          </td>
-          <td><div class="text-center">3,280円</div></td>
-          <td>
-            <button class="btn" type="button">
-              <span>削除</span>
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td class="cart-item-name">
-            <div class="cart-item-icon">
-              <img src="../static/img_aloha/1.jpg" />
-            </div>
-            <span>ハワイアンパラダイス</span>
-          </td>
-          <td>
-            <span class="price">&nbsp;Ｌ</span>&nbsp;&nbsp;2,380円
-            &nbsp;&nbsp;1個
-          </td>
-          <td>
-            <ul>
-              <li>ピーマン300円</li>
-              <li>オニオン300円</li>
-              <li>あらびきソーセージ300円</li>
-            </ul>
-          </td>
-          <td><div class="text-center">3,280円</div></td>
-          <td>
-            <button class="btn" type="button">
-              <span>削除</span>
-            </button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="row cart-total-price">
-      <div>消費税：8,000円</div>
-      <div>ご注文金額合計：38,000円 (税込)</div>
-    </div>
-    <div class="row order-confirm-btn">
-      <button
-              class="btn"
-              type="button"
-              onclick="location.href='order_confirm.html'"
-      >
-        <span>注文に進む</span>
-      </button>
-    </div>
-  </div>
-  <!-- end container -->
-</div>
-<!-- end top-wrapper -->
-<footer>
-  <div class="container">
-    <img src="../static/img_aloha/header_logo.png" />
-    <p>アロハな気分をあなたにお届け！</p>
-  </div>
-</footer>
-<!-- Compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</body>
+    <!-- end top-wrapper -->
+    <footer>
+      <div class="container">
+        <img src="../static/img_aloha/header_logo.png" />
+        <p>アロハな気分をあなたにお届け！</p>
+      </div>
+    </footer>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </body>
 </html>

@@ -4,8 +4,17 @@ import com.example.domain.Item;
 import com.example.domain.Order;
 import com.example.domain.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+
+import java.sql.*;
+import java.util.List;
+
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+import com.example.domain.Item;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -14,16 +23,153 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 注文情報を管理するリポジトリクラス。
+ */
 @Repository
 public class OrderRepository {
 
-//    private static final RowMapper<Order> ORDER_ROW_MAPPER = (rs, i) -> {
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    // OrderのRowMapper
+    private static final RowMapper<Order> ORDER_ROW_MAPPER = new RowMapper<Order>() {
+        @Override
+        public Order mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Order order = new Order();
+            order.setId(rs.getInt("id"));
+            order.setUserId(rs.getInt("user_id"));
+            order.setStatus(rs.getInt("status"));
+            order.setTotalPrice(rs.getInt("total_price"));
+            order.setOrderDate(rs.getDate("order_date"));
+            order.setDestinationName(rs.getString("destination_name"));
+            order.setDestinationEmail(rs.getString("destination_email"));
+            order.setDestinationZipcode(rs.getString("destination_zipcode"));
+            order.setDestinationPrefecture(rs.getString("destination_prefecture"));
+            order.setDestinationMunicipalities(rs.getString("destination_municipalities"));
+            order.setDestinationAddress(rs.getString("destination_address"));
+            order.setDestinationTel(rs.getString("destination_tel"));
+            order.setDeliveryTime(rs.getTimestamp("delivery_time"));
+            order.setPaymentMethod(rs.getInt("payment_method"));
+            // orderItemListは後でセット
+            return order;
+        }
+    };
+
+    /**
+     * OrderItemテーブルの1行をOrderItemオブジェクトに変換するRowMapper
+     */
+    private static final RowMapper<OrderItem> ORDER_ITEM_ROW_MAPPER = new RowMapper<OrderItem>() {
+        @Override
+        public OrderItem mapRow(ResultSet rs, int rowNum) throws SQLException {
+            OrderItem item = new OrderItem();
+            item.setId(rs.getInt("id"));
+            item.setItemId(rs.getInt("item_id"));
+            item.setOrderId(rs.getInt("order_id"));
+            item.setQuantity(rs.getInt("quantity"));
+            // shoes_sizeはCHAR(1)型なので、nullでなければ1文字目をセット
+            String shoesSize = rs.getString("shoes_size");
+            if (shoesSize != null && !shoesSize.isEmpty()) {
+                item.setShoesSize(shoesSize.charAt(0));
+            }
+            return item;
+        }
+    };
+
+    /**
+     * ユーザーIDとステータスに基づいて注文を検索します.
+     * @param userId ユーザーID
+     * @param status 注文ステータス
+     * @return 該当する注文オブジェクト、存在しない場合はnull
+     */
+    public Order findByUserIdAndStatus(Integer userId, Integer status) {
+        // 注文情報を取得するSQL文
+        String sql = "SELECT * FROM orders WHERE user_id = ? AND status = ?";
+        // 注文情報を取得する
+        List<Order> orderList = jdbcTemplate.query(sql, ORDER_ROW_MAPPER, userId, status);
+        // 注文情報が存在しない場合はnullを返す
+        if(orderList.isEmpty()){
+            return null;
+        }
+        // 注文情報が存在する場合、最初の注文を返す
+        Order order = orderList.get(0);
+
+        //orderItemListを取得するSQL文（itemsテーブルとJOINしてitem情報も取得）
+        String itemsql = "SELECT oi.*, i.name AS item_name, i.description AS item_description, i.price AS item_price, i.imagepath AS item_image_path " +
+                "FROM order_items oi INNER JOIN items i ON oi.item_id = i.id WHERE oi.order_id = ?";
+        //orderItemListを取得する
+        List<OrderItem> orderItemList = jdbcTemplate.query(itemsql, (rs, rowNum) -> {
+            OrderItem item = new OrderItem();
+            item.setId(rs.getInt("id"));
+            item.setItemId(rs.getInt("item_id"));
+            item.setOrderId(rs.getInt("order_id"));
+            item.setQuantity(rs.getInt("quantity"));
+            String shoesSize = rs.getString("shoes_size");
+            if (shoesSize != null && !shoesSize.isEmpty()) {
+                item.setShoesSize(shoesSize.charAt(0));
+            }
+            // Item情報もセット
+            com.example.domain.Item itemObj = new com.example.domain.Item();
+            itemObj.setId(rs.getInt("item_id"));
+            itemObj.setName(rs.getString("item_name"));
+            itemObj.setDescription(rs.getString("item_description"));
+            itemObj.setPrice(rs.getInt("item_price"));
+            itemObj.setImagePath(rs.getString("item_image_path"));
+            item.setItem(itemObj);
+            return item;
+        }, order.getId());
+        // 注文オブジェクトに注文商品リストをセット
+        order.setOrderItemList(orderItemList);
+        // 注文オブジェクトを返す
+        return order;
+    }
+
+    /**
+     * 注文をデータベースに挿入します.
+     * @param order 挿入する注文オブジェクト
+     */
+    public void insert(Order order) {
+        // 注文を挿入するSQL文
+        String sql = "INSERT INTO orders (user_id, status, total_price, order_date, destination_name, destination_email, destination_zipcode, destination_prefecture, destination_municipalities, destination_address, destination_tel, delivery_time, payment_method) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        // 自動採番されたIDを取得するためのKeyHolder
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        // jdbcTemplateを使用して注文を挿入
+        jdbcTemplate.update(con -> {
+            PreparedStatement ps = con.prepareStatement(sql, new String[]{"id"});
+            ps.setInt(1, order.getUserId());
+            ps.setInt(2, order.getStatus());
+            ps.setObject(3, order.getTotalPrice(), Types.INTEGER);
+            ps.setObject(4, order.getOrderDate(), Types.DATE);
+            ps.setString(5, order.getDestinationName());
+            ps.setString(6, order.getDestinationEmail());
+            ps.setString(7, order.getDestinationZipcode());
+            ps.setString(8, order.getDestinationPrefecture());
+            ps.setString(9, order.getDestinationMunicipalities());
+            ps.setString(10, order.getDestinationAddress());
+            ps.setString(11, order.getDestinationTel());
+            ps.setObject(12, order.getDeliveryTime(), Types.TIMESTAMP);
+            ps.setObject(13, order.getPaymentMethod(), Types.INTEGER);
+            return ps;
+        }, keyHolder);
+
+        // 自動採番されたIDをOrderオブジェクトにセット
+        Number key = keyHolder.getKey();
+        // keyがnullでない場合のみIDをセット
+        if (key != null) {
+            order.setId(key.intValue());
+        }
+    }
+
+//@Repository
+//public class OrderRepository {
+
+//    private static final RowMapper<Order> ORDER_RESULT_ROW_MAPPER = (rs, i) -> {
 //        Order order = new Order();
 //        order.setId(rs.getInt("id"));
 //        return order;
 //    };
 
-    private static final ResultSetExtractor<List<Order>> ORDER_ROW_MAPPER = (rs) -> {
+    private static final ResultSetExtractor<List<Order>> ORDER_RESULT_ROW_MAPPER = (rs) -> {
         List<Order> orderList = new ArrayList<>();
         Order order = new Order();
         List<OrderItem> orderItemList = new ArrayList<>();
@@ -37,13 +183,13 @@ public class OrderRepository {
                 order.setStatus(rs.getInt("o_status"));
                 order.setTotalPrice(rs.getInt("o_total_price"));
                 order.setOrderDate(rs.getDate("o_order_date"));
-                order.setDistationName(rs.getString("o_destination_name"));
-                order.setDistationEmail(rs.getString("o_destination_email"));
-                order.setDistationZipcode(rs.getString("o_destination_zipcode"));
-                order.setDistationPrefecture(rs.getString("o_destination_prefecture"));
-                order.setDistationMunicipalities(rs.getString("o_destination_municipalities"));
-                order.setDistationAddress(rs.getString("o_destination_address"));
-                order.setDistationTel(rs.getString("o_destination_tel"));
+                order.setDestinationName(rs.getString("o_destination_name"));
+                order.setDestinationEmail(rs.getString("o_destination_email"));
+                order.setDestinationZipcode(rs.getString("o_destination_zipcode"));
+                order.setDestinationPrefecture(rs.getString("o_destination_prefecture"));
+                order.setDestinationMunicipalities(rs.getString("o_destination_municipalities"));
+                order.setDestinationAddress(rs.getString("o_destination_address"));
+                order.setDestinationTel(rs.getString("o_destination_tel"));
                 order.setDeliveryTime(rs.getTimestamp("o_delivery_time")); // TIMESTAMP型の場合
                 order.setPaymentMethod(rs.getInt("o_payment_method"));
                 order.setOrderItemList(orderItemList);
@@ -114,7 +260,7 @@ public class OrderRepository {
                 WHERE o.id = :userId AND o.status=0;
                 """;
         SqlParameterSource param = new MapSqlParameterSource().addValue("userId", userId);
-        List<Order> orderList = template.query(sql, param, ORDER_ROW_MAPPER);
+        List<Order> orderList = template.query(sql, param, ORDER_RESULT_ROW_MAPPER);
 
         if (orderList.size() == 0)
             return null;
@@ -192,7 +338,7 @@ public class OrderRepository {
         SqlParameterSource param
                 = new MapSqlParameterSource().addValue("userId", userId);
 
-        List<Order> orderList = template.query(sql, param, ORDER_ROW_MAPPER);
+        List<Order> orderList = template.query(sql, param, ORDER_RESULT_ROW_MAPPER);
 
         if (orderList.size() == 0)
             return null;

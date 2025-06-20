@@ -9,6 +9,8 @@ import com.example.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
  * 注文処理を行うコントローラ.
  */
@@ -28,13 +30,14 @@ public class ExecuteOrderService {
     public void executeOrder(int userId, OrderForm orderForm){
         Order order = orderRepository.findByUserIdAndStatus0(userId);
         order.setId(orderForm.getOrderId());
-        order.setDistationName(orderForm.getName());
-        order.setDistationEmail(orderForm.getEmail());
-        order.setDistationZipcode(orderForm.getZipcode());
-        order.setDistationPrefecture(orderForm.getPrefecture());
-        order.setDistationMunicipalities(orderForm.getMunicipalities());
-        order.setDistationAddress(orderForm.getAddress());
-        order.setDistationTel(orderForm.getTelephone());
+        order.setDestinationName(orderForm.getName());
+        order.setDestinationEmail(orderForm.getEmail());
+        order.setDestinationZipcode(orderForm.getZipcode());
+        order.setDestinationPrefecture(orderForm.getPrefecture());
+        order.setDestinationMunicipalities(orderForm.getMunicipalities());
+        order.setDestinationAddress(orderForm.getAddress());
+        order.setDestinationTel(orderForm.getTelephone());
+
 
         //TODO:
         order.setStatus(OrderStatus.UNPAID.getCode()); //入金待ちに変更

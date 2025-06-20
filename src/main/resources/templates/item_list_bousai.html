@@ -30,7 +30,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ラクラクアロハ</title>
+    <title>ラクラク防災</title>
   </head>
   <body>
     <header>
@@ -45,7 +45,7 @@
           <div class="header-right">
             <a th:href="@{/showItemList}">商品一覧</a>
             <a th:href="@{/topPage}">会員登録</a>
-            <a href="cart_list.html">
+            <a th:href="@{/cart/show}">
               <i class="fas fa-shopping-cart"> </i>カート
             </a>
             <a
@@ -120,6 +120,20 @@
             ><span th:text="${#numbers.formatInteger(item.price,0,'COMMA')}"
               >1,800円(税抜)</span
             >円
+            <form th:action="@{/cart/add}" method="post">
+              <input type="hidden" name="itemId" th:value="${item.id}" />
+              <input type="number" name="quantity" value="1" min="1" style="width:60px;" />
+              <!-- サイズやオプションが必要ならここに追加 -->
+              <div th:if="${item.itemType}">
+                <label>サイズ：</label>
+                <select name="shoesSize">
+                  <option value="S">S</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                </select>
+              </div>
+              <button type="submit" class="btn">カートに追加</button>
+            </form>
           </div>
         </div>
       </div>
