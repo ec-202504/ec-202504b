@@ -185,12 +185,14 @@
             </div>
             <div class="row">
               <div class="input-field">
+                <label th:errors="*{name}" class="error-messages"></label>
                 <input id="name" type="text" th:field="*{name}" />
                 <label for="name">お名前</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field">
+                <label th:errors="*{email}" class="error-messages"></label>
                 <input id="email" type="email" th:field="*{email}" />
                 <label for="email">メールアドレス</label>
               </div>
@@ -203,6 +205,7 @@
                   maxlength="7"
                   th:field="*{zipcode}"
                 />
+               
                 <label for="zipcode">郵便番号</label>
                 <button class="btn" type="button">
                   <span>住所検索</span>
@@ -211,6 +214,7 @@
             </div>
             <div class="row">
               <div class="input-field col s4">
+                <label th:errors="*{prefecture}" class="error-messages"></label>
                 <select
                   class="browser-default"
                   id="pref"
@@ -275,12 +279,14 @@
                 <label for="municipalities">市区町村</label>
               </div>
               <div class="input-field col s4">
+                <label th:errors="*{address}" class="error-messages"></label>
                 <input id="address" type="text" th:field="*{address}" />
                 <label for="address">住所</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field">
+                <label th:errors="*{telephone}" class="error-messages"></label>
                 <input id="tel" type="tel" th:field="*{telephone}" />
                 <label for="tel">電話番号</label>
               </div>
@@ -292,6 +298,7 @@
                   type="date"
                   th:field="*{deliveryTime}"
                 />
+                <label th:errors="*{address}" class="error-messages"></label>
                 <label for="address">配達日時</label>
               </div>
               <label class="order-confirm-delivery-time">
@@ -341,6 +348,7 @@
           <h2 class="page-title">お支払い方法</h2>
           <div class="row order-confirm-payment-method">
             <span>
+              <label th:errors="*{paymentMethod}" class="error-messages"></label>
               <label class="order-confirm-payment-method-radio">
                 <input
                   name="paymentMethod"

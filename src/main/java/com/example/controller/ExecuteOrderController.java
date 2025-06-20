@@ -5,6 +5,7 @@ import com.example.domain.User;
 import com.example.form.OrderForm;
 import com.example.service.ConfirmOrderService;
 import com.example.service.ExecuteOrderService;
+import com.example.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,9 @@ public class ExecuteOrderController {
     @Autowired
     private ConfirmOrderService confirmOrderService;
 
+    @Autowired
+    private MailService mailService;
+
     /**
      * 注文処理を行い，注文を完了する.
      *
@@ -37,16 +41,22 @@ public class ExecuteOrderController {
     public String executeOrder(@Validated OrderForm orderForm, BindingResult result, Model model) {
         final int orderId = 1;
         orderForm.setOrderId(orderId);//TODO:治す
-        System.out.println("executeOrder");
-        System.out.println(orderForm);
+//        System.out.println("executeOrder");
+//        System.out.println(orderForm);
 
         //入力エラーがある場合
         if(result.hasErrors()){
+//            System.out.println("入力エラーがあります--------------------");
+//            System.out.println(result);
+            Order order = confirmOrderService.showCart(orderId);
+            model.addAttribute("order", order);
             model.addAttribute("orderForm", orderForm);
             return "confirmOrder";
         }
 
         executeOrderService.executeOrder(orderForm);
+//        mailService.sendTestMail(); //TODO:メールの内容を後で決める
+
         return "orderFinished";
     }
 

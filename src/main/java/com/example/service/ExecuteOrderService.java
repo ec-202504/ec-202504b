@@ -38,7 +38,6 @@ public class ExecuteOrderService {
         order.setDistationAddress(orderForm.getAddress());
         order.setDistationTel(orderForm.getTelephone());
 
-
         //TODO:
         order.setStatus(OrderStatus.UNPAID.getCode());
 
