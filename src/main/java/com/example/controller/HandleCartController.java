@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import com.example.domain.LoginUser;
 
 import com.example.domain.Order;
 import com.example.form.OrderItemForm;
@@ -35,12 +37,13 @@ public class HandleCartController {
      * @return カート表示画面へのリダイレクト
      */
     @PostMapping("/add")
-    public String add(@Valid OrderItemForm orderItemForm, BindingResult result) {
+    public String add(@Valid OrderItemForm orderItemForm, BindingResult result, @AuthenticationPrincipal LoginUser loginUser) {
         // セッションからユーザーIDを取得
-        Integer userId = (Integer) session.getAttribute("userId");
+        // Integer userId = (Integer) session.getAttribute("userId");
+        Integer userId = loginUser != null ? loginUser.getAdministrator().getId() : null;
         // セッションが切れた時にlogin画面へリダイレクト
         if (userId == null) {
-            return "redirect:/login";
+            return "redirect:/";
         }
         // 入力チェックエラーがある場合、商品詳細画面に戻る
         if(result.hasErrors()){
@@ -61,12 +64,13 @@ public class HandleCartController {
      * @return カート表示画面へのリダイレクト
      */
     @RequestMapping("/delete")
-    public String delete(Integer orderItemId) {
+    public String delete(Integer orderItemId, @AuthenticationPrincipal LoginUser loginUser) {
         // セッションからユーザーIDを取得
-        Integer userId = (Integer) session.getAttribute("userId");
+        // Integer userId = (Integer) session.getAttribute("userId");
+        Integer userId = loginUser != null ? loginUser.getAdministrator().getId() : null;
         //セッションが切れた時にlogin画面へリダイレクト
         if (userId == null) {
-            return "redirect:/login";
+            return "redirect:/";
         }
         //商品をカートから削除
         handleCartService.delete(orderItemId, userId);
@@ -80,12 +84,13 @@ public class HandleCartController {
      * @return カートの詳細を表示するビュー名
      */
     @RequestMapping("/show")
-    public String showCart(Model model) {
+    public String showCart(Model model, @AuthenticationPrincipal LoginUser loginUser) {
         // セッションからユーザーIDを取得
-        Integer userId = (Integer) session.getAttribute("userId");
+        // Integer userId = (Integer) session.getAttribute("userId");
+        Integer userId = loginUser != null ? loginUser.getAdministrator().getId() : null;
         //セッションが切れた時にlogin画面へリダイレクト
         if (userId == null) {
-            return "redirect:/login";
+            return "redirect:/";
         }
         // カートの内容を取得
         Order order = handleCartService.showCart(userId);
