@@ -84,6 +84,29 @@ public class Order {
     public java.util.List<OrderItem> getOrderItemList() { return orderItemList; }
     public void setOrderItemList(java.util.List<OrderItem> orderItemList) { this.orderItemList = orderItemList; }
 
+    /**
+     * 消費税を計算して返す（10%）
+     */
+    public int getTax() {
+        if (orderItemList == null) return 0;
+        int sum = 0;
+        for (OrderItem orderItem : orderItemList) {
+            sum += orderItem.getCalcSubTotalPrice();
+        }
+        return (int)(sum * 0.1);
+    }
+
+    /**
+     * 合計金額（税込）を計算して返す
+     */
+    public int getCalcTotalPrice() {
+        if (orderItemList == null) return 0;
+        int sum = 0;
+        for (OrderItem orderItem : orderItemList) {
+            sum += orderItem.getCalcSubTotalPrice();
+        }
+        return sum + getTax();
+    }
 
     @Override
     public String toString() {

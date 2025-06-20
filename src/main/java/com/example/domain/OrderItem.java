@@ -53,4 +53,11 @@ public class OrderItem {
                 ", optionShoesSize=" + optionShoesSize +
                 '}';
     }
+
+    public int getCalcSubTotalPrice() {
+        if (item == null || item.getPrice() == null || quantity == null) {
+            return 0;
+        }
+        return item.getPrice() * quantity;
+    }
 } 

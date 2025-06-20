@@ -45,7 +45,7 @@
           <div class="header-right">
             <a href="item_list_bousai.html">商品一覧</a>
             <a href="register_user.html">会員登録</a>
-            <a href="cart_list.html">
+            <a th:href="@{/cart/show}">
               <i class="fas fa-shopping-cart"> </i>カート
             </a>
             <a href="login.html" class="login">
@@ -86,6 +86,12 @@
             <span class="price">Ｍ</span
             ><span th:text="${item.price}">1,800円(税抜)</span>円<br />
             <span class="price">Ｌ</span>2,700円(税抜)<br />
+            <form th:action="@{/cart/add}" method="post">
+              <input type="hidden" name="itemId" th:value="${item.id}" />
+              <input type="number" name="quantity" value="1" min="1" style="width:60px;" />
+              <!-- サイズやオプションが必要ならここに追加 -->
+              <button type="submit" class="btn">カートに追加</button>
+            </form>
           </div>
         </div>
       </div>

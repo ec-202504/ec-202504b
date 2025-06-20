@@ -2,11 +2,13 @@ package com.example.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.example.domain.OrderItem;
 /**
  * 注文商品情報を管理するリポジトリクラス。
  */
+@Repository
 public class OrderItemRepository {
 
     @Autowired

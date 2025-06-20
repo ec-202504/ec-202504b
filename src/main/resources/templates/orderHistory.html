@@ -104,9 +104,7 @@
                       </ul>
                     </td>
                     <td>
-                      <div class="text-center" th:text="${order.totalPrice}">
-                        3,280円
-                      </div>
+                      <div class="text-center" th:text="${orderItem.calcSubTotalPrice}">小計</div>
                     </td>
                   </tr>
                 </div>
@@ -116,8 +114,8 @@
         </div>
 
         <div class="row cart-total-price">
-          <div>消費税：8,000円</div>
-          <div>ご注文金額合計：38,000円 (税込)</div>
+          <div>消費税：<span th:text="${order.tax}">0</span>円</div>
+          <div>ご注文金額合計：<span th:text="${order.calcTotalPrice}">0</span>円 (税込)</div>
         </div>
       </div>
       <!-- end container -->

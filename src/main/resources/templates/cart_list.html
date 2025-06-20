@@ -45,7 +45,7 @@
       <div class="header-right">
         <a href="item_list_aloha.html">商品一覧</a>
         <a href="register_user.html">会員登録</a>
-        <a href="#"><i class="fas fa-shopping-cart"></i>カート</a>
+        <a href="cart_list.html"><i class="fas fa-shopping-cart"></i>カート</a>
         <a href="login.html" class="login">
           <i class="fas fa-sign-in-alt"></i>ログイン
         </a>
@@ -88,7 +88,9 @@
               <li>あらびきソーセージ300円</li>
             </ul>
           </td>
-          <td><div class="text-center">3,280円</div></td>
+          <td>
+            <div class="text-center" th:text="${orderItem.calcSubTotalPrice}">小計</div>
+          </td>
           <td>
             <button class="btn" type="button">
               <span>削除</span>
@@ -113,7 +115,9 @@
               <li>あらびきソーセージ300円</li>
             </ul>
           </td>
-          <td><div class="text-center">3,280円</div></td>
+          <td>
+            <div class="text-center" th:text="${orderItem.calcSubTotalPrice}">小計</div>
+          </td>
           <td>
             <button class="btn" type="button">
               <span>削除</span>
@@ -138,7 +142,9 @@
               <li>あらびきソーセージ300円</li>
             </ul>
           </td>
-          <td><div class="text-center">3,280円</div></td>
+          <td>
+            <div class="text-center" th:text="${orderItem.calcSubTotalPrice}">小計</div>
+          </td>
           <td>
             <button class="btn" type="button">
               <span>削除</span>
@@ -150,8 +156,8 @@
     </div>
 
     <div class="row cart-total-price">
-      <div>消費税：8,000円</div>
-      <div>ご注文金額合計：38,000円 (税込)</div>
+      <div>消費税：<span th:text="${order.tax}">0</span>円</div>
+      <div>ご注文金額合計：<span th:text="${order.calcTotalPrice}">0</span>円 (税込)</div>
     </div>
     <div class="row order-confirm-btn">
       <button
