@@ -1,8 +1,11 @@
 package com.example.controller;
 
+import com.example.common.AnyTimeFeed;
+import com.example.common.EarthquakeAndVolcanoFeed;
 import com.example.domain.User;
 import com.example.form.LoginForm;
 import com.example.service.LoginService;
+import jakarta.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 /**
  * ログインに関連するコントローラ.
  */
@@ -22,6 +27,9 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
+    @Autowired
+    private ServletContext application;
+
     /**
      * ログイン画面を表示する.
      *
@@ -29,7 +37,19 @@ public class LoginController {
      * @return ログイン画面
      */
     @GetMapping("/")
-    public String login(LoginForm loginForm){
+    public String login(LoginForm loginForm, Model model){
+        List<EarthquakeAndVolcanoFeed.VolcanoReport> volcanoReports =
+                (List<EarthquakeAndVolcanoFeed.VolcanoReport>) application.getAttribute("volcanoReports");
+
+        List<EarthquakeAndVolcanoFeed.EarthquakeReport> earthquakeReports =
+                (List<EarthquakeAndVolcanoFeed.EarthquakeReport>) application.getAttribute("earthquakeReports");
+
+        List<AnyTimeFeed.AnyTimeFeedReport> anyTimeFeedsReports =
+                 (List<AnyTimeFeed.AnyTimeFeedReport>) application.getAttribute("anyTimeFeedsReports");
+
+        model.addAttribute("volcanoReports", volcanoReports);
+        model.addAttribute("earthquakeReports", earthquakeReports);
+        model.addAttribute("anyTimeFeedsReports", anyTimeFeedsReports);
         return "loginBosai";
     }
 
